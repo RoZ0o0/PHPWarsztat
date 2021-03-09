@@ -1,2 +1,1 @@
-# 20-21-ai-projekt-lab3-projekt-ai-przewoznik-plizga
-20-21-ai-projekt-lab3-projekt-ai-przewoznik-plizga created by GitHub Classroom
+Baza danych służy do użytku przez sieć warsztatów blacharskich w której istnieją tabele do zapisu danych pracownika, klienta, pojazdu, warsztatu oraz tabela główna będąca zbiorem danych o wykonanych naprawach dla danych klientów, pojazdów w danym warsztacie przez danego pracownika. Celem projektu jest stworzenie interfejsu umożliwiającego dodawanie rekordów w danych tabelach, edytowanie, usuwanie, możliwość podglądu usterki przed i po naprawie.
