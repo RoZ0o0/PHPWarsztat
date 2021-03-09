@@ -1,4 +1,4 @@
- Celem projektu jest stworzenie interfejsu umożliwiającego obsługę klientów sieci warsztatów blacharskich. 
+ #Celem projektu jest stworzenie interfejsu umożliwiającego obsługę klientów sieci warsztatów blacharskich. 
 Program posiadał będzie następujące funkcjonalności:
 • Przechowywanie informacji o warsztatch firmy.
 • Przechowywanie informacji o klientach
