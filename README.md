@@ -16,7 +16,7 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 ### Interfejs serwisu
 -||-<br/>
 
-### Baza danych
+## Baza danych
 
 Baza danych służy do użytku przez sieć warsztatów blacharskich w której istnieją tabele do zapisu danych pracownika, klienta, pojazdu, warsztatu oraz tabela główna będąca zbiorem danych o wykonanych naprawach dla danych klientów, pojazdów w danym warsztacie przez danego pracownika.<br/>
 
