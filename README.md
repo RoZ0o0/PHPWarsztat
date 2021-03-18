@@ -3,7 +3,7 @@
 ## Skład grupy: Patryk Plizga, Krzysztof Przewoźnik
 ## Specyfikacja projektu
 ### Cel projektu :
-Stworzenie interfejsu umożliwiającego obsługę sieci warsztatów blacharskich. 
+Stworzenie interfejsu umożliwiającego obsługę sieci warsztatów blacharskich.<br/>
 
 ### Funkcjonalności:
 
