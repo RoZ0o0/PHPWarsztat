@@ -19,3 +19,5 @@ Baza danych służy do użytku przez sieć warsztatów blacharskich w której is
 ####	Diagram ERD
 ![image](https://user-images.githubusercontent.com/62017852/110503710-c3cc6b80-80fc-11eb-98ff-b57ca0eada76.png)
 
+## Wykorzystane technologie
+HTML, CSS, JavaScript, PHP
