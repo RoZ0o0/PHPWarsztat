@@ -15,11 +15,11 @@
 <body>
 <div class="jumbotron text-center">
  <h1>Obsługa warsztatów blacharskich</h1>
- <p>adadad</p>
+ <p>Panel logowania</p>
  </div>
 <form class="box" action="login.php" method="post" >
 
-<h1> Logowanie </h1>
+<h1> Zaloguj się </h1>
 <div id="inputs">
 <br><input type="text" name="login" placeholder="Login"/> <br>
 <br><input type="password" name="password" placeholder="Hasło"/><br>
