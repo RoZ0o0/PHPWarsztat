@@ -14,10 +14,10 @@
 </head>
 <body>
 <div class="jumbotron text-center">
- <h1>Obsługa warsztatów blacharskich</h1>
- <p>Panel logowania</p>
+  <h1>Obsługa warsztatów blacharskich</h1>
+  <p>Panel logowania</p>
  </div>
-<form class="box" action="login.php" method="post" >
+<form class="box" action="login.php" method="post" autocomplete="off" >
 
 <h1> Zaloguj się </h1>
 <div id="inputs">
