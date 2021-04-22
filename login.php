@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<h2>Witaj <?php echo htmlspecialchars($_POST['login']); ?>.
+<h2>Zalogowałeś się na użytkownika <?php echo htmlspecialchars($_POST['login']); ?>.
 </h2>
 </body>
 
