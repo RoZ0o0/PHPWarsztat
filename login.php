@@ -1,23 +1,39 @@
-<!doctype html>
-<meta charset="utf-8">
-<html lang="pl">
-<head>
+<?php
 
-<title>Warsztaty Blacharskie</title>
+    session_start();
 
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-<script src="./js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="style.css">
+    require_once "connect.php";
 
+    $polaczenie = @new mysqli($host, $user, $password, $db);
 
-</head>
+    if($polaczenie->connect_errno!=0){
+        echo "Error: ".$polaczenie->connect_errno;
+    }else{
+        $login = $_POST['login'];
+        $haslo = $_POST['password'];
+        
+        $sql = "SELECT * FROM pracownik WHERE username='$login' AND pass='$haslo'";
 
-<body>
-<h2>Zalogowałeś się na użytkownika <?php echo htmlspecialchars($_POST['login']); ?>.
-</h2>
-</body>
+        if($result = @$polaczenie->query($sql)){
+            $ilu = $result->num_rows;
+            if($ilu>0){
+                $row = $result->fetch_assoc();
+                $_SESSION['user'] = $row['username'];
+                $_SESSION['nazwisko'] = $row['nazwisko'];
+                $_SESSION['imie'] = $row['imie'];
+                $_SESSION['pesel'] = $row['pesel'];
+                $_SESSION['data_zatrudnienia'] = $row['data_zatrudnienia'];
+                $_SESSION['wynagrodzenie'] = $row['wynagrodzenie'];
 
+                $result->free_result();
+                header('Location: usluga.php');
+            }else{
 
-</html>
+            }
+        }
+
+        $polaczenie->close();
+    }
+?>
 
 

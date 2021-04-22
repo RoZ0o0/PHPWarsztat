@@ -21,9 +21,10 @@
 
 <h1> Zaloguj się </h1>
 <div id="inputs">
-<br><input type="text" name="login" placeholder="Login"/> <br>
-<br><input type="password" name="password" placeholder="Hasło"/><br>
+  <br><input type="text" name="login" placeholder="Login"/> <br>
+  <br><input type="password" name="password" placeholder="Hasło"/><br>
 </div>
+  <p><a href>Tworzenie konta pracownika</a></p>
 <button type="submit" class="btn btn-outline-primary btn-lg" value="Zaloguj">Zaloguj</button>
 </form>
 </body>
