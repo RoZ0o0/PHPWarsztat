@@ -15,17 +15,19 @@
 <body>
 <div class="jumbotron text-center">
   <h1>Obsługa warsztatów blacharskich</h1>
-  <p>Panel logowania</p>
+  <p>Panel rejestracji</p>
  </div>
-<form class="box" action="login.php" method="post" autocomplete="off" >
+<form class="box" action="register.php" method="post" autocomplete="off" >
 
-<h1> Zaloguj się </h1>
+<h1> Zarejestruj się </h1>
 <div id="inputs">
-  <br><input type="text" name="login" placeholder="Login"/> <br>
+  <br><input type="text" name="pesel" placeholder="PESEL"/> <br>
+  <br><input type="text" name="login" placeholder="Nazwa użytkownika"/><br>
   <br><input type="password" name="password" placeholder="Hasło"/><br>
 </div>
-  <p><a href="index2.php">Tworzenie konta pracownika</a></p>
-<button type="submit" class="btn btn-outline-primary btn-lg" value="Zaloguj">Zaloguj</button>
+  <p><a href="index.php">Wróć do logowania</a></p>
+<button type="submit" class="btn btn-outline-primary btn-lg" value="Zarejestruj">Zarejestuj</button>
 </form>
+
 </body>
 </html>
