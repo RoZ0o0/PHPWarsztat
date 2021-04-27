@@ -62,7 +62,6 @@
     </li>
     <li class="nav-item">
       <a href="#" class="nav-link text-dark">
-      <i class="far fa-garage-car mr-3 text-primary fa-fw"></i>
       <i class="fa fa-wrench mr-3 text-primary fa-fw"></i>
                 Warsztaty
             </a>
