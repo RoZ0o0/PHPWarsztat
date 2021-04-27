@@ -24,6 +24,7 @@
                 $_SESSION['pesel'] = $row['pesel'];
                 $_SESSION['data_zatrudnienia'] = $row['data_zatrudnienia'];
                 $_SESSION['wynagrodzenie'] = $row['wynagrodzenie'];
+                $_SESSION['stanowisko'] = $row['stanowisko'];
 
                 $result->free_result();
                 header('Location: dashboard.php');
