@@ -24,11 +24,11 @@
                             <header>Logowanie</header>
                             <div class="form-group">
                                 <i class="fas fa-user"></i>
-                                <input class="myInput" type="text" placeholder="Login" id="username" required> 
+                                <input class="myInput" type="text" placeholder="Login" id="username" name="login" required> 
                             </div>
                             <div class="form-group">
                                 <i class="fas fa-lock"></i>
-                                <input class="myInput" type="password" id="password" placeholder="Hasło" required> 
+                                <input class="myInput" type="password" id="password" placeholder="Hasło" name="password" required> 
                             </div>
                             <input type="submit" class="butt" value="ZALOGUJ">
                             <div class="register-employee">

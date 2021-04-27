@@ -1,6 +1,6 @@
 <?php
     $host = "freedb.tech";
-    $user = "root";
-    $password = "";
+    $user = "freedbtech_cyziek";
+    $password = "projekt12";
     $db = "freedbtech_projektaplikacje";
 ?>
