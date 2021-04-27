@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!doctype html>
 <meta charset="utf-8">
 <html lang="pl">
@@ -32,6 +36,10 @@
                                 <i class="fas fa-lock"></i>
                                 <input class="myInput" type="password" id="password" placeholder="Hasło" name="password"  required> 
                             </div>
+                            <div class="form-group">
+                                <i class="fas fa-lock"></i>
+                                <input class="myInput" type="password" id="password" placeholder="Powtórz hasło" name="password"  required> 
+                            </div>
 
                             <div class="form-group">
                                 <label>
@@ -40,18 +48,20 @@
                                 </label>
                             </div>
                             <input type="submit" class="butt" value="ZAREJESTRUJ SIĘ">
+                            <?php
+                                if(isset($_SESSION['komunikat'])){
+                                    echo $_SESSION['komunikat'];
+                                }
+                            ?>   
                         </form>
                     </div>
                 </div> 
                 <div class="col-md-5">
                     <div class="rightCont">
                             <div class="box"><header>Rejestracja</header>
-                            
                             <p>Stwórz konto pracownika wpisując numer PESEL, nazwę użytkownika oraz hasło. Jeśli posiadasz już konto przejdź do logowania</p>
                                 <a href="index.php"><input type="button" class="butt_out" value="Logowanie"/></a>
-                                
-                            </div>
-                                
+                            </div>   
                     </div>
                 </div>
             </div>
@@ -61,7 +71,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-
+<?php
+    unset($_SESSION['komunikat']);
+?>
 
 </body>
 </html>
