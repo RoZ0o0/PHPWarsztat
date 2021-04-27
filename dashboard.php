@@ -22,7 +22,7 @@
     <div class="media d-flex align-items-center">
       <div class="media-body">
         <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['imie']."!</p>"; ?></h4>
-        <p class="font-weight-normal text-muted mb-0">Stanowisko</p>
+        <p class="font-weight-normal text-muted mb-0"><?php echo $_SESSION['stanowisko']; ?></p>
         <button type="button" class="btn btn-outline-secondary">Wyloguj</button>
       </div>
     </div>
