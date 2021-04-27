@@ -17,7 +17,7 @@
     <li class="nav-item">
       <a href="#" class="nav-link text-dark bg-light">
                 <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                home
+                Strona Główna
             </a>
     </li>
     <li class="nav-item">
@@ -46,38 +46,10 @@
     </li>
   </ul>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
-
-  <ul class="nav flex-column bg-white mb-0">
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-                area charts
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-                <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
-                bar charts
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-                <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
-                pie charts
-            </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-                <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>
-                line charts
-            </a>
-    </li>
-  </ul>
 </div>
 
 
 <div class="page-content p-5" id="content">
   <!-- Toggle button -->
-  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
+  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">MENU</small></button>
 </html>
