@@ -40,9 +40,12 @@
                                 <input class="myInput" type="password" id="password" placeholder="Hasło" name="password" required> 
                             </div>
                             <input type="submit" class="butt" value="ZALOGUJ">
-                            <div class="register-employee">
-                              <a href="index2.php">Rejestracja konta pracownika</a>
-                            </div>
+                            <?php
+                                if(isset($_SESSION['blad'])){
+                                    echo $_SESSION['blad'];
+                                    
+                                }
+                            ?>
                         </form>
                     </div>
                 </div> 
@@ -50,8 +53,8 @@
                     <div class="rightCont">
                             <div class="box"><header>Panel logowania</header>
                             
-                            <p>Zaloguj się danymi pracownika podanymi w procesie rejestracji. Jeśli nie jesteś jeszcze zarejestrowany użyj opcji "Rejestracja konta pracownika".</p>
-                                <input type="button" class="butt_out" value="Więcej informacji"/>
+                            <p>Zaloguj się danymi pracownika podanymi w procesie rejestracji. Jeśli nie jesteś jeszcze zarejestrowany użyj opcji "Rejestracja".</p>
+                            <a href="index2.php"><input type="button" class="butt_out" value="Rejestracja"/></a>
                                 
                             </div>
                                 
@@ -65,6 +68,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
 
-
+<?php
+    unset($_SESSION['blad']);
+?>
 </body>
 </html>

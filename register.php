@@ -24,27 +24,22 @@
                 if($row['username'] == null){
                     $sql2 = "UPDATE pracownik SET username='$login', pass='$haslo' where pesel='$pesel'";
                     if($polaczenie->query($sql2)=== TRUE){
-                        echo '<script type="text/javascript">'; 
-                        echo 'alert("Stworzono konto");';
-                        echo 'window.location.href = "index2.php";';
-                        echo '</script>';
+                        $_SESSION['komunikat'] = '<div class="alert alert-success" role="alert"><p style="color:green">Konto pomyślnie utworzone!</p></div>';
+                        header('Location: index2.php');
                     }else{
-                        echo '<script type="text/javascript">'; 
-                        echo 'alert("Nie stworzono użytkownika: "). $polaczenie->error;';
-                        echo 'window.location.href = "index2.php";';
-                        echo '</script>';
+                        $_SESSION['komunikat'] = '<div class="alert alert-danger" role="alert"><p style="color:green">Konto nie zostało utworzone!</p></div>';
+                        header('Location: index2.php');
                     }
                 }else{
-                    echo '<script type="text/javascript">'; 
-                    echo 'alert("Użytkownik już istnieje");';
-                    echo 'window.location.href = "index2.php";';
-                    echo '</script>';
+                    $_SESSION['komunikat'] = '<div class="alert alert-warning" role="alert"><p style="color:orange">Użytkownik już istnieje!</p></div>';
+                        header('Location: index2.php');
                 }
 
-
                 $result->free_result();
-            }else{
 
+            }else{
+                $_SESSION['komunikat'] = '<div class="alert alert-danger" role="alert"><p style="color:red">Nieprawidłowe dane!</p></div>';
+                        header('Location: index2.php');
             }
         }
 

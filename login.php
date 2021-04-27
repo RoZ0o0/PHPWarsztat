@@ -2,6 +2,12 @@
 
     session_start();
 
+    if((!isset($_POST['login'])) || (!isset($_POST['password']))){
+
+        header('Location: index.php');
+        exit();
+    }
+
     require_once "connect.php";
 
     $polaczenie = @new mysqli($host, $user, $password, $db);
@@ -28,10 +34,13 @@
                 $_SESSION['wynagrodzenie'] = $row['wynagrodzenie'];
                 $_SESSION['stanowisko'] = $row['stanowisko'];
 
+                unset($_SESSION['blad']);
+
                 $result->free_result();
                 header('Location: dashboard.php');
             }else{
-
+                $_SESSION['blad'] = '<div class="alert alert-danger" role="alert"><p style="color:red">Niepoprawny login lub hasło!</p></div>';
+                header('Location: index.php');
             }
         }
 
