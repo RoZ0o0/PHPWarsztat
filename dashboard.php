@@ -21,8 +21,14 @@
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <div class="media-body">
+<<<<<<< HEAD
         <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['imie']."!</p>"; ?></h4>
         <p class="font-weight-normal text-muted mb-0"><?php echo $_SESSION['stanowisko']?></p>
+=======
+        <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['user']."!</p>"; ?></h4>
+        <p class="font-weight-normal text-muted mb-0">Stanowisko</p>
+        <button type="button" class="btn btn-outline-secondary">Wyloguj</button>
+>>>>>>> cyziek
       </div>
     </div>
   </div>
@@ -57,6 +63,7 @@
     <li class="nav-item">
       <a href="#" class="nav-link text-dark">
       <i class="far fa-garage-car mr-3 text-primary fa-fw"></i>
+      <i class="fa fa-wrench mr-3 text-primary fa-fw"></i>
                 Warsztaty
             </a>
     </li>
