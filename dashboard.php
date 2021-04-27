@@ -17,7 +17,7 @@
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <div class="media-body">
-        <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['user']."!</p>"; ?></h4>
+        <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['imie']."!</p>"; ?></h4>
         <p class="font-weight-normal text-muted mb-0">Stanowisko</p>
       </div>
     </div>
