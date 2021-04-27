@@ -23,7 +23,7 @@
       <div class="media-body">
         <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['imie']."!</p>"; ?></h4>
         <p class="font-weight-normal text-muted mb-0"><?php echo $_SESSION['stanowisko']; ?></p>
-        <button type="button" class="btn btn-outline-secondary">Wyloguj</button>
+        <a href="logout.php"><button type="button" class="btn btn-outline-secondary">Wyloguj</button></a>
       </div>
     </div>
   </div>
