@@ -26,7 +26,7 @@
                 $_SESSION['wynagrodzenie'] = $row['wynagrodzenie'];
 
                 $result->free_result();
-                header('Location: usluga.php');
+                header('Location: dashboard.php');
             }else{
 
             }
