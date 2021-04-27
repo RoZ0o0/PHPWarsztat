@@ -1,3 +1,12 @@
+<?php
+    session_start();
+
+    if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true)){
+        header('Location: dashboard.php');
+        exit();
+    }
+?>
+
 <!doctype html>
 <meta charset="utf-8">
 <html lang="pl">

@@ -17,6 +17,8 @@
         if($result = @$polaczenie->query($sql)){
             $ilu = $result->num_rows;
             if($ilu>0){
+                $_SESSION['zalogowany'] = true;
+                
                 $row = $result->fetch_assoc();
                 $_SESSION['user'] = $row['username'];
                 $_SESSION['nazwisko'] = $row['nazwisko'];
