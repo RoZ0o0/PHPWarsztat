@@ -19,6 +19,7 @@
       <div class="media-body">
         <h4 class="m-0"><?php echo "<p>Witaj ".$_SESSION['user']."!</p>"; ?></h4>
         <p class="font-weight-normal text-muted mb-0">Stanowisko</p>
+        <button type="button" class="btn btn-outline-secondary">Wyloguj</button>
       </div>
     </div>
   </div>
@@ -52,7 +53,7 @@
     </li>
     <li class="nav-item">
       <a href="#" class="nav-link text-dark">
-      <i class="far fa-garage-car mr-3 text-primary fa-fw"></i>
+      <i class="fa fa-wrench mr-3 text-primary fa-fw"></i>
                 Warsztaty
             </a>
     </li>
