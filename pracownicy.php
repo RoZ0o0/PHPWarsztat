@@ -215,40 +215,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="#"> Janusz Kowalski</a></td>
-                            <td>04/10/2013</td>                        
-                            <td>Kierownik</td>
-                            <td><span class="status text-success">&bull;</span> Aktywne</td>
-                            <td>
-                                <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#"> Marcin Nowak</a></td>
-                            <td>05/08/2014</td>                       
-                            <td>Pracownik</td>
-                            <td><span class="status text-success">&bull;</span> Aktywne</td>
-                            <td>
-                                <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><a href="#"> Andrzej Wiśniewski</a></td>
-                            <td>05/08/2014</td>                       
-                            <td>Pracownik</td>
-                            <td><span class="status text-success">&bull;</span> Aktywne</td>
-                            <td>
-                                <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                                <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                            </td>
-                        </tr>
+                        <?php
+                        require_once "connect.php";
+
+                        $polaczenie = @new mysqli($host, $user, $password, $db);
                     
+                        if($polaczenie->connect_errno!=0){
+                            echo "Error: ".$polaczenie->connect_errno;
+                        }else{
+                            $sql = "SELECT * FROM pracownik";
+                            $licznik = 1;
+                            if($result = @$polaczenie->query($sql)){
+                                $ilu = $result->num_rows;
+                                if($ilu>0){
+                                    while($row = $result->fetch_assoc()){
+
+                                        echo "<tr>";
+                                            echo "<td>".$licznik."</td>";
+                                            echo "<td><a href='#'>".$row['imie']." ".$row['nazwisko']."</a></td>";
+                                            echo "<td>".$row['data_zatrudnienia']."</td>";                  
+                                            echo "<td>".$row['stanowisko']."</td>";
+                                            echo "<td><span class='status text-success'>&bull;</span> Aktywne</td>";
+                                            echo "<td>";
+                                                echo "<a href='#' class='settings' title='Settings' data-toggle='tooltip'><i class='material-icons'>&#xE8B8;</i></a>";
+                                                echo "<a href='#' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9;</i></a>";
+                                            echo "</td>";
+                                        echo "</tr>";
+                                        $licznik++;
+                                    }
+                                }
+                            }
+                        }
+                            $polaczenie->close();
+                        ?>
                     </tbody>
                 </table>
                 <div class="clearfix">
