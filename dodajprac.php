@@ -22,13 +22,13 @@
         if($result = @$polaczenie->query($sql)){
             $ilu = $result->num_rows;
             if($ilu>0){
-                $_SESSION['komunikat']='<div class="alert alert-danger" role="alert" style="text-align:center;"><p style="color:red; text-align:center;">Już istnieje pracownik o takim peselu!</p></div>';
+                $_SESSION['komunikat']="istnieje";
                 header('Location: pracownicy.php');
             }else{
                 $sql2 = "INSERT INTO pracownik(nazwisko, imie, stanowisko, pesel, data_zatrudnienia, wynagrodzenie) VALUES ('$nazwisko', '$imie', '$stanowisko', '$pesel', '$date', $wynagrodzenie)";
                 echo $sql2;
                 if($polaczenie->query($sql2)=== TRUE){
-                    $_SESSION['komunikat'] = '<div class="alert alert-success" role="alert" style="text-align:center;"><p style="color:green; text-align:center;">Pracownik pomyślnie dodany!</p></div>';
+                    $_SESSION['komunikat'] = "dodany";
                     header('Location: pracownicy.php');
                 }
             }

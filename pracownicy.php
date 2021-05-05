@@ -1,6 +1,9 @@
 <?php
   session_start();
   $page = "pracownik";
+  if(isset($_SESSION['komunikat'])){
+      $blad = $_SESSION['komunikat'];
+  }
   if(!isset($_SESSION['zalogowany'])){
     header('Location: index.php');
     exit();
@@ -20,6 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <?php include 'nav.php';?> 
     <script>$(function() { 
         $('#sidebarCollapse').on('click', function() {
@@ -37,7 +41,7 @@
 
 
 </head>
-<body>
+<body onload="blad()">
     <center><h2 class="display-4 text-white">Sekcja pracownicy</h2></center>
     <div class="container">
         <div class="table-responsive">
@@ -48,7 +52,7 @@
                             <h2>Zarządzenie pracownikami</h2>
                         </div>
                         <div class="col-xs-2 ml-auto">
-                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Pracownika</span></a>
+                            <a href="#" class="btn btn-primary" <?php if($_SESSION['stanowisko']=="Pracownik"){echo 'onclick="return confirm_alert();"';}else{echo 'data-toggle="modal"';} ?> data-target="#myModal" ><i class="material-icons">&#xE147;</i> <span>Dodaj Pracownika</span></a>
                             <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
                         </div>
                     </div>
@@ -106,7 +110,7 @@
                     </tbody>
                 </table>
                 <div class="clearfix">
-                    <div class="hint-text">Pokazano <b>3</b> / <b><?php echo $_SESSION['ile']; ?></b> wyników.</div>
+                    <div class="hint-text">Pokazano <b><?php echo $_SESSION['ile']; ?></b> / <b><?php echo $_SESSION['ile']; ?></b> wyników.</div>
                     <ul class="pagination">
                         <li class="page-item disabled"><a href="#">Poprzedni</a></li>
                         <li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -181,26 +185,52 @@
   </div>
 </div>
 
-
-<p id="demo"><?php if(isset($_SESSION['komunikat'])){echo $_SESSION['komunikat'];}?></p>
-
-<!-- <script>
-function myFunction() {
-  var x = document.getElementById("jd").value;
-  document.getElementById("demo").innerHTML = x;
+<script>
+function confirm_alert() {
+    return Swal.fire({
+        icon: 'error',
+        title: 'Błąd',
+        text: 'Nie masz uprawnień aby dodać pracownika!',
+        });
 }
-</script> -->
+</script>
+
+<script>
+function blad(){
+
+    var simple = '<?php echo $blad; ?>';
+
+    if(simple == "istnieje"){
+        Swal.fire({
+        icon: 'error',
+        title: 'Błąd',
+        text: 'Pracownik już istnieje!',
+        });
+    }else if(simple == "dodany"){
+        Swal.fire({
+        icon: 'success',
+        title: 'Udało się!',
+        text: 'Pracownik pracownik został dodany!',
+        });
+    }
+}
+</script>
 <script>
 $('form').on('submit', function(e) {
   if(pesel.value.length < 11) {
     e.preventDefault();
-    alert("Podany PESEL jest nieprawidłowy");
+    Swal.fire({
+        icon: 'error',
+        title: 'Błąd',
+        text: 'Podany PESEL jest nieprawidłowy!',
+    });
   } 
 });
 </script>
 
 <?php
     unset($_SESSION['komunikat']);
+    unset($blad);
 ?>
 </body>
 </html>
