@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $page = "uslugi";
   if(!isset($_SESSION['zalogowany'])){
     header('Location: index.php');
     exit();

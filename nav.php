@@ -1,4 +1,3 @@
-
 <html>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"><!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
@@ -16,31 +15,31 @@
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="dashboard.php" class="nav-link text-dark bg-light">
+      <a href="dashboard.php" class="<?php if ( $page == "home" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
                 <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
                 Strona Główna
             </a>
     </li>
     <li class="nav-item">
-      <a href="pracownicy.php" class="nav-link text-dark">
+      <a href="pracownicy.php" class="<?php if ( $page == "pracownik" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
                 <i class="fa fa-users mr-3 text-primary fa-fw"></i>
                 Pracownicy
             </a>
     </li>
     <li class="nav-item">
-      <a href="uslugi.php" class="nav-link text-dark">
+      <a href="uslugi.php" class="<?php if ( $page == "uslugi" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
                 <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
                 Usługi
             </a>
     </li>
     <li class="nav-item">
-      <a href="galeria.php" class="nav-link text-dark">
+      <a href="galeria.php" class="<?php if ( $page == "galeria" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
                 Galeria
             </a>
     </li>
     <li class="nav-item">
-      <a href="warsztaty.php" class="nav-link text-dark">
+      <a href="warsztaty.php" class="<?php if ( $page == "warsztaty" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
       <i class="fa fa-wrench mr-3 text-primary fa-fw"></i>
                 Warsztaty
             </a>

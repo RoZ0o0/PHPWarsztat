@@ -12,6 +12,7 @@
         $pesel = $_POST['pesel'];
         $login = $_POST['login'];
         $haslo = $_POST['password'];
+        $haslo = md5($haslo);
         
         $sql = "SELECT * FROM pracownik WHERE pesel='$pesel'";
 
@@ -24,21 +25,21 @@
                 if($row['username'] == null){
                     $sql2 = "UPDATE pracownik SET username='$login', pass='$haslo' where pesel='$pesel'";
                     if($polaczenie->query($sql2)=== TRUE){
-                        $_SESSION['komunikat'] = '<div class="alert alert-success" role="alert"><p style="color:green">Konto pomyślnie utworzone!</p></div>';
+                        $_SESSION['komunikat'] = '<div class="alert alert-success" role="alert"><p style="color:green; text-align:center">Konto pomyślnie utworzone!</p></div>';
                         header('Location: index2.php');
                     }else{
-                        $_SESSION['komunikat'] = '<div class="alert alert-danger" role="alert"><p style="color:green">Konto nie zostało utworzone!</p></div>';
+                        $_SESSION['komunikat'] = '<div class="alert alert-danger" role="alert"><p style="color:green; text-align:center">Konto nie zostało utworzone!</p></div>';
                         header('Location: index2.php');
                     }
                 }else{
-                    $_SESSION['komunikat'] = '<div class="alert alert-warning" role="alert"><p style="color:orange">Użytkownik już istnieje!</p></div>';
+                    $_SESSION['komunikat'] = '<div class="alert alert-warning" role="alert"><p style="color:orange; text-align:center">Użytkownik już istnieje!</p></div>';
                         header('Location: index2.php');
                 }
 
                 $result->free_result();
 
             }else{
-                $_SESSION['komunikat'] = '<div class="alert alert-danger" role="alert"><p style="color:red">Nieprawidłowe dane!</p></div>';
+                $_SESSION['komunikat'] = '<div class="alert alert-danger" role="alert"><p style="color:red; text-align:center">Nieprawidłowe dane!</p></div>';
                         header('Location: index2.php');
             }
         }

@@ -124,10 +124,11 @@
   margin-top:10px;
   color: #000000;
   }
-  .alert{
+.alert{
     margin-top: 5%;
     width: 100%;
     height: 3.3em;
+    text-align: center;
   }
   input[type=number]::-webkit-inner-spin-button, /*krywanie inkrementacji wartości w polu PESEL*/
   input[type=number]::-webkit-outer-spin-button { 

@@ -38,15 +38,13 @@
                                 <input class="myInput" type="password" id="password" placeholder="Hasło" name="password" required> 
                             </div>
                             <input type="submit" class="butt" value="ZALOGUJ">
-                            <?php
-                                if(isset($_SESSION['blad'])){
-                                    echo $_SESSION['blad'];
-                                    
-                                }
-                            ?>
                         </form>
                         <div class="g-recaptcha" data-sitekey="6Ldrxb0aAAAAAMxZ9D2L2mnGW4gAV8NpMor2ksXQ"></div>
-                       
+                        <?php
+                            if(isset($_SESSION['blad'])){
+                                echo $_SESSION['blad'];
+                            }
+                        ?>
                     </div>
                 </div> 
                 <div class="col-md-5">

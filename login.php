@@ -17,7 +17,8 @@
     }else{
         $login = $_POST['login'];
         $haslo = $_POST['password'];
-        
+        $haslo = md5($haslo);
+
         $sql = "SELECT * FROM pracownik WHERE username='$login' AND pass='$haslo'";
 
         if($result = @$polaczenie->query($sql)){
@@ -39,7 +40,7 @@
                 $result->free_result();
                 header('Location: dashboard.php');
             }else{
-                $_SESSION['blad'] = '<div class="alert alert-danger" role="alert"><p style="color:red">Niepoprawny login lub hasło!</p></div>';
+                $_SESSION['blad'] = '<div class="alert alert-danger" role="alert"><p style="color:red; text-align:center">Niepoprawny login lub hasło!</p></div>';
                 header('Location: index.php');
             }
         }

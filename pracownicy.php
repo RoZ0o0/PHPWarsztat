@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $page = "pracownik";
   if(!isset($_SESSION['zalogowany'])){
     header('Location: index.php');
     exit();
@@ -43,7 +44,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
+<!-- <style>
     body {
 		font-family: 'Varela Round', sans-serif;
 		font-size: 13px;
@@ -201,7 +202,7 @@
         margin-top: 10px;
         font-size: 13px;
     }
-</style>
+</style> -->
 <script>
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
