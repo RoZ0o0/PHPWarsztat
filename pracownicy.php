@@ -130,46 +130,51 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form method="post">
+        <form method="post" action="dodajprac.php" id="form">
             <div class="form-group row">
                 <label for="imie" class="col-sm-4 col-form-label">Imie</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="imie" placeholder="Imie" required>
+                    <input type="text" class="form-control" id="imie" name="imie" placeholder="Imie" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="nazwisko" class="col-sm-4 col-form-label">Nazwisko</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nazwisko" placeholder="Nazwisko" required>
+                    <input type="text" class="form-control" id="nazwisko" name="nazwisko" placeholder="Nazwisko" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="date" class="col-sm-4 col-form-label">Data Zatrudnienia</label>
                 <div class="col-sm-8">
-                    <input type="date" class="form-control" id="date" placeholder="Data Zatrudnienia" required>
+                    <input type="date" class="form-control" id="date" name="date" placeholder="Data Zatrudnienia" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="stanowisko" class="col-sm-4 col-form-label">Stanowisko</label>
                 <div class="col-sm-8">
-                    <select id="stanowisko" class="col-sm-12 form-control" required>
+                    <select id="stanowisko" name="stanowisko" class="col-sm-12 form-control" required>
                         <option value="">Wybierz stanowisko</option>
-                        <option value="prezes">Prezes</option>
-                        <option value="kierownik">Kierownik</option>
-                        <option value="pracownik">Pracownik</option>
+                        <option value="Prezes">Prezes</option>
+                        <option value="Kierownik">Kierownik</option>
+                        <option value="Pracownik">Pracownik</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="wynagrodzenie" class="col-sm-4 col-form-label">Wynagrodzenie</label>
                 <div class="col-sm-8">
-                    <input type="number" max="99999" class="form-control" id="date" placeholder="Wynagrodzenie" required>
+                    <input type="number" min="0" max="99999" class="form-control" id="wynagrodzenie" name="wynagrodzenie" placeholder="Wynagrodzenie" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="pesel" class="col-sm-4 col-form-label">PESEL</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="pesel" name="pesel" placeholder="PESEL" onKeyDown="if(this.value.length==11 && event.keyCode!=8) return false;" required>
                 </div>
             </div>
       </div>
       <div class="modal-footer">
-        <input type="submit" class="form-control col-sm-4" value="Dodaj Pracownika">
-        <!-- <button id="myBtn" value="myvalue" onclick="myFunction()">Try it</button> -->
+        <input type="submit" class="sub form-control col-sm-4" value="Dodaj Pracownika">
       </div>
       </form>
     </div>
@@ -177,16 +182,26 @@
 </div>
 
 
-<p id="demo"></p>
+<p id="demo"><?php if(isset($_SESSION['komunikat'])){echo $_SESSION['komunikat'];}?></p>
 
-<script>
+<!-- <script>
 function myFunction() {
   var x = document.getElementById("jd").value;
   document.getElementById("demo").innerHTML = x;
 }
+</script> -->
+<script>
+$('form').on('submit', function(e) {
+  if(pesel.value.length < 11) {
+    e.preventDefault();
+    alert("Podany PESEL jest nieprawidłowy");
+  } 
+});
 </script>
 
-</script>
+<?php
+    unset($_SESSION['komunikat']);
+?>
 </body>
 </html>
 
