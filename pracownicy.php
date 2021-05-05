@@ -16,8 +16,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="style_dashboard.css">
     <link rel="stylesheet" href="pracownik.css">
-    <?php include 'nav.php';?>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <?php include 'nav.php';?> 
     <script>$(function() { 
         $('#sidebarCollapse').on('click', function() {
             $('#sidebar, #content').toggleClass('active');
@@ -44,9 +47,9 @@
                         <div class="col-xs-5">
                             <h2>Zarządzenie pracownikami</h2>
                         </div>
-                        <div class="col-xs-7">
-                            <a href="#" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Dodaj Pracownika</span></a>
-                            <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a>	
+                        <div class="col-xs-2 ml-auto">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Pracownika</span></a>
+                            <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
                         </div>
                     </div>
                 </div>
@@ -58,6 +61,7 @@
                             <th>Data zatrudnienia</th>
                             <th>Stanowisko</th>
                             <th>PESEL</th>
+                            <th>Wynagrodzenie</th>
                             <th>Akcja</th>
                         </tr>
                     </thead>
@@ -86,6 +90,7 @@
                                             echo "<td>".$row['data_zatrudnienia']."</td>";                  
                                             echo "<td>".$row['stanowisko']."</td>";
                                             echo "<td>".$row['pesel']."</td>";
+                                            echo "<td>".$row['wynagrodzenie']." zł</td>";
                                             echo "<td>";
                                                 echo "<a href='#' class='settings' title='Settings' data-toggle='tooltip'><i class='material-icons'>&#xE8B8;</i></a>";
                                                 echo "<a href='#' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9;</i></a>";
@@ -114,7 +119,74 @@
                 </div>
             </div>
         </div>        
-    </div>     
+    </div>
+    
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Dodaj Pracownika</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+            <div class="form-group row">
+                <label for="imie" class="col-sm-4 col-form-label">Imie</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="imie" placeholder="Imie" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nazwisko" class="col-sm-4 col-form-label">Nazwisko</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="nazwisko" placeholder="Nazwisko" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="date" class="col-sm-4 col-form-label">Data Zatrudnienia</label>
+                <div class="col-sm-8">
+                    <input type="date" class="form-control" id="date" placeholder="Data Zatrudnienia" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="stanowisko" class="col-sm-4 col-form-label">Stanowisko</label>
+                <div class="col-sm-8">
+                    <select id="stanowisko" class="col-sm-12 form-control" required>
+                        <option value="">Wybierz stanowisko</option>
+                        <option value="prezes">Prezes</option>
+                        <option value="kierownik">Kierownik</option>
+                        <option value="pracownik">Pracownik</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="wynagrodzenie" class="col-sm-4 col-form-label">Wynagrodzenie</label>
+                <div class="col-sm-8">
+                    <input type="number" max="99999" class="form-control" id="date" placeholder="Wynagrodzenie" required>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="form-control col-sm-4" value="Dodaj Pracownika">
+        <!-- <button id="myBtn" value="myvalue" onclick="myFunction()">Try it</button> -->
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("jd").value;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</script>
 </body>
 </html>
 
