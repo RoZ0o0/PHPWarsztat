@@ -93,8 +93,13 @@
                                             echo "<td><a href='#'>".$row['imie']." ".$row['nazwisko']."</a></td>";
                                             echo "<td>".$row['data_zatrudnienia']."</td>";                  
                                             echo "<td>".$row['stanowisko']."</td>";
-                                            echo "<td>".$row['pesel']."</td>";
-                                            echo "<td>".$row['wynagrodzenie']." zł</td>";
+                                            if($_SESSION['stanowisko']== "Pracownik"){
+                                                echo "<td>Ukryto Dane</td>";
+                                                echo "<td>Ukryto Dane</td>";
+                                            }else{
+                                                echo "<td>".$row['pesel']."</td>";
+                                                echo "<td>".$row['wynagrodzenie']." zł</td>";
+                                            }
                                             echo "<td>";
                                                 echo "<a href='#' class='settings' title='Settings' data-toggle='tooltip'><i class='material-icons'>&#xE8B8;</i></a>";
                                                 echo "<a href='#' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9;</i></a>";
