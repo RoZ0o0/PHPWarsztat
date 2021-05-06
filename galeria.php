@@ -30,79 +30,78 @@
   });
 });
 </script>
-<h2>PORTFOLIO</h2>
 <div id="myBtnContainer">
-  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-  <button class="btn" onclick="filterSelection('nature')"> Nature</button>
-  <button class="btn" onclick="filterSelection('cars')"> Cars</button>
-  <button class="btn" onclick="filterSelection('people')"> People</button>
+  <button class="btn active" onclick="filterSelection('all')"> Wszystko</button>
+  <button class="btn" onclick="filterSelection('naprawa')"> Naprawa</button>
+  <button class="btn" onclick="filterSelection('detailing')"> Detailing</button>
+  <button class="btn" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
 </div>
 
 <!-- Portfolio Gallery Grid -->
 <div class="row">
-  <div class="column nature">
+  <div class="column naprawa">
     <div class="content">
-      <img src="/w3images/mountains.jpg" alt="Mountains" style="width:100%">
-      <h4>Mountains</h4>
-      <p>Lorem ipsum dolor..</p>
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 1</h4>
+      <p>Naprawa klapy bagażnika Audi a3</p>
     </div>
   </div>
-  <div class="column nature">
+  <div class="column naprawa">
     <div class="content">
-      <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
-      <h4>Lights</h4>
-      <p>Lorem ipsum dolor..</p>
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 2</h4>
+      <p>Naprawa drzwi Skoda Octavia</p>
     </div>
   </div>
-  <div class="column nature">
+  <div class="column detailing">
     <div class="content">
-      <img src="/w3images/nature.jpg" alt="Nature" style="width:100%">
-      <h4>Forest</h4>
-      <p>Lorem ipsum dolor..</p>
-    </div>
-  </div>
-
-  <div class="column cars">
-    <div class="content">
-      <img src="/w3images/cars1.jpg" alt="Car" style="width:100%">
-      <h4>Retro</h4>
-      <p>Lorem ipsum dolor..</p>
-    </div>
-  </div>
-  <div class="column cars">
-    <div class="content">
-      <img src="/w3images/cars2.jpg" alt="Car" style="width:100%">
-      <h4>Fast</h4>
-      <p>Lorem ipsum dolor..</p>
-    </div>
-  </div>
-  <div class="column cars">
-    <div class="content">
-      <img src="/w3images/cars3.jpg" alt="Car" style="width:100%">
-      <h4>Classic</h4>
-      <p>Lorem ipsum dolor..</p>
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 3</h4>
+      <p>Detailing Mitsubishi Lancer</p>
     </div>
   </div>
 
-  <div class="column people">
+  <div class="column detailing">
     <div class="content">
-      <img src="/w3images/people1.jpg" alt="People" style="width:100%">
-      <h4>Girl</h4>
-      <p>Lorem ipsum dolor..</p>
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 4</h4>
+      <p>Detailing Volkswagen Passat</p>
     </div>
   </div>
-  <div class="column people">
+  <div class="column detailing">
     <div class="content">
-      <img src="/w3images/people2.jpg" alt="People" style="width:100%">
-      <h4>Man</h4>
-      <p>Lorem ipsum dolor..</p>
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 5</h4>
+      <p>Detailing Audi A5</p>
     </div>
   </div>
-  <div class="column people">
+  <div class="column lakierowanie">
     <div class="content">
-      <img src="/w3images/people3.jpg" alt="People" style="width:100%">
-      <h4>Woman</h4>
-      <p>Lorem ipsum dolor..</p>
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 6</h4>
+      <p>Lakierowanie dachu BMW E90</p>
+    </div>
+  </div>
+
+  <div class="column lakierowanie">
+    <div class="content">
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 7</h4>
+      <p>Lakierowanie maski Mercedes W204 </p>
+    </div>
+  </div>
+  <div class="column lakierowanie">
+    <div class="content">
+    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 8</h4>
+      <p>Lakierowanie zderzaka Opel Astra</p>
+    </div>
+  </div>
+  <div class="column lakierowanie">
+    <div class="content">
+      <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
+      <h4>Zdjęcie 9</h4>
+      <p>Lakierowanie Skoda Fabia</p>
     </div>
   </div>
 <!-- END GRID -->
