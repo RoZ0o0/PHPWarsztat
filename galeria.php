@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="style_dashboard.css">
 </head>
 <body>
@@ -35,16 +36,10 @@
   <button class="btnfilter" onclick="filterSelection('naprawa')"> Naprawa</button>
   <button class="btnfilter" onclick="filterSelection('detailing')"> Detailing</button>
   <button class="btnfilter" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
-  <form class="form-inline">
-  <div class="form-group mb-2">
-    <label for="staticEmail2" class="sr-only">Email</label>
-  </div>
-  <div class="form-group mx-sm-3 mb-2" id="searchfilter">
-    <label for="inputFilter" class="sr-only">Wyszukaj</label>
-    <input type="text" class="form-control" id="inputFilter" placeholder="Wyszukaj">
-  </div>
-  <button type="button" class="btn btn-primary"onclick="filterSelection(getFilterText())">Filtruj</button>
-</form>
+  <input type="text" id="inputFilter" placeholder="Wyszukaj"/>
+  
+  <button type="button" class="btn btn-primary btn-lg"onclick="filterSelection(getFilterText())">Filtruj</button>
+
 </div>
 
 <!-- Portfolio Gallery Grid -->
@@ -199,6 +194,15 @@ h1 {
 #searchfilter{
   margin-top:12px;
 }
+#inputFilter{
+  display:inline-block;
+  padding:14.866px 10px;
+  line-height:100%;
+  border-radius: 10px;
+  margin-right: 10px;
+  border-style: none;
+}
+
   </style>
   <script>
  filterSelection("all") // Execute the function and show all columns
