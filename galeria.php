@@ -40,10 +40,10 @@
     <label for="staticEmail2" class="sr-only">Email</label>
   </div>
   <div class="form-group mx-sm-3 mb-2" id="searchfilter">
-    <label for="inputPassword2" class="sr-only">Wyszukaj</label>
-    <input type="text" class="form-control" id="inputPassword2" placeholder="Wyszukaj">
+    <label for="inputFilter" class="sr-only">Wyszukaj</label>
+    <input type="text" class="form-control" id="inputFilter" placeholder="Wyszukaj">
   </div>
-  <button type="button" class="btn btn-primary">Filtruj</button>
+  <button type="button" class="btn btn-primary"onclick="filterSelection(getFilterText())">Filtruj</button>
 </form>
 </div>
 
@@ -201,7 +201,7 @@ h1 {
 }
   </style>
   <script>
-    filterSelection("all") // Execute the function and show all columns
+ filterSelection("all") // Execute the function and show all columns
 function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("column");
@@ -247,6 +247,10 @@ for (var i = 0; i < btns.length; i++) {
     current[0].className = current[0].className.replace(" active", "");
     this.className += " active";
   });
+}
+function getFilterText(){
+  var textfilter = document.getElementById("inputFilter").value;
+  return textfilter;
 }
     </script>
 </html>
