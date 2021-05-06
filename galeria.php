@@ -31,10 +31,20 @@
 });
 </script>
 <div id="myBtnContainer">
-  <button class="btn active" onclick="filterSelection('all')"> Wszystko</button>
-  <button class="btn" onclick="filterSelection('naprawa')"> Naprawa</button>
-  <button class="btn" onclick="filterSelection('detailing')"> Detailing</button>
-  <button class="btn" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
+  <button class="btnfilter active"  onclick="filterSelection('all')"> Wszystko</button>
+  <button class="btnfilter" onclick="filterSelection('naprawa')"> Naprawa</button>
+  <button class="btnfilter" onclick="filterSelection('detailing')"> Detailing</button>
+  <button class="btnfilter" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
+  <form class="form-inline">
+  <div class="form-group mb-2">
+    <label for="staticEmail2" class="sr-only">Email</label>
+  </div>
+  <div class="form-group mx-sm-3 mb-2" id="searchfilter">
+    <label for="inputPassword2" class="sr-only">Wyszukaj</label>
+    <input type="text" class="form-control" id="inputPassword2" placeholder="Wyszukaj">
+  </div>
+  <button type="button" class="btn btn-primary">Filtruj</button>
+</form>
 </div>
 
 <!-- Portfolio Gallery Grid -->
@@ -158,6 +168,7 @@ h1 {
 .content {
   background-color: white;
   padding: 10px;
+  border-radius: 8px;
 }
 
 /* The "show" class is added to the filtered elements */
@@ -166,10 +177,11 @@ h1 {
 }
 
 /* Style the buttons */
-.btn {
+.btnfilter {
   border: none;
   outline: none;
   padding: 12px 16px;
+  border-radius:10px;
   background-color: white;
   cursor: pointer;
 }
@@ -183,6 +195,9 @@ h1 {
 .btn.active {
   background-color: #666;
    color: white;
+}
+#searchfilter{
+  margin-top:12px;
 }
   </style>
   <script>
