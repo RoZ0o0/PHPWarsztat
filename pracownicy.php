@@ -110,8 +110,8 @@ if (!isset($_SESSION['zalogowany'])) {
                                             echo "<td>" . $row['wynagrodzenie'] . " zł</td>";
                                         }
                                         echo "<td>";
-                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
-                                        echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id, ".$licznik.");deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);getlicznik(".$licznik.");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                                        echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                                         echo "</td>";
                                         echo "</tr>";
                                         $licznik++;
@@ -328,19 +328,25 @@ if (!isset($_SESSION['zalogowany'])) {
     </script>
     <script>
         var b_id;
+        var licz;
 
-        function getid(c_id, licz) {
+        function getid(c_id) {
             b_id = c_id;
             document.getElementById('id_p').value = b_id;
             document.getElementById('id_del').value = b_id;
             return b_id;
         }
 
+        function getlicznik(licz1) {
+            licz = licz1;
+            return licz;
+        }
+
         function showTableData() {
             var myTab = document.getElementById('table_to_highlight');
             var array = [];
 
-            for (i = b_id - 2; i < b_id - 1; i++) {
+            for (i = licz; i < licz + 1; i++) {
                 array[i] = [];
                 var objCells = myTab.rows.item(i).cells;
 
@@ -349,12 +355,12 @@ if (!isset($_SESSION['zalogowany'])) {
                 }
             }
 
-            var wynag = array[b_id - 2][6].substring(0, array[b_id - 2][6].length - 3);
-            document.getElementById("imiee").value = array[b_id - 2][1];
-            document.getElementById("nazwiskoe").value = array[b_id - 2][2];
-            document.getElementById("datee").value = array[b_id - 2][3];
-            document.getElementById("stanowiskoe").value = array[b_id - 2][4];
-            document.getElementById("pesele").value = parseFloat(array[b_id - 2][5]);
+            var wynag = array[licz][6].substring(0, array[licz][6].length - 3);
+            document.getElementById("imiee").value = array[licz][1];
+            document.getElementById("nazwiskoe").value = array[licz][2];
+            document.getElementById("datee").value = array[licz][3];
+            document.getElementById("stanowiskoe").value = array[licz][4];
+            document.getElementById("pesele").value = parseFloat(array[licz][5]);
             document.getElementById("wynagrodzeniee").value = parseFloat(wynag);
         }
     </script>
