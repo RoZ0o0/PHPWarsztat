@@ -96,7 +96,7 @@ if (!isset($_SESSION['zalogowany'])) {
                                 $_SESSION['ile'] = $ilu;
                                 if ($ilu > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<tr'>";
+                                        echo "<tr>";
                                         echo "<td>" . $licznik . "</td>";
                                         echo "<td>" . $row['imie'] . "</td>";
                                         echo "<td>" . $row['nazwisko'] . "</td>";
@@ -111,7 +111,7 @@ if (!isset($_SESSION['zalogowany'])) {
                                         }
                                         echo "<td>";
                                         echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
-                                        echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                        echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id, ".$licznik.");deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                                         echo "</td>";
                                         echo "</tr>";
                                         $licznik++;
@@ -253,12 +253,14 @@ if (!isset($_SESSION['zalogowany'])) {
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="sub form-control col-sm-4" value="Edytuj Pracownika">
-                    <input type="text" name="id_p" id="id_p" value="">
+                    <input type="hidden" name="id_p" id="id_p" value="">
                 </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <p id="test"></p>
 
     <form name="delprac" id="delprac" method="post" action="usunprac.php">
         <input type="hidden" name="id_del" id="id_del" value="">
@@ -297,7 +299,7 @@ if (!isset($_SESSION['zalogowany'])) {
                     title: 'Udało się!',
                     text: 'Pracownik został edytowany!',
                 });
-            }else if (simple == "usuniete"){
+            } else if (simple == "usuniete") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Udało się!',
@@ -327,7 +329,7 @@ if (!isset($_SESSION['zalogowany'])) {
     <script>
         var b_id;
 
-        function getid(c_id) {
+        function getid(c_id, licz) {
             b_id = c_id;
             document.getElementById('id_p').value = b_id;
             document.getElementById('id_del').value = b_id;
