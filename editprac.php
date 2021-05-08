@@ -25,4 +25,4 @@
         }
     }
     $polaczenie->close();
-    ?>
+?>
