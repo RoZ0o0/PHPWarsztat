@@ -82,49 +82,49 @@ if (!isset($_SESSION['zalogowany'])) {
                         <?php
                         require_once "connect.php";
 
-                        $polaczenie = @new mysqli($host, $user, $password, $db);
+                        $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-                        $polaczenie->set_charset("utf8");
+                        // $polaczenie->set_charset("utf8");
 
-                        if ($polaczenie->connect_errno != 0) {
-                            echo "Error: " . $polaczenie->connect_errno;
+                        if (!$polaczenie) {
+                            die("Connection failed: " . oci_error());
                         } else {
-                            $sql = "SELECT * FROM pracownik";
+                            $stid = oci_parse($polaczenie, "SELECT * FROM pracownicy");
                             $licznik = 1;
-                            if ($result = @$polaczenie->query($sql)) {
-                                $ilu = $result->num_rows;
-                                $_SESSION['ile'] = $ilu;
-                                if ($ilu > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . $licznik . "</td>";
-                                        echo "<td>" . $row['imie'] . "</td>";
-                                        echo "<td>" . $row['nazwisko'] . "</td>";
-                                        echo "<td>" . $row['data_zatrudnienia'] . "</td>";
-                                        echo "<td>" . $row['stanowisko'] . "</td>";
-                                        if ($_SESSION['stanowisko'] == "Pracownik") {
-                                            echo "<td>Ukryto Dane</td>";
-                                            echo "<td>Ukryto Dane</td>";
-                                        } else {
-                                            echo "<td>" . $row['pesel'] . "</td>";
-                                            echo "<td>" . $row['wynagrodzenie'] . " zł</td>";
-                                        }
-                                        echo "<td>";
-                                        if ($_SESSION['stanowisko'] == "Pracownik") {
-                                            echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
-                                            echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
-                                        } else {
-                                            echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
-                                            echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
-                                        }
-                                        echo "</td>";
-                                        echo "</tr>";
-                                        $licznik++;
+                            if (oci_execute($stid) == TRUE) {
+                                // $ilu = $result->num_rows;
+                                // $_SESSION['ile'] = $ilu;
+                                // if ($ilu > 0) {
+                                while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                                    echo "<tr>";
+                                    echo "<td>" . $licznik . "</td>";
+                                    echo "<td>" . $row['IMIE'] . "</td>";
+                                    echo "<td>" . $row['NAZWISKO'] . "</td>";
+                                    $datee = date_create($row['DATA_ZATRUDNIENIA']);
+                                    echo "<td>" . date_format($datee, 'Y-m-d') . "</td>";
+                                    echo "<td>" . $row['STANOWISKO'] . "</td>";
+                                    if ($_SESSION['stanowisko'] == "Pracownik") {
+                                        echo "<td>Ukryto Dane</td>";
+                                        echo "<td>Ukryto Dane</td>";
+                                    } else {
+                                        echo "<td>" . $row['PESEL'] . "</td>";
+                                        echo "<td>" . $row['WYNAGRODZENIE'] . " zł</td>";
                                     }
+                                    echo "<td>";
+                                    if ($_SESSION['stanowisko'] == "Pracownik") {
+                                        echo "<a href='#' class='settings' id='" . $row['ID_PRACOWNIKA'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
+                                        echo "<a href='#' class='delete' id='" . $row['ID_PRACOWNIKA'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                    } else {
+                                        echo "<a href='#' class='settings' id='" . $row['ID_PRACOWNIKA'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                                        echo "<a href='#' class='delete' id='" . $row['ID_PRACOWNIKA'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                    }
+                                    echo "</td>";
+                                    echo "</tr>";
+                                    $licznik++;
                                 }
                             }
                         }
-                        $polaczenie->close();
+                        oci_close($polaczenie);
                         ?>
                     </tbody>
                 </table>
