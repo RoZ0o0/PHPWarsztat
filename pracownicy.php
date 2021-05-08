@@ -96,7 +96,7 @@ if (!isset($_SESSION['zalogowany'])) {
                                 $_SESSION['ile'] = $ilu;
                                 if ($ilu > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<tr'>";
+                                        echo "<tr>";
                                         echo "<td>" . $licznik . "</td>";
                                         echo "<td>" . $row['imie'] . "</td>";
                                         echo "<td>" . $row['nazwisko'] . "</td>";
@@ -110,7 +110,7 @@ if (!isset($_SESSION['zalogowany'])) {
                                             echo "<td>" . $row['wynagrodzenie'] . " zł</td>";
                                         }
                                         echo "<td>";
-                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);getlicznik(".$licznik.");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
                                         echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                                         echo "</td>";
                                         echo "</tr>";
@@ -253,12 +253,14 @@ if (!isset($_SESSION['zalogowany'])) {
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="sub form-control col-sm-4" value="Edytuj Pracownika">
-                    <input type="text" name="id_p" id="id_p" value="">
+                    <input type="hidden" name="id_p" id="id_p" value="">
                 </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <p id="test"></p>
 
     <form name="delprac" id="delprac" method="post" action="usunprac.php">
         <input type="hidden" name="id_del" id="id_del" value="">
@@ -297,7 +299,7 @@ if (!isset($_SESSION['zalogowany'])) {
                     title: 'Udało się!',
                     text: 'Pracownik został edytowany!',
                 });
-            }else if (simple == "usuniete"){
+            } else if (simple == "usuniete") {
                 Swal.fire({
                     icon: 'success',
                     title: 'Udało się!',
@@ -326,6 +328,7 @@ if (!isset($_SESSION['zalogowany'])) {
     </script>
     <script>
         var b_id;
+        var licz;
 
         function getid(c_id) {
             b_id = c_id;
@@ -334,11 +337,16 @@ if (!isset($_SESSION['zalogowany'])) {
             return b_id;
         }
 
+        function getlicznik(licz1) {
+            licz = licz1;
+            return licz;
+        }
+
         function showTableData() {
             var myTab = document.getElementById('table_to_highlight');
             var array = [];
 
-            for (i = b_id - 2; i < b_id - 1; i++) {
+            for (i = licz; i < licz + 1; i++) {
                 array[i] = [];
                 var objCells = myTab.rows.item(i).cells;
 
@@ -347,12 +355,12 @@ if (!isset($_SESSION['zalogowany'])) {
                 }
             }
 
-            var wynag = array[b_id - 2][6].substring(0, array[b_id - 2][6].length - 3);
-            document.getElementById("imiee").value = array[b_id - 2][1];
-            document.getElementById("nazwiskoe").value = array[b_id - 2][2];
-            document.getElementById("datee").value = array[b_id - 2][3];
-            document.getElementById("stanowiskoe").value = array[b_id - 2][4];
-            document.getElementById("pesele").value = parseFloat(array[b_id - 2][5]);
+            var wynag = array[licz][6].substring(0, array[licz][6].length - 3);
+            document.getElementById("imiee").value = array[licz][1];
+            document.getElementById("nazwiskoe").value = array[licz][2];
+            document.getElementById("datee").value = array[licz][3];
+            document.getElementById("stanowiskoe").value = array[licz][4];
+            document.getElementById("pesele").value = parseFloat(array[licz][5]);
             document.getElementById("wynagrodzeniee").value = parseFloat(wynag);
         }
     </script>
