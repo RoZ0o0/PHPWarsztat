@@ -32,105 +32,105 @@
 });
 </script>
 <div id="entirebody">
-<div id="myBtnContainer">
-  <button class="btnfilter active"  onclick="filterSelection('all')"> Wszystko</button>
-  <button class="btnfilter" onclick="filterSelection('naprawa')"> Naprawa</button>
-  <button class="btnfilter" onclick="filterSelection('detailing')"> Detailing</button>
-  <button class="btnfilter" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
-  <input type="text" id="inputFilter" placeholder="Wyszukaj"/>
-  
-  <button type="button" class="btn btn-primary btn-lg"onclick="filterSelection(getFilterText())">Filtruj</button>
+  <div id="myBtnContainer">
+    <button class="btnfilter active"  onclick="filterSelection('all')"> Wszystko</button>
+    <button class="btnfilter" onclick="filterSelection('naprawa')"> Naprawa</button>
+    <button class="btnfilter" onclick="filterSelection('detailing')"> Detailing</button>
+    <button class="btnfilter" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
+    <input type="text" id="inputFilter" placeholder="Wyszukaj"/>
+    
+    <button type="button" class="btn btn-primary btn-lg"onclick="filterSelection(getFilterText())">Filtruj</button>
 
-</div>
-
-<!-- Portfolio Gallery Grid -->
-<div class="container">
-<div class="row">
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo1.png" alt="zdj" style="width:100%">
-    </div>
-      <h4>Zdjęcie 1</h4>
-      <p>Naprawa klapy bagażnika Audi a3</p>
-    </div>
-  </div>
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo2.png" alt="zdj" style="width:100%">
-    </div>
-      <h4>Zdjęcie 2</h4>
-      <p>Naprawa drzwi Skoda Octavia</p>
-    </div>
-  </div>
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo3.png" alt="zdj" style="width:100%">
-    </div>
-      <h4>Zdjęcie 3</h4>
-      <p>Detailing Mitsubishi Lancer</p>
-    </div>
   </div>
 
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo4.png" alt="zdj" style="width:100%">
+  <!-- Portfolio Gallery Grid -->
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo1.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 1</h4>
+        <p>Naprawa klapy bagażnika Audi a3</p>
+      </div>
     </div>
-      <h4>Zdjęcie 4</h4>
-      <p>Detailing Volkswagen Passat</p>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo2.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 2</h4>
+        <p>Naprawa drzwi Skoda Octavia</p>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-4 col-md-6 col-sm-12 col-12 column detailing">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo5.png" alt="zdj" style="width:100%">
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo3.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 3</h4>
+        <p>Detailing Mitsubishi Lancer</p>
+      </div>
     </div>
-      <h4>Zdjęcie 5</h4>
-      <p>Detailing Audi A5</p>
-    </div>
-  </div>
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo6.png" alt="zdj" style="width:100%">
-    </div>
-      <h4>Zdjęcie 6</h4>
-      <p>Lakierowanie dachu BMW E90</p>
-    </div>
-  </div>
 
-  <div class="col-lg-4 col-md-6 col-sm-12 col-12 column lakierowanie">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo7.png" alt="zdj" style="width:100%">
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo4.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 4</h4>
+        <p>Detailing Volkswagen Passat</p>
+      </div>
     </div>
-      <h4>Zdjęcie 7</h4>
-      <p>Lakierowanie maski Mercedes W204 </p>
+    <div class="col-lg-4 col-md-6 col-sm-12 col-12 column detailing">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo5.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 5</h4>
+        <p>Detailing Audi A5</p>
+      </div>
+    </div>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo6.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 6</h4>
+        <p>Lakierowanie dachu BMW E90</p>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo7.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 7</h4>
+        <p>Lakierowanie maski Mercedes W204 </p>
+      </div>
+    </div>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo8.jpg" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 8</h4>
+        <p>Lakierowanie zderzaka Opel Astra</p>
+      </div>
+    </div>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+        <img src="./gallery/photo9.jpg" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 9</h4>
+        <p>Lakierowanie Skoda Fabia</p>
+      </div>
     </div>
   </div>
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
-    <div class="content">
-    <div class="photo_container">
-    <img src="./gallery/photo8.jpg" alt="zdj" style="width:100%">
-    </div>
-      <h4>Zdjęcie 8</h4>
-      <p>Lakierowanie zderzaka Opel Astra</p>
-    </div>
   </div>
-  <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
-    <div class="content">
-    <div class="photo_container">
-      <img src="./gallery/photo9.jpg" alt="zdj" style="width:100%">
-    </div>
-      <h4>Zdjęcie 9</h4>
-      <p>Lakierowanie Skoda Fabia</p>
-    </div>
-  </div>
-</div>
-</div>
 <!-- END GRID -->
 </div>
 
