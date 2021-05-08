@@ -110,8 +110,13 @@ if (!isset($_SESSION['zalogowany'])) {
                                             echo "<td>" . $row['wynagrodzenie'] . " zł</td>";
                                         }
                                         echo "<td>";
-                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
-                                        echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                        if ($_SESSION['stanowisko'] == "Pracownik") {
+                                            echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
+                                            echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                        } else {
+                                            echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                                            echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                                        }
                                         echo "</td>";
                                         echo "</tr>";
                                         $licznik++;
@@ -303,9 +308,9 @@ if (!isset($_SESSION['zalogowany'])) {
                         $('.pagination').show();
                     }
 
-                    if(maxRows )
+                    if (maxRows)
 
-                    var totalRows = $(table + ' tbody tr').length;
+                        var totalRows = $(table + ' tbody tr').length;
                     $(table + ' tr:gt(0)').each(function() {
                         trnum++;
                         if (trnum > maxRows) {
@@ -401,7 +406,7 @@ if (!isset($_SESSION['zalogowany'])) {
             return Swal.fire({
                 icon: 'error',
                 title: 'Błąd',
-                text: 'Nie masz uprawnień aby dodać pracownika!',
+                text: 'Nie masz uprawnień!',
             });
         }
     </script>
@@ -506,30 +511,6 @@ if (!isset($_SESSION['zalogowany'])) {
             }
         });
     </script>
-    <script type="text/javascript">
-        document.getElementById('table_to_highlight')
-            .addEventListener('click', function(item) {
-                var row = item.path[1];
-
-                var row_value = "";
-
-                for (var j = 0; j < row.cells.length; j++) {
-                    row_value += row.cells[j].innerHTML;
-                    if (row_value.includes('zł')) {
-                        break;
-                    }
-                    row_value += " | ";
-                }
-
-                alert(row_value);
-
-                if (row.classList.contains('highlight'))
-                    row.classList.remove('highlight');
-                else
-                    row.classList.add('highlight');
-            });
-    </script>
-
     <?php
     unset($_SESSION['komunikat']);
     unset($blad);
