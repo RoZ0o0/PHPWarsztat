@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="style_dashboard.css">
 </head>
 <body>
@@ -30,79 +31,105 @@
   });
 });
 </script>
-<div id="myBtnContainer">
-  <button class="btn active" onclick="filterSelection('all')"> Wszystko</button>
-  <button class="btn" onclick="filterSelection('naprawa')"> Naprawa</button>
-  <button class="btn" onclick="filterSelection('detailing')"> Detailing</button>
-  <button class="btn" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
-</div>
+<div id="entirebody">
+  <div id="myBtnContainer">
+    <button class="btnfilter active"  onclick="filterSelection('all')"> Wszystko</button>
+    <button class="btnfilter" onclick="filterSelection('naprawa')"> Naprawa</button>
+    <button class="btnfilter" onclick="filterSelection('detailing')"> Detailing</button>
+    <button class="btnfilter" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
+    <input type="text" id="inputFilter" placeholder="Wyszukaj"/>
+    
+    <button type="button" class="btn btn-primary btn-lg"onclick="filterSelection(getFilterText())">Filtruj</button>
 
-<!-- Portfolio Gallery Grid -->
-<div class="row">
-  <div class="column naprawa">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 1</h4>
-      <p>Naprawa klapy bagażnika Audi a3</p>
-    </div>
-  </div>
-  <div class="column naprawa">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 2</h4>
-      <p>Naprawa drzwi Skoda Octavia</p>
-    </div>
-  </div>
-  <div class="column detailing">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 3</h4>
-      <p>Detailing Mitsubishi Lancer</p>
-    </div>
   </div>
 
-  <div class="column detailing">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 4</h4>
-      <p>Detailing Volkswagen Passat</p>
+  <!-- Portfolio Gallery Grid -->
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo1.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 1</h4>
+        <p>Naprawa klapy bagażnika Audi a3</p>
+      </div>
     </div>
-  </div>
-  <div class="column detailing">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 5</h4>
-      <p>Detailing Audi A5</p>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo2.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 2</h4>
+        <p>Naprawa drzwi Skoda Octavia</p>
+      </div>
     </div>
-  </div>
-  <div class="column lakierowanie">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 6</h4>
-      <p>Lakierowanie dachu BMW E90</p>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo3.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 3</h4>
+        <p>Detailing Mitsubishi Lancer</p>
+      </div>
     </div>
-  </div>
 
-  <div class="column lakierowanie">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 7</h4>
-      <p>Lakierowanie maski Mercedes W204 </p>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo4.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 4</h4>
+        <p>Detailing Volkswagen Passat</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 col-12 column detailing">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo5.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 5</h4>
+        <p>Detailing Audi A5</p>
+      </div>
+    </div>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo6.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 6</h4>
+        <p>Lakierowanie dachu BMW E90</p>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo7.png" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 7</h4>
+        <p>Lakierowanie maski Mercedes W204 </p>
+      </div>
+    </div>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+      <img src="./gallery/photo8.jpg" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 8</h4>
+        <p>Lakierowanie zderzaka Opel Astra</p>
+      </div>
+    </div>
+    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+      <div class="content">
+      <div class="photo_container">
+        <img src="./gallery/photo9.jpg" alt="zdj" style="width:100%">
+      </div>
+        <h4>Zdjęcie 9</h4>
+        <p>Lakierowanie Skoda Fabia</p>
+      </div>
     </div>
   </div>
-  <div class="column lakierowanie">
-    <div class="content">
-    <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 8</h4>
-      <p>Lakierowanie zderzaka Opel Astra</p>
-    </div>
-  </div>
-  <div class="column lakierowanie">
-    <div class="content">
-      <img src="/w3images/avatar.jpg" alt="zdj" style="width:100%">
-      <h4>Zdjęcie 9</h4>
-      <p>Lakierowanie Skoda Fabia</p>
-    </div>
   </div>
 <!-- END GRID -->
 </div>
@@ -157,7 +184,13 @@ h1 {
 /* Content */
 .content {
   background-color: white;
-  padding: 10px;
+  padding: 15px;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.photo_container{
+height: 200px;
 }
 
 /* The "show" class is added to the filtered elements */
@@ -166,12 +199,14 @@ h1 {
 }
 
 /* Style the buttons */
-.btn {
+.btnfilter {
   border: none;
   outline: none;
   padding: 12px 16px;
+  border-radius:10px;
   background-color: white;
   cursor: pointer;
+  margin-top:8px;
 }
 
 /* Add a grey background color on mouse-over */
@@ -184,9 +219,33 @@ h1 {
   background-color: #666;
    color: white;
 }
+#searchfilter{
+  margin-top:12px;
+}
+#inputFilter{
+  display:inline-block;
+  padding:14.866px 10px;
+  line-height:100%;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-style: none;
+}
+img{
+  max-width:360px;
+  max-height:200px;
+  position: relative;
+  padding-bottom: 10px;
+  top: 50%;
+  transform: translateY(-50%);      
+}
+#myBtnContainer{
+  transform: translateX(20%);
+}
+
   </style>
   <script>
-    filterSelection("all") // Execute the function and show all columns
+ filterSelection("all") // Execute the function and show all columns
 function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("column");
@@ -232,6 +291,10 @@ for (var i = 0; i < btns.length; i++) {
     current[0].className = current[0].className.replace(" active", "");
     this.className += " active";
   });
+}
+function getFilterText(){
+  var textfilter = document.getElementById("inputFilter").value;
+  return textfilter;
 }
     </script>
 </html>
