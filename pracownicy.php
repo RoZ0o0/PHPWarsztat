@@ -110,7 +110,7 @@ if (!isset($_SESSION['zalogowany'])) {
                                             echo "<td>" . $row['wynagrodzenie'] . " zł</td>";
                                         }
                                         echo "<td>";
-                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);getlicznik(".$licznik.");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                                        echo "<a href='#' class='settings' id='" . $row['id_pracownika'] . "' title='Settings' data-target='#editModal' data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
                                         echo "<a href='#' class='delete' id='" . $row['id_pracownika'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                                         echo "</td>";
                                         echo "</tr>";
@@ -123,17 +123,31 @@ if (!isset($_SESSION['zalogowany'])) {
                         ?>
                     </tbody>
                 </table>
-                <div class="clearfix">
-                    <div class="hint-text">Pokazano <b><?php echo $_SESSION['ile']; ?></b> / <b><?php echo $_SESSION['ile']; ?></b> wyników.</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Poprzedni</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <!-- <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li> -->
-                        <li class="page-item"><a href="#" class="page-link">Następny</a></li>
-                    </ul>
+
+                <div class='pagination-container'>
+                    <nav>
+                        <ul class="pagination">
+
+                            <li data-page="prev">
+                                <span>
+                                    < <span class="sr-only">(current)
+                                </span></span>
+                            </li>
+                            <li data-page="next" id="prev">
+                                <span> > <span class="sr-only">(current)</span></span>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="form-group hidden">
+                    <select class="form-control" name="state" id="maxRows" style="width: 10%">
+                        <option value="5000">Wszystko</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+
                 </div>
             </div>
         </div>
@@ -266,6 +280,122 @@ if (!isset($_SESSION['zalogowany'])) {
         <input type="hidden" name="id_del" id="id_del" value="">
     </form>
 
+    <script>
+        getPagination('#table_to_highlight');
+
+        function getPagination(table) {
+            var lastPage = 1;
+
+            $('#maxRows')
+                .on('change', function(evt) {
+
+                    lastPage = 1;
+                    $('.pagination')
+                        .find('li')
+                        .slice(1, -1)
+                        .remove();
+                    var trnum = 0;
+                    var maxRows = parseInt($(this).val());
+
+                    if (maxRows == 5000) {
+                        $('.pagination').hide();
+                    } else {
+                        $('.pagination').show();
+                    }
+
+                    if(maxRows )
+
+                    var totalRows = $(table + ' tbody tr').length;
+                    $(table + ' tr:gt(0)').each(function() {
+                        trnum++;
+                        if (trnum > maxRows) {
+
+                            $(this).hide();
+                        }
+                        if (trnum <= maxRows) {
+                            $(this).show();
+                        }
+                    });
+                    if (totalRows > maxRows) {
+                        var pagenum = Math.ceil(totalRows / maxRows);
+                        for (var i = 1; i <= pagenum;) {
+                            $('.pagination #prev')
+                                .before(
+                                    '<li data-page="' +
+                                    i +
+                                    '">\
+								  <span>' +
+                                    i++ +
+                                    '<span class="sr-only">(current)</span></span>\
+								</li>'
+                                )
+                                .show();
+                        }
+                    }
+                    $('.pagination [data-page="1"]').addClass('active');
+                    $('.pagination li').on('click', function(evt) {
+                        evt.stopImmediatePropagation();
+                        evt.preventDefault();
+                        var pageNum = $(this).attr('data-page');
+
+                        var maxRows = parseInt($('#maxRows').val());
+
+                        if (pageNum == 'prev') {
+                            if (lastPage == 1) {
+                                return;
+                            }
+                            pageNum = --lastPage;
+                        }
+                        if (pageNum == 'next') {
+                            if (lastPage == $('.pagination li').length - 2) {
+                                return;
+                            }
+                            pageNum = ++lastPage;
+                        }
+
+                        lastPage = pageNum;
+                        var trIndex = 0;
+                        $('.pagination li').removeClass('active');
+                        $('.pagination [data-page="' + lastPage + '"]').addClass('active');
+                        limitPagging();
+                        $(table + ' tr:gt(0)').each(function() {
+                            trIndex++;
+                            if (
+                                trIndex > maxRows * pageNum ||
+                                trIndex <= maxRows * pageNum - maxRows
+                            ) {
+                                $(this).hide();
+                            } else {
+                                $(this).show();
+                            }
+                        });
+                    });
+                    limitPagging();
+                })
+                .val(5)
+                .change();
+        }
+
+        function limitPagging() {
+
+            if ($('.pagination li').length > 7) {
+                if ($('.pagination li.active').attr('data-page') <= 3) {
+                    $('.pagination li:gt(5)').hide();
+                    $('.pagination li:lt(5)').show();
+                    $('.pagination [data-page="next"]').show();
+                }
+                if ($('.pagination li.active').attr('data-page') > 3) {
+                    $('.pagination li:gt(0)').hide();
+                    $('.pagination [data-page="next"]').show();
+                    for (let i = (parseInt($('.pagination li.active').attr('data-page')) - 2); i <= (parseInt($('.pagination li.active').attr('data-page')) + 2); i++) {
+                        $('.pagination [data-page="' + i + '"]').show();
+
+                    }
+
+                }
+            }
+        }
+    </script>
     <script>
         function confirm_alert() {
             return Swal.fire({
