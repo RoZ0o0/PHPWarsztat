@@ -6,23 +6,27 @@
         $id_prac = $_POST['id_p'];
     }
 
-    $polaczenie = @new mysqli($host, $user, $password, $db);
+    $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-    $polaczenie->set_charset("utf8");
-    if ($polaczenie->connect_errno != 0) {
-        echo "Error: " . $polaczenie->connect_errno;
+    if (!$polaczenie) {
+        die("Connection failed: " . oci_error());
     } else {
         $imie = $_POST['imiee'];
         $nazwisko = $_POST['nazwiskoe'];
         $wynagrodzenie = $_POST['wynagrodzeniee'];
         $stanowisko = $_POST['stanowiskoe'];
-        $date = $_POST['datee'];
+        $date = date_create($_POST['datee']);
+        $date = date_format($date, 'y/m/d');
         $pesel = $_POST['pesele'];
-        $sql = "UPDATE pracownik SET nazwisko='$nazwisko', imie='$imie', stanowisko='$stanowisko', pesel='$pesel', data_zatrudnienia='$date', wynagrodzenie=$wynagrodzenie WHERE id_pracownika = $id_prac";
-        if ($result = @$polaczenie->query($sql)) {
+        $stid  = oci_parse($polaczenie, "BEGIN pracownicy_crud.pracownik_edit('$id_prac', '$imie', '$nazwisko', (TO_DATE('$date', 'yy/mm/dd')), $wynagrodzenie, $pesel, '$stanowisko'); END;");
+        // $sql = "BEGIN pracownicy_crud.pracownik_edit('$id_prac', '$imie', '$nazwisko', (TO_DATE('$date', 'yy/mm/dd')), $wynagrodzenie, $pesel, '$stanowisko'); END;";
+        // echo $sql;
+        if (oci_execute($stid) == TRUE) {
             $_SESSION['komunikat'] = "edycja";
             header('Location: pracownicy.php');
         }
+        oci_free_statement($stid);
     }
-    $polaczenie->close();
+    oci_close($polaczenie);
+    
 ?>
