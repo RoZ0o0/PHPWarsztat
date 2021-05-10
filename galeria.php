@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /> -->
     <link rel="stylesheet" href="style_dashboard.css">
 </head>
 <body>
@@ -46,7 +46,7 @@
   <!-- Portfolio Gallery Grid -->
   <div class="container">
   <div class="row">
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
+    <div class="col-lg-4 col-12 column naprawa">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo1.png" alt="zdj" style="width:100%">
@@ -55,7 +55,7 @@
         <p>Naprawa klapy bagażnika Audi a3</p>
       </div>
     </div>
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column naprawa">
+    <div class="col-lg-4 col-12 column naprawa">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo2.png" alt="zdj" style="width:100%">
@@ -64,7 +64,7 @@
         <p>Naprawa drzwi Skoda Octavia</p>
       </div>
     </div>
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
+    <div class="col-lg-4 col-12 column detailing">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo3.png" alt="zdj" style="width:100%">
@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column detailing">
+    <div class="col-lg-4 col-12 column detailing">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo4.png" alt="zdj" style="width:100%">
@@ -83,7 +83,7 @@
         <p>Detailing Volkswagen Passat</p>
       </div>
     </div>
-    <div class="col-lg-4 col-md-6 col-sm-12 col-12 column detailing">
+    <div class="col-lg-4 col-12 column detailing">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo5.png" alt="zdj" style="width:100%">
@@ -92,7 +92,7 @@
         <p>Detailing Audi A5</p>
       </div>
     </div>
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+    <div class="col-lg-4  col-12 column lakierowanie">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo6.png" alt="zdj" style="width:100%">
@@ -102,7 +102,7 @@
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-6 col-sm-12 col-12 column lakierowanie">
+    <div class="col-lg-4 col-12 column lakierowanie">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo7.png" alt="zdj" style="width:100%">
@@ -111,7 +111,7 @@
         <p>Lakierowanie maski Mercedes W204 </p>
       </div>
     </div>
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+    <div class="col-lg-4 col-12 column lakierowanie">
       <div class="content">
       <div class="photo_container">
       <img src="./gallery/photo8.jpg" alt="zdj" style="width:100%">
@@ -120,7 +120,7 @@
         <p>Lakierowanie zderzaka Opel Astra</p>
       </div>
     </div>
-    <div class="col-lg-4  col-md-6 col-sm-12 col-12 column lakierowanie">
+    <div class="col-lg-4 col-12 column lakierowanie">
       <div class="content">
       <div class="photo_container">
         <img src="./gallery/photo9.jpg" alt="zdj" style="width:100%">
@@ -143,7 +143,6 @@
 body {
   background-color: #f1f1f1;
   padding: 20px;
-  font-family: Arial;
 }
 
 /* Center website */
@@ -187,6 +186,7 @@ h1 {
   padding: 15px;
   height: 100%;
   border-radius: 2px;
+  max-width: 380px;
 }
 
 .photo_container{
@@ -224,7 +224,7 @@ height: 200px;
 }
 #inputFilter{
   display:inline-block;
-  padding:14.866px 10px;
+  padding:12px 10px;
   line-height:100%;
   border-radius: 10px;
   margin-right: 10px;
