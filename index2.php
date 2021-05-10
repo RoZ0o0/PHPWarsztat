@@ -42,7 +42,7 @@
 
                             <div class="form-group">
                                 <label>
-                                    <input id="check_1" name="check_1"  type="checkbox" required><small> Przeczyałem i akceptuję regulamin</small></input> 
+                                    <input id="check_1" name="check_1"  type="checkbox" required><small> Przeczytałem i akceptuję regulamin</small></input> 
                                     <div class="invalid-feedback">Zaznacz to pole jeśli chcesz kontynuować.</div>
                                 </label>
                             </div>
