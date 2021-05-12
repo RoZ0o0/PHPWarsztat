@@ -19,7 +19,7 @@
 <body>
 
 <?php include 'nav.php';?>
-<center><h2 class="display-4 text-white">Sekcja Galerii</h2></center>
+<h2 class="display-4 text-white" style="text-align: center">Sekcja Galerii</h2>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -42,98 +42,40 @@
     <button type="button" class="btn btn-primary btn-lg"onclick="filterSelection(getFilterText())">Filtruj</button>
 
   </div>
-
-  <!-- Portfolio Gallery Grid -->
   <div class="container">
-  <div class="row">
-    <div class="col-lg-4 col-12 column naprawa">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo1.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 1</h4>
-        <p>Naprawa klapy bagażnika Audi a3</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-12 column naprawa">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo2.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 2</h4>
-        <p>Naprawa drzwi Skoda Octavia</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-12 column detailing">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo3.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 3</h4>
-        <p>Detailing Mitsubishi Lancer</p>
-      </div>
-    </div>
+<div class="row">
 
-    <div class="col-lg-4 col-12 column detailing">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo4.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 4</h4>
-        <p>Detailing Volkswagen Passat</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-12 column detailing">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo5.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 5</h4>
-        <p>Detailing Audi A5</p>
-      </div>
-    </div>
-    <div class="col-lg-4  col-12 column lakierowanie">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo6.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 6</h4>
-        <p>Lakierowanie dachu BMW E90</p>
-      </div>
-    </div>
+<?php
+require_once "connect.php";
 
-    <div class="col-lg-4 col-12 column lakierowanie">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo7.png" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 7</h4>
-        <p>Lakierowanie maski Mercedes W204 </p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-12 column lakierowanie">
-      <div class="content">
-      <div class="photo_container">
-      <img src="./gallery/photo8.jpg" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 8</h4>
-        <p>Lakierowanie zderzaka Opel Astra</p>
-      </div>
-    </div>
-    <div class="col-lg-4 col-12 column lakierowanie">
-      <div class="content">
-      <div class="photo_container">
-        <img src="./gallery/photo9.jpg" alt="zdj" style="width:100%">
-      </div>
-        <h4>Zdjęcie 9</h4>
-        <p>Lakierowanie Skoda Fabia</p>
-      </div>
-    </div>
+$polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+// $polaczenie->set_charset("utf8");
+
+if (!$polaczenie) {
+    die("Connection failed: " . oci_error());
+} else {
+    $stid = oci_parse($polaczenie, "SELECT * FROM GALERIA");
+    
+    if (oci_execute($stid) == TRUE) {
+  
+        while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+            echo "<div class='col-lg-4 col-12 column'>";
+            echo "<div class='content'>";
+            echo "<div class='photo_container'>";
+            echo "<img src='./gallery/" . $row['ZDJECIE'] . "' alt='zdj' style='width:100%'>";
+            echo "</div>";
+            echo "<h4>Zdjęcie 1</h4>";
+            echo "<p>".$row['KOMENTARZ']."</p>";
+            echo "</div>";
+            echo "</div>";
+        }
+    }               
+}
+oci_close($polaczenie);
+?>
   </div>
-  </div>
-<!-- END GRID -->
 </div>
-
 </body>
 <style>
   * {
