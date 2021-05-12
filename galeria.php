@@ -33,14 +33,10 @@
 </script>
 <div id="entirebody">
   <div id="myBtnContainer">
-    <button class="btnfilter active"  onclick="filterSelection('all')"> Wszystko</button>
-    <button class="btnfilter" onclick="filterSelection('naprawa')"> Naprawa</button>
-    <button class="btnfilter" onclick="filterSelection('detailing')"> Detailing</button>
-    <button class="btnfilter" onclick="filterSelection('lakierowanie')"> Lakierowanie</button>
-    <input type="text" id="inputFilter" placeholder="Wyszukaj"/>
-    
-    <button type="button" class="btn btn-primary btn-lg"onclick="filterSelection(getFilterText())">Filtruj</button>
-
+    <form method="post" action="galeria.php">
+  <input type="text" id="inputFilter" name='textFilter' placeholder="Wyszukaj"/>
+  <button type="button" class="btn btn-primary btn-lg">Filtruj</button>
+    </form>
   </div>
   <div class="container">
 <div class="row">
@@ -54,9 +50,19 @@ $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
 if (!$polaczenie) {
     die("Connection failed: " . oci_error());
-} else {
-    $stid = oci_parse($polaczenie, "SELECT * FROM GALERIA");
-    
+}else{
+  
+  if(isset ($_POST['textFilter']))
+  {
+  $text = $_POST['textFilter'];
+  $sql_query = "SELECT * FROM GALERIA WHERE KOMENTARZ LIKE'%".$text."%'";
+  }
+ else{
+  $sql_query = "SELECT * FROM GALERIA";
+ }
+  
+
+    $stid = oci_parse($polaczenie, $sql_query);
     if (oci_execute($stid) == TRUE) {
   
         while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
@@ -73,6 +79,7 @@ if (!$polaczenie) {
     }               
 }
 oci_close($polaczenie);
+unset($_POST['textFilter']);
 ?>
   </div>
 </div>
@@ -112,7 +119,6 @@ h1 {
 .column {
   float: left;
   width: 33.33%;
-  display: none; /* Hide columns by default */
 }
 
 /* Clear floats after rows */
@@ -186,59 +192,6 @@ img{
 }
 
   </style>
-  <script>
- filterSelection("all") // Execute the function and show all columns
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("column");
-  if (c == "all") c = "";
-  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
-
-// Show filtered elements
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {
-      element.className += " " + arr2[i];
-    }
-  }
-}
-
-// Hide elements that are not selected
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
-    }
-  }
-  element.className = arr1.join(" ");
-}
-
-// Add active class to the current button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-function getFilterText(){
-  var textfilter = document.getElementById("inputFilter").value;
-  return textfilter;
-}
-    </script>
 </html>
 
 
