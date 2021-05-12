@@ -21,7 +21,9 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 Baza danych służy do użytku przez sieć warsztatów blacharskich w której istnieją tabele do zapisu danych pracownika, klienta, pojazdu, warsztatu oraz tabela główna będąca zbiorem danych o wykonanych naprawach dla danych klientów, pojazdów w danym warsztacie przez danego pracownika.<br/>
 
 ###	Diagram ERD
-![image](https://user-images.githubusercontent.com/62017852/111640287-586d5280-87fc-11eb-8ab4-fc1c323cb71b.png)
+![image](https://user-images.githubusercontent.com/59484767/117965278-9f2a8500-b333-11eb-83a2-4f3a482f66df.png)
+
+
 
 ## Wykorzystane technologie
 HTML, CSS, JavaScript, PHP<br/>
