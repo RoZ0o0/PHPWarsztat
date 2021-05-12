@@ -33,6 +33,27 @@
             </a>
     </li>
     <li class="nav-item">
+      <a href="faktury.php" class="<?php if ( $page == "faktury" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
+                <i class="fa fa-file-text-o mr-3 text-primary fa-fw"></i>
+                Faktury
+            </a>
+            <li class="nav-item">
+      <a href="klienci.php" class="<?php if ( $page == "klienci" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
+                <i class="fa fa-user mr-3 text-primary fa-fw"></i>
+                Klienci
+            </a>
+            <li class="nav-item">
+      <a href="pojazdy.php" class="<?php if ( $page == "pojazdy" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
+                <i class="fa fa-car mr-3 text-primary fa-fw"></i>
+                Pojazdy
+            </a>
+    <li class="nav-item">
+      <a href="faktury.php" class="<?php if ( $page == "faktury" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
+        <i class="fa fa-shopping-cart mr-3 text-primary fa-fw"></i>
+        Zamówienia
+    </a>
+            
+    <li class="nav-item">
       <a href="galeria.php" class="<?php if ( $page == "galeria" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
                 <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
                 Galeria
