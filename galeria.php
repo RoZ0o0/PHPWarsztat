@@ -20,6 +20,7 @@ if (!isset($_SESSION['zalogowany'])) {
 
 <body>
 
+<<<<<<< HEAD
   <?php include 'nav.php'; ?>
   <h2 class="display-4 text-white" style="text-align: center">Sekcja Galerii</h2>
 
@@ -82,6 +83,82 @@ if (!isset($_SESSION['zalogowany'])) {
         ?>
       </div>
     </div>
+=======
+<?php include 'nav.php';?>
+<h2 class="display-4 text-white" style="text-align: center">Sekcja Galerii</h2>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<script>$(function() { 
+  $('#sidebarCollapse').on('click', function() {
+    $('#sidebar, #content').toggleClass('active');
+  });
+});
+</script>
+<div id="entirebody">
+  <div id="myBtnContainer">
+    <form method="post" action="galeria.php">
+  <input type="text" id="inputFilter" name='textFilter' placeholder="Wyszukaj"/>
+  <button type="button" class="btn btn-primary btn-lg">Filtruj</button>
+    </form>
+  </div>
+  <div class="container">
+<div class="row">
+
+<?php
+require_once "connect.php";
+
+$polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+// $polaczenie->set_charset("utf8");
+
+if (!$polaczenie) {
+    die("Connection failed: " . oci_error());
+}else{
+  
+  if(isset ($_POST['textFilter']))
+  {
+  $text = $_POST['textFilter'];
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
+    FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+    INNER JOIN USLUGI
+    ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
+    INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
+    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie LIKE '%".$text."%' OR klienci.nazwisko LIKE '%".$text."%'";
+  }
+ else{
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
+  FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+  INNER JOIN USLUGI
+  ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
+  INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi)";
+ }
+  
+
+    $stid = oci_parse($polaczenie, $sql_query);
+    if (oci_execute($stid) == TRUE) {
+  
+        while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+            echo "<div class='col-lg-4 col-12 column'>";
+            echo "<div class='content'>";
+            echo "<div class='photo_container'>";
+            echo "<img src='./gallery/" . $row['ZDJECIE'] . "' alt='zdj' style='width:100%'>";
+            echo "</div>";
+            echo "<h4>".$row['IMIE']." ".$row['NAZWISKO']."</h4>";
+            echo "<p>".$row['KOMENTARZ']."</p>";
+            echo "</div>";
+            echo "</div>";
+        }
+    }               
+}
+oci_close($polaczenie);
+unset($_POST['textFilter']);
+?>
+  </div>
+</div>
+>>>>>>> cyziek
 </body>
 <style>
   * {
@@ -114,6 +191,7 @@ if (!isset($_SESSION['zalogowany'])) {
     padding: 8px;
   }
 
+<<<<<<< HEAD
   /* Create three equal columns that floats next to each other */
   .column {
     float: left;
@@ -121,6 +199,13 @@ if (!isset($_SESSION['zalogowany'])) {
     display: none;
     /* Hide columns by default */
   }
+=======
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+}
+>>>>>>> cyziek
 
   /* Clear floats after rows */
   .row:after {
@@ -169,6 +254,7 @@ if (!isset($_SESSION['zalogowany'])) {
     color: white;
   }
 
+<<<<<<< HEAD
   #searchfilter {
     margin-top: 12px;
   }
@@ -233,6 +319,10 @@ if (!isset($_SESSION['zalogowany'])) {
     }
     element.className = arr1.join(" ");
   }
+=======
+  </style>
+</html>
+>>>>>>> cyziek
 
   // Add active class to the current button (highlight it)
   var btnContainer = document.getElementById("myBtnContainer");
