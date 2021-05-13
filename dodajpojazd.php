@@ -9,7 +9,7 @@ $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 if (!$polaczenie) {
     die("Connection failed: " . oci_error());
 } else {
-    $id = $_POST['id'];
+    $id = $_POST['select'];
     $model = $_POST['model'];
     $marka = $_POST['marka'];
     $rocznik = $_POST['rocznik'];

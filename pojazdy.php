@@ -162,8 +162,8 @@ if (!isset($_SESSION['zalogowany'])) {
             <div class="form-group row">
               <label for="klient" class="col-sm-4 col-form-label">Klient</label>
               <div class="col-sm-8">
-              <input list="brow">
-              <datalist id="brow">
+                <input class="col-sm-12" list="brow" id="select" name="select" autocomplete="off" placeholder="Podaj Klienta">
+                <datalist id="brow" onchange='changeFunc()'>
                   <?php
                   require_once "connect.php";
 
@@ -178,8 +178,8 @@ if (!isset($_SESSION['zalogowany'])) {
                       while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                         $id = $row['ID_KLIENTA'];
                         $imie = $row['IMIE'];
-                        $nazwisko = $row['NAZWISKO']; 
-                        echo "<option value='$imie $nazwisko' id='$id'></option>";
+                        $nazwisko = $row['NAZWISKO'];
+                        echo "<option data-id='$id' value='".$imie.$nazwisko."'></option>";
                       }
                     }
                   }
@@ -466,6 +466,20 @@ if (!isset($_SESSION['zalogowany'])) {
       document.getElementById("adrese").value = array[licz][1];
       document.getElementById("miastoe").value = array[licz][2];
     }
+  </script>
+
+  <script>
+    $("input").on('input', function() {
+      // var inputValue = this.value;
+      var g = $('#select').val();
+      var id = $('#brow option[value=' + g + ']').attr('data-id');
+      // if ($('datalist').find('option').filter(function() {
+      //     return this.value == inputValue;
+      //   }).length) {
+        //your code as per need
+        alert(id);
+      }
+    );
   </script>
   <?php
   unset($_SESSION['komunikat']);
