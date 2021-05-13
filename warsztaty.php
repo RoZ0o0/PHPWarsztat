@@ -198,6 +198,7 @@ if (!isset($_SESSION['zalogowany'])) {
                         </div>
                 </div>
                 <div class="modal-footer">
+                <button type="button" onclick="reloadMaps()"class="btn btn-success">Zobacz na Mapie</button>
                     <input type="submit" class="sub form-control col-sm-4" value="Edytuj Warsztat">
                     <input type="hidden" name="id_w" id="id_w" value="">
                 </div>
@@ -211,6 +212,17 @@ if (!isset($_SESSION['zalogowany'])) {
     <form name="delprac" id="delprac" method="post" action="usunwarsztat.php">
         <input type="hidden" name="id_del" id="id_del" value="">
     </form>
+<div id="tutaj_Mapy"></div>
+    <script>
+function reloadMaps(){
+var adreso = $('#adrese').val() + ' ';
+var miastoo = $('#miastoe').val()+ ' ';
+document.getElementById("tutaj_Mapy").innerHTML = "<div id='map-container-google-3' class='z-depth-1-half map-container-3'><iframe src='https://maps.google.com/maps?q="+miastoo+adreso+"E&t=&z=18&ie=UTF8&iwloc=&output=embed' frameborder='0' style='border:0' allowfullscreen></iframe></div>";
+console.log(miastoo+adreso);
+}
+</script>
+
+
 
     <script>
         getPagination('#table_to_highlight');
@@ -431,6 +443,24 @@ if (!isset($_SESSION['zalogowany'])) {
     unset($_SESSION['komunikat']);
     unset($blad);
     ?>
+
+    <style>
+   .map-container-3{
+overflow:hidden;
+padding-bottom:56.25%;
+position: relative;
+margin-top: 5%;
+left:14.87%;
+height:0;
+}
+.map-container-3 iframe{
+left:0;
+top:0;
+height:70%;
+width:70%;
+position:absolute;
+}
+    </style>
 </body>
 
 </html>
