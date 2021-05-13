@@ -35,7 +35,7 @@
   <div id="myBtnContainer">
     <form method="post" action="galeria.php">
   <input type="text" id="inputFilter" name='textFilter' placeholder="Wyszukaj"/>
-  <button type="button" class="btn btn-primary btn-lg">Filtruj</button>
+  <input type="submit" class="btn btn-primary btn-lg" value="Filtruj"></button>
     </form>
   </div>
   <div class="container">
@@ -55,12 +55,11 @@ if (!$polaczenie) {
   if(isset ($_POST['textFilter']))
   {
   $text = $_POST['textFilter'];
-  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
-    FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
     INNER JOIN USLUGI
     ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
     INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
-    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie LIKE '%".$text."%' OR klienci.nazwisko LIKE '%".$text."%'";
+    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie || ' ' || klienci.nazwisko LIKE '%".$text."%'";
   }
  else{
   $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
