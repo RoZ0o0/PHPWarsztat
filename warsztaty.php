@@ -94,13 +94,15 @@ if (!isset($_SESSION['zalogowany'])) {
                                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                                     echo "<tr>";
                                     echo "<td>" . $licznik . "</td>";
-                                    echo "<td>" . $row['ADRES'] . "</td>";
-                                    echo "<td>" . $row['MIASTO'] . "</td>";
-                                    echo "<td>";
+                                    echo "<td class='adres_row'>" . $row['ADRES'] . "</td>";
+                                    echo "<td class='miasto_row'>" . $row['MIASTO'] . "</td>";
+                                    echo "<td class='tede'>";
                                     if ($_SESSION['stanowisko'] == "Pracownik") {
+                                        echo "<a href='#' class='material-icons-outlined' id='" . $row['ID_WARSZTATU'] . "' title='Map' data-target='#showMap' onclick='reloadMaps();'><i class='material-icons ikonka_map'>&#xe0c8;</i></a>";
                                         echo "<a href='#' class='settings' id='" . $row['ID_WARSZTATU'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
                                         echo "<a href='#' class='delete' id='" . $row['ID_WARSZTATU'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
                                     } else {
+                                        echo "<a href='#' class='material-icons-outlined' id='" . $row['ID_WARSZTATU'] . "' title='Map' data-target='#showMap' onclick='reloadMaps();'><i class='material-icons ikonka_map'>&#xe0c8;</i></a>";
                                         echo "<a href='#' class='settings' id='" . $row['ID_WARSZTATU'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
                                         echo "<a href='#' class='delete' id='" . $row['ID_WARSZTATU'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                                     }
@@ -114,7 +116,6 @@ if (!isset($_SESSION['zalogowany'])) {
                         ?>
                     </tbody>
                 </table>
-
                 <div class='pagination-container'>
                     <nav>
                         <ul class="pagination">
@@ -198,7 +199,6 @@ if (!isset($_SESSION['zalogowany'])) {
                         </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" onclick="reloadMaps()"class="btn btn-success">Zobacz na Mapie</button>
                     <input type="submit" class="sub form-control col-sm-4" value="Edytuj Warsztat">
                     <input type="hidden" name="id_w" id="id_w" value="">
                 </div>
@@ -212,14 +212,26 @@ if (!isset($_SESSION['zalogowany'])) {
     <form name="delprac" id="delprac" method="post" action="usunwarsztat.php">
         <input type="hidden" name="id_del" id="id_del" value="">
     </form>
-<div id="tutaj_Mapy"></div>
+<div id="tutaj_Mapy">
+</div>
     <script>
-function reloadMaps(){
-var adreso = $('#adrese').val() + ' ';
-var miastoo = $('#miastoe').val()+ ' ';
-document.getElementById("tutaj_Mapy").innerHTML = "<div id='map-container-google-3' class='z-depth-1-half map-container-3'><iframe src='https://maps.google.com/maps?q="+miastoo+adreso+"E&t=&z=18&ie=UTF8&iwloc=&output=embed' frameborder='0' style='border:0' allowfullscreen></iframe></div>";
-console.log(miastoo+adreso);
-}
+
+    $('tbody .ikonka_map').click(function(e) {
+        e.preventDefault();
+        var adreso = $(this).closest('tr').find('.adres_row').text();
+        var miastoo = $(this).closest('tr').find('.miasto_row').text();
+        adreso = adreso + ' ';
+        miastoo = miastoo + ' ';
+        document.getElementById("tutaj_Mapy").innerHTML = "<div id='map-container-google-3' class='z-depth-1-half map-container-3'><iframe src='https://maps.google.com/maps?q="+miastoo+adreso+"E&t=&z=18&ie=UTF8&iwloc=&output=embed' frameborder='0' style='border:0' allowfullscreen></iframe></div>";
+
+    });
+
+// function reloadMaps(){
+// var adreso = $('#adrese').val() + ' ';
+// var miastoo = $('#miastoe').val()+ ' ';
+// document.getElementById("tutaj_Mapy").innerHTML = "<div id='map-container-google-3' class='z-depth-1-half map-container-3'><iframe src='https://maps.google.com/maps?q="+miastoo+adreso+"E&t=&z=18&ie=UTF8&iwloc=&output=embed' frameborder='0' style='border:0' allowfullscreen></iframe></div>";
+// console.log(miastoo+adreso);
+
 </script>
 
 
@@ -460,7 +472,11 @@ height:70%;
 width:70%;
 position:absolute;
 }
+.tede{
+width: 11.8875%;
+}
     </style>
 </body>
+
 
 </html>
