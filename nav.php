@@ -48,7 +48,7 @@
                 Pojazdy
             </a>
     <li class="nav-item">
-      <a href="faktury.php" class="<?php if ( $page == "faktury" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
+      <a href="zamowienia.php" class="<?php if ( $page == "faktury" ) { echo "nav-link text-dark bg-light"; }else{ echo "nav-link text-dark";} ?>">
         <i class="fa fa-shopping-cart mr-3 text-primary fa-fw"></i>
         Zamówienia
     </a>
