@@ -179,7 +179,7 @@ if (!isset($_SESSION['zalogowany'])) {
                         $id = $row['ID_KLIENTA'];
                         $imie = $row['IMIE'];
                         $nazwisko = $row['NAZWISKO'];
-                        echo "<option data-id='$id' value='".$imie.$nazwisko."'></option>";
+                        echo "<option data-id='$id' value='".$imie." ".$nazwisko."'></option>";
                       }
                     }
                   }
@@ -206,6 +206,7 @@ if (!isset($_SESSION['zalogowany'])) {
                 <input type="number" class="form-control" id="rocznik" name="rocznik" placeholder="Rocznik" required>
               </div>
             </div>
+            <input type="hidden" id="id_kl" name="id_kl" value="">
         </div>
         <div class="modal-footer">
           <input type="submit" class="sub form-control col-sm-4" value="Dodaj Pojazd">
@@ -219,27 +220,63 @@ if (!isset($_SESSION['zalogowany'])) {
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edytuj Warsztat</h4>
+          <h4 class="modal-title">Edytuj Pojazd</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="post" action="editwarsztat.php" id="form1">
+          <form method="post" action="editpojazd.php" id="form1">
             <div class="form-group row">
-              <label for="imie" class="col-sm-4 col-form-label">Adres</label>
+              <label for="imie" class="col-sm-4 col-form-label">Klient</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="adrese" name="adrese" placeholder="Adres" required>
+              <input class="col-sm-12" list="browe" id="selecte" name="selecte" autocomplete="off" value="" placeholder="Podaj Klienta">
+                <datalist id="browe" onchange='changeFunc()'>
+                  <?php
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "SELECT * FROM klienci");
+                    $licznik = 1;
+                    if (oci_execute($stid) == TRUE) {
+                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                        $id = $row['ID_KLIENTA'];
+                        $imie = $row['IMIE'];
+                        $nazwisko = $row['NAZWISKO'];
+                        echo "<option data-id='$id' value='".$imie." ".$nazwisko."'></option>";
+                      }
+                    }
+                  }
+                  oci_close($polaczenie);
+                  ?>
+                </datalist>
               </div>
             </div>
             <div class="form-group row">
-              <label for="nazwisko" class="col-sm-4 col-form-label">Miasto</label>
+              <label for="modele" class="col-sm-4 col-form-label">Model</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="miastoe" name="miastoe" placeholder="Miasto" required>
+                <input type="text" class="form-control" id="modele" name="modele" placeholder="Model" required>
               </div>
             </div>
+            <div class="form-group row">
+              <label for="markae" class="col-sm-4 col-form-label">Marka</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="markae" name="markae" placeholder="Marka" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="rocznike" class="col-sm-4 col-form-label">Rocznik</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="rocznike" name="rocznike" placeholder="Rocznik" required>
+              </div>
+            </div>
+            <input type="hidden" id="id_kle" name="id_kle" value="">
         </div>
         <div class="modal-footer">
-          <input type="submit" class="sub form-control col-sm-4" value="Edytuj Warsztat">
-          <input type="hidden" name="id_w" id="id_w" value="">
+          <input type="submit" class="sub form-control col-sm-4" value="Edytuj Pojazd">
+          <input type="hidden" name="id_poj" id="id_poj" value="">
         </div>
         </form>
       </div>
@@ -248,7 +285,7 @@ if (!isset($_SESSION['zalogowany'])) {
 
   <p id="test"></p>
 
-  <form name="delprac" id="delprac" method="post" action="usunwarsztat.php">
+  <form name="delpojazd" id="delpojazd" method="post" action="usunpojazd.php">
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
 
@@ -393,25 +430,25 @@ if (!isset($_SESSION['zalogowany'])) {
         Swal.fire({
           icon: 'error',
           title: 'Błąd',
-          text: 'Warsztat już istnieje!',
+          text: 'Pojazd już istnieje!',
         });
       } else if (simple == "dodany") {
         Swal.fire({
           icon: 'success',
           title: 'Udało się!',
-          text: 'Warsztat został dodany!',
+          text: 'Pojazd został dodany!',
         });
       } else if (simple == "edycja") {
         Swal.fire({
           icon: 'success',
           title: 'Udało się!',
-          text: 'Warsztat został edytowany!',
+          text: 'Pojazd został edytowany!',
         });
       } else if (simple == "usuniete") {
         Swal.fire({
           icon: 'success',
           title: 'Udało się!',
-          text: 'Warsztat został usunięty!',
+          text: 'Pojazd został usunięty!',
         });
       }
     }
@@ -429,7 +466,7 @@ if (!isset($_SESSION['zalogowany'])) {
         confirmButtonText: 'Tak, usuń!'
       }).then((result) => {
         if (result.isConfirmed) {
-          document.forms["delprac"].submit();
+          document.forms["delpojazd"].submit();
         }
       })
     }
@@ -440,7 +477,7 @@ if (!isset($_SESSION['zalogowany'])) {
 
     function getid(c_id) {
       b_id = c_id;
-      document.getElementById('id_w').value = b_id;
+      document.getElementById('id_poj').value = b_id;
       document.getElementById('id_del').value = b_id;
       return b_id;
     }
@@ -462,22 +499,26 @@ if (!isset($_SESSION['zalogowany'])) {
           array[i][j] = objCells.item(j).innerHTML;
         }
       }
-
-      document.getElementById("adrese").value = array[licz][1];
-      document.getElementById("miastoe").value = array[licz][2];
+      document.getElementById("selecte").value = array[licz][1];
+      document.getElementById("modele").value = array[licz][2];
+      document.getElementById("markae").value = array[licz][3];
+      document.getElementById("rocznike").value = array[licz][4];
     }
   </script>
 
   <script>
     $("input").on('input', function() {
-      // var inputValue = this.value;
       var g = $('#select').val();
-      var id = $('#brow option[value=' + g + ']').attr('data-id');
-      // if ($('datalist').find('option').filter(function() {
-      //     return this.value == inputValue;
-      //   }).length) {
-        //your code as per need
-        alert(id);
+      var id = $('#brow option[value="' + g + '"]').attr('data-id');
+      document.getElementById('id_kl').value = id;
+      }
+    );
+  </script>
+  <script>
+    $("input").on('input', function() {
+      var g = $('#selecte').val();
+      var id = $('#browe option[value="' + g + '"]').attr('data-id');
+      document.getElementById('id_kle').value = id;
       }
     );
   </script>
