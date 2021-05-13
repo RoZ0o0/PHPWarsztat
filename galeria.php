@@ -55,10 +55,19 @@ if (!$polaczenie) {
   if(isset ($_POST['textFilter']))
   {
   $text = $_POST['textFilter'];
-  $sql_query = "SELECT * FROM GALERIA WHERE KOMENTARZ LIKE'%".$text."%'";
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
+    FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+    INNER JOIN USLUGI
+    ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
+    INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
+    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie LIKE '%".$text."%' OR klienci.nazwisko LIKE '%".$text."%'";
   }
  else{
-  $sql_query = "SELECT * FROM GALERIA";
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
+  FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+  INNER JOIN USLUGI
+  ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
+  INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi)";
  }
   
 
@@ -71,7 +80,7 @@ if (!$polaczenie) {
             echo "<div class='photo_container'>";
             echo "<img src='./gallery/" . $row['ZDJECIE'] . "' alt='zdj' style='width:100%'>";
             echo "</div>";
-            echo "<h4>Zdjęcie 1</h4>";
+            echo "<h4>".$row['IMIE']." ".$row['NAZWISKO']."</h4>";
             echo "<p>".$row['KOMENTARZ']."</p>";
             echo "</div>";
             echo "</div>";
