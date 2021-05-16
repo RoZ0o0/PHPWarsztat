@@ -32,13 +32,13 @@
 });
 </script>
 <div id="entirebody">
-  <div id="myBtnContainer">
-    <form method="post" action="galeria.php">
+  <div class="container">
+  <div class="row">
+  <form method="post" action="galeria.php">
   <input type="text" id="inputFilter" name='textFilter' placeholder="Wyszukaj"/>
   <input type="submit" class="btn btn-primary btn-lg" value="Filtruj"></button>
     </form>
   </div>
-  <div class="container">
 <div class="row">
 
 <?php
@@ -195,8 +195,8 @@ img{
   top: 50%;
   transform: translateY(-50%);      
 }
-#myBtnContainer{
-  transform: translateX(20%);
+form{
+  margin-left: 1%;s
 }
 
   </style>
