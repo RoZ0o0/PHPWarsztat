@@ -74,6 +74,7 @@ if (!isset($_SESSION['zalogowany'])) {
               <th>Miasto</th>
               <th>Numer Telefonu</th>
               <th>Ulica i numer domu</th>
+              <th>Kod Pocztowy</th>
               <th>Akcja</th>
             </tr>
           </thead>
@@ -102,6 +103,7 @@ if (!isset($_SESSION['zalogowany'])) {
                   echo "<td>" . $row['MIASTO'] . "</td>";
                   echo "<td>" . $row['NR_TELEFONU'] . "</td>";
                   echo "<td>" . $row['ULICA_NR_DOMU'] . "</td>";
+                  echo "<td>" . $row['KOD_POCZTOWY'] . "</td>";
                   echo "<td>";
                   if ($_SESSION['stanowisko'] == "Pracownik") {
                     echo "<a href='#' class='settings' id='" . $row['ID_KLIENTA'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
@@ -161,33 +163,39 @@ if (!isset($_SESSION['zalogowany'])) {
         <div class="modal-body">
           <form method="post" action="dodajklienta.php" id="form">
             <div class="form-group row">
-              <label for="imie" class="col-sm-4 col-form-label">Imie</label>
-              <div class="col-sm-8">
+              <label for="imie" class="col-sm-5 col-form-label">Imie</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="imie" name="imie" placeholder="Imie" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="nazwisko" class="col-sm-4 col-form-label">Nazwisko</label>
-              <div class="col-sm-8">
+              <label for="nazwisko" class="col-sm-5 col-form-label">Nazwisko</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="nazwisko" name="nazwisko" placeholder="Nazwisko" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="miasto" class="col-sm-4 col-form-label">Miasto</label>
-              <div class="col-sm-8">
+              <label for="miasto" class="col-sm-5 col-form-label">Miasto</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="miasto" name="miasto" placeholder="Miasto" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="nr_telefonu" class="col-sm-4 col-form-label">Numer Telefonu</label>
-              <div class="col-sm-8">
+              <label for="nr_telefonu" class="col-sm-5 col-form-label">Numer Telefonu</label>
+              <div class="col-sm-7">
                 <input type="number" min="0" max="999999999" class="form-control" id="nrtelefonu" name="nrtelefonu" placeholder="Numer Telefonu" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="ulica_nr_domu" class="col-sm-4 col-form-label">Ulica i numer domu</label>
-              <div class="col-sm-8">
+              <label for="ulica_nr_domu" class="col-sm-5 col-form-label">Ulica i numer domu</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="ulica_nr_domu" name="ulica_nr_domu" placeholder="Ulica i numer domu" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="kod_pocztowy" class="col-sm-5 col-form-label">Kod Pocztowy</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="kod_pocztowy" name="kod_pocztowy" pattern="[0-9]{2}\-[0-9]{3}" placeholder="Kod Pocztowy" required>
               </div>
             </div>
         </div>
@@ -209,33 +217,39 @@ if (!isset($_SESSION['zalogowany'])) {
         <div class="modal-body">
           <form method="post" action="editklient.php" id="form1">
             <div class="form-group row">
-              <label for="imie" class="col-sm-4 col-form-label">Imie</label>
-              <div class="col-sm-8">
+              <label for="imie" class="col-sm-5 col-form-label">Imie</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="imiee" name="imiee" placeholder="Imie" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="nazwisko" class="col-sm-4 col-form-label">Nazwisko</label>
-              <div class="col-sm-8">
+              <label for="nazwisko" class="col-sm-5 col-form-label">Nazwisko</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="nazwiskoe" name="nazwiskoe" placeholder="Nazwisko" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="miasto" class="col-sm-4 col-form-label">Miasto</label>
-              <div class="col-sm-8">
+              <label for="miasto" class="col-sm-5 col-form-label">Miasto</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="miastoe" name="miastoe" placeholder="Miasto" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="nr_telefonu" class="col-sm-4 col-form-label">Numer Telefonu</label>
-              <div class="col-sm-8">
+              <label for="nr_telefonu" class="col-sm-5 col-form-label">Numer Telefonu</label>
+              <div class="col-sm-7">
                 <input type="number" min="0" max="999999999" class="form-control" id="nr_telefonue" name="nr_telefonue" placeholder="Wynagrodzenie" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="ulica_nr_domu" class="col-sm-4 col-form-label">Ulica i numer domu</label>
-              <div class="col-sm-8">
+              <label for="ulica_nr_domu" class="col-sm-5 col-form-label">Ulica i numer domu</label>
+              <div class="col-sm-7">
                 <input type="text" class="form-control" id="ulica_nr_domue" name="ulica_nr_domue" placeholder="Ulica i numer domu" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="kod_pocztowy" class="col-sm-5 col-form-label">Kod Pocztowy</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="kod_pocztowye" name="kod_pocztowye" pattern="[0-9]{2}\-[0-9]{3}" placeholder="Kod Pocztowy" required>
               </div>
             </div>
         </div>
@@ -464,6 +478,7 @@ if (!isset($_SESSION['zalogowany'])) {
       document.getElementById("miastoe").value = array[licz][3];
       document.getElementById("nr_telefonue").value = parseFloat(array[licz][4]);
       document.getElementById("ulica_nr_domue").value = array[licz][5];
+      document.getElementById("kod_pocztowye").value=array[licz][6];
     }
   </script>
   <script>
@@ -476,6 +491,50 @@ if (!isset($_SESSION['zalogowany'])) {
           text: 'Podany PESEL jest nieprawidłowy!',
         });
       }
+    });
+  </script>
+  <script>
+    $("#kod_pocztowy").on("keydown", function(){
+        var key = event.keyCode || event.charCode;
+        if( key == 8 || key == 46 ){
+            if($(this).val().length == 4) {
+                $(this).val($(this).val().slice(0,-1));
+            }
+        }else{
+            if($(this).val().length == 2 && key != 189) {
+                $(this).val($(this).val() + '-');
+            }
+        }
+        if($(this).val().length == 6){
+            $(this).val($(this).val().slice(0,-1));
+        }
+        if(key == 189 && $(this).val().length != 2){
+            return false;
+        }
+        if(key >= 65 && key <= 90){
+            return false;
+        }
+    });
+    $("#kod_pocztowye").on("keydown", function(){
+        var key = event.keyCode || event.charCode;
+        if( key == 8 || key == 46 ){
+            if($(this).val().length == 4) {
+                $(this).val($(this).val().slice(0,-1));
+            }
+        }else{
+            if($(this).val().length == 2 && key != 189) {
+                $(this).val($(this).val() + '-');
+            }
+        }
+        if($(this).val().length == 6){
+            $(this).val($(this).val().slice(0,-1));
+        }
+        if(key == 189 && $(this).val().length != 2){
+            return false;
+        }
+        if(key >= 65 && key <= 90){
+            return false;
+        }
     });
   </script>
   <?php
