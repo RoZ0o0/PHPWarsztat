@@ -151,7 +151,7 @@ if (!isset($_SESSION['zalogowany'])) {
       </div>
     </div>
   </div>
-
+  <div id="piechart_3d" style="width: 1110px; height: 600px;"></div>
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
 
@@ -541,6 +541,36 @@ if (!isset($_SESSION['zalogowany'])) {
   unset($_SESSION['komunikat']);
   unset($blad);
   ?>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Kod pocztowy', 'Częstotliwość'],
+          ['38-000',     11],
+          ['34-000',      3],
+          ['37-000',  8],
+          ['39-000', 2],
+          ['40-000', 2],
+          ['42-000', 2],
+          ['55-000', 2],
+          ['36-000',    7]
+        ]);
+
+
+
+        var options = {
+          title: 'Kody pocztowe według ilości klientów',
+          is3D: true,
+          fontSize: 20,
+          sliceVisibilityThreshold: .2
+        };
+          
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
 </body>
 
 </html>
