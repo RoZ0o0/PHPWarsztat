@@ -196,7 +196,7 @@ img{
   transform: translateY(-50%);      
 }
 form{
-  margin-left: 1%;s
+  margin-left: 1%;
 }
 
   </style>

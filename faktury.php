@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $page = "uslugi";
+  $page = "faktury";
   if(!isset($_SESSION['zalogowany'])){
     header('Location: index.php');
     exit();
