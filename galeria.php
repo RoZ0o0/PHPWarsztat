@@ -85,7 +85,6 @@ if (!$polaczenie) {
             echo "<h5>".$row['IMIE']." ".$row['NAZWISKO']."</h5>";
             echo "<h6>".$row['KOMENTARZ']."</h6>";
 
-
             $datee = date_create($row['DATA_OBSLUGI']);
             $datef = date_format($datee, 'd-m-Y');
             $datetstamp = utf8_encode(strtotime($datef));
@@ -101,13 +100,6 @@ unset($_POST['textFilter']);
 ?>
   </div>
 </div>
-<script>
-function parseDate(var date) {
-  date= 
-  
-}
-</script>
-
 </body>
 <style>
   * {
