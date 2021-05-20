@@ -62,14 +62,16 @@ if (!$polaczenie) {
     INNER JOIN USLUGI
     ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
     INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
-    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie || ' ' || klienci.nazwisko LIKE '%".$text."%'";
+    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie || ' ' || klienci.nazwisko LIKE '%".$text."%'
+    ORDER BY USLUGI.DATA_OBSLUGI DESC";
   }
  else{
   $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI  
   FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
   INNER JOIN USLUGI
   ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
-  INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi)";
+  INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi)
+  ORDER BY USLUGI.DATA_OBSLUGI DESC";
  }
   
 
