@@ -172,7 +172,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="warsztat" class="col-sm-4 col-form-label">Warsztat</label>
               <div class="col-sm-8">
-                <input class="col-sm-12" list="wbrow" id="wselect" name="wselect" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
+                <input class="col-sm-12 form-control" list="wbrow" id="wselect" name="wselect" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrow">
                   <?php
                   require_once "connect.php";
@@ -214,7 +214,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
               <div class="col-sm-8">
-                <input class="col-sm-12" list="pbrow" id="pselect" name="pselect" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
+                <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrow">
                   <?php
                   require_once "connect.php";
@@ -271,7 +271,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="warsztate" class="col-sm-4 col-form-label">Warsztat</label>
               <div class="col-sm-8">
-                <input class="col-sm-12" list="wbrowe" id="wselecte" name="wselecte" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
+                <input class="col-sm-12 form-control" list="wbrowe" id="wselecte" name="wselecte" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrowe">
                   <?php
                   require_once "connect.php";
@@ -313,7 +313,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="pojazde" class="col-sm-4 col-form-label">Pojazd</label>
               <div class="col-sm-8">
-                <input class="col-sm-12" list="pbrowe" id="pselecte" name="pselecte" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
+                <input class="col-sm-12 form-control" list="pbrowe" id="pselecte" name="pselecte" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrowe">
                   <?php
                   require_once "connect.php";
@@ -493,25 +493,25 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
         Swal.fire({
           icon: 'error',
           title: 'Błąd',
-          text: 'Pracownik już istnieje!',
+          text: 'Usługa już istnieje!',
         });
       } else if (simple == "dodany") {
         Swal.fire({
           icon: 'success',
           title: 'Udało się!',
-          text: 'Pracownik został dodany!',
+          text: 'Usługa została dodana!',
         });
       } else if (simple == "edycja") {
         Swal.fire({
           icon: 'success',
           title: 'Udało się!',
-          text: 'Pracownik został edytowany!',
+          text: 'Usługa została edytowana!',
         });
       } else if (simple == "usuniete") {
         Swal.fire({
           icon: 'success',
           title: 'Udało się!',
-          text: 'Pracownik został usunięty!',
+          text: 'Usługa została usunięta!',
         });
       }
     }

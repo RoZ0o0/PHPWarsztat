@@ -131,7 +131,8 @@
     text-align: center;
   }
   input[type=number]::-webkit-inner-spin-button, /*krywanie inkrementacji wartości w polu PESEL*/
-  input[type=number]::-webkit-outer-spin-button { 
+  input[type=number]::-webkit-outer-spin-button,
+  input { 
     -webkit-appearance: none; 
     margin: 0; 
   }
