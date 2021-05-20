@@ -98,7 +98,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";
-                  echo "<td>" . $row['IMIEP'] . " " . $row['NAZWISKOP'] ."</td>";
+                  echo "<td>" . $row['IMIEP'] . " " . $row['NAZWISKOP'] . "</td>";
                   echo "<td>" . $row['ADRES'] . " | " . $row['MIASTO'] . "</td>";
                   $datee = date_create($row['DATA_OBSLUGI']);
                   echo "<td>" . date_format($datee, 'Y-m-d') . "</td>";
@@ -170,9 +170,9 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="nazwisko" class="col-sm-4 col-form-label">Warsztat</label>
+              <label for="warsztat" class="col-sm-4 col-form-label">Warsztat</label>
               <div class="col-sm-8">
-              <input class="col-sm-12" list="wbrow" id="wselect" name="wselect" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
+                <input class="col-sm-12" list="wbrow" id="wselect" name="wselect" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrow">
                   <?php
                   require_once "connect.php";
@@ -189,7 +189,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                         $idw = $row['ID_WARSZTATU'];
                         $adres = $row['ADRES'];
                         $miasto = $row['MIASTO'];
-                        echo "<option data-id='$idw' value='".$adres." ".$miasto."'></option>";
+                        echo "<option data-id='$idw' value='" . $adres . " " . $miasto . "'></option>";
                       }
                     }
                   }
@@ -214,7 +214,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
               <div class="col-sm-8">
-              <input class="col-sm-12" list="pbrow" id="pselect" name="pselect" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
+                <input class="col-sm-12" list="pbrow" id="pselect" name="pselect" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrow">
                   <?php
                   require_once "connect.php";
@@ -233,7 +233,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                         $model = $row['MODEL'];
                         $imiek = $row['IMIE'];
                         $nazwiskok = $row['NAZWISKO'];
-                        echo "<option data-id='$idp' value='".$marka." ".$model." ".$imiek." ".$nazwiskok."'></option>";
+                        echo "<option data-id='$idp' value='" . $marka . " " . $model . " " . $imiek . " " . $nazwiskok . "'></option>";
                       }
                     }
                   }
@@ -256,56 +256,95 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edytuj Pracownika</h4>
+          <h4 class="modal-title">Edytuj Usługę</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="post" action="editprac.php" id="form1">
+          <form method="post" action="edituslugi.php" id="form1">
             <div class="form-group row">
-              <label for="imie" class="col-sm-4 col-form-label">Imie</label>
+              <label for="pracownike" class="col-sm-4 col-form-label">Pracownik</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="imiee" name="imiee" placeholder="Imie" required>
+                <input type="text" class="form-control" id="pracownike" name="pracownike" placeholder="Pracownik" value="<?php echo $imiep ?>" disabled required>
+                <input type="hidden" id="id_pracownikae" name="id_pracownikae" value="<?php echo $_SESSION['id_prac']; ?>">
               </div>
             </div>
             <div class="form-group row">
-              <label for="nazwisko" class="col-sm-4 col-form-label">Nazwisko</label>
+              <label for="warsztate" class="col-sm-4 col-form-label">Warsztat</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="nazwiskoe" name="nazwiskoe" placeholder="Nazwisko" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="date" class="col-sm-4 col-form-label">Data Zatrudnienia</label>
-              <div class="col-sm-8">
-                <input type="date" class="form-control" id="datee" name="datee" placeholder="Data Zatrudnienia" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="stanowisko" class="col-sm-4 col-form-label">Stanowisko</label>
-              <div class="col-sm-8">
-                <select id="stanowiskoe" name="stanowiskoe" class="col-sm-12 form-control" required>
-                  <option value="">Wybierz stanowisko</option>
-                  <option value="Prezes">Prezes</option>
-                  <option value="Kierownik">Kierownik</option>
-                  <option value="Pracownik">Pracownik</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="wynagrodzenie" class="col-sm-4 col-form-label">Wynagrodzenie</label>
+                <input class="col-sm-12" list="wbrowe" id="wselecte" name="wselecte" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
+                <datalist id="wbrowe">
+                  <?php
+                  require_once "connect.php";
 
-              <div class="col-sm-8">
-                <input type="number" min="0" max="99999" class="form-control" id="wynagrodzeniee" name="wynagrodzeniee" placeholder="Wynagrodzenie" required>
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "SELECT * FROM warsztaty");
+                    $licznik = 1;
+                    if (oci_execute($stid) == TRUE) {
+                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                        $idw = $row['ID_WARSZTATU'];
+                        $adres = $row['ADRES'];
+                        $miasto = $row['MIASTO'];
+                        echo "<option data-id='$idw' value='" . $adres . " " . $miasto . "'></option>";
+                      }
+                    }
+                  }
+                  oci_close($polaczenie);
+                  ?>
+                </datalist>
+                <input type="hidden" id="id_ware" name="id_ware" value="">
               </div>
             </div>
             <div class="form-group row">
-              <label for="pesel" class="col-sm-4 col-form-label">PESEL</label>
+              <label for="datee" class="col-sm-4 col-form-label">Data Obsługi</label>
               <div class="col-sm-8">
-                <input type="number" class="form-control" id="pesele" name="pesele" placeholder="PESEL" onKeyDown="if(this.value.length==11 && event.keyCode!=8) return false;" required>
+                <input type="date" class="form-control" id="datee" name="datee" placeholder="Data Obsługi" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cenae" class="col-sm-4 col-form-label">Cena</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="cenae" name="cenae" placeholder="Cena" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="pojazde" class="col-sm-4 col-form-label">Pojazd</label>
+              <div class="col-sm-8">
+                <input class="col-sm-12" list="pbrowe" id="pselecte" name="pselecte" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
+                <datalist id="pbrowe">
+                  <?php
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "SELECT pojazdy.id_pojazdu, pojazdy.marka, pojazdy.model, klienci.imie, klienci.nazwisko FROM pojazdy inner join klienci on pojazdy.id_klienta=klienci.id_klienta");
+                    $licznik = 1;
+                    if (oci_execute($stid) == TRUE) {
+                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                        $idp = $row['ID_POJAZDU'];
+                        $marka = $row['MARKA'];
+                        $model = $row['MODEL'];
+                        $imiek = $row['IMIE'];
+                        $nazwiskok = $row['NAZWISKO'];
+                        echo "<option data-id='$idp' value='" . $marka . " " . $model . " " . $imiek . " " . $nazwiskok . "'></option>";
+                      }
+                    }
+                  }
+                  oci_close($polaczenie);
+                  ?>
+                </datalist>
+                <input type="hidden" id="id_poje" name="id_poje" value="">
               </div>
             </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" class="sub form-control col-sm-4" value="Edytuj Pracownika">
+          <input type="submit" class="sub form-control col-sm-4" value="Edytuj Usługę">
           <input type="hidden" name="id_p" id="id_p" value="">
         </div>
         </form>
@@ -315,7 +354,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
 
   <p id="test"></p>
 
-  <form name="delprac" id="delprac" method="post" action="usunprac.php">
+  <form name="delprac" id="delprac" method="post" action="usunusluge.php">
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
 
@@ -523,57 +562,37 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
           array[i][j] = objCells.item(j).innerHTML;
         }
       }
-
-      var wynag = array[licz][6].substring(0, array[licz][6].length - 3);
-      document.getElementById("imiee").value = array[licz][1];
-      document.getElementById("nazwiskoe").value = array[licz][2];
+      document.getElementById("wselecte").value = array[licz][2];
       document.getElementById("datee").value = array[licz][3];
-      document.getElementById("stanowiskoe").value = array[licz][4];
-      document.getElementById("pesele").value = parseFloat(array[licz][5]);
-      document.getElementById("wynagrodzeniee").value = parseFloat(wynag);
+      document.getElementById("cenae").value = array[licz][4];
+      document.getElementById("pselecte").value = array[licz][5];
     }
-  </script>
-  <script>
-    $('form1').on('submit', function(e) {
-      if (pesel.value.length < 11) {
-        e.preventDefault();
-        Swal.fire({
-          icon: 'error',
-          title: 'Błąd',
-          text: 'Podany PESEL jest nieprawidłowy!',
-        });
-      }
-    });
   </script>
   <script>
     $("input").on('input', function() {
       var g = $('#wselect').val();
       var id = $('#wbrow option[value="' + g + '"]').attr('data-id');
       document.getElementById('id_war').value = id;
-      }
-    );
+    });
     $("input").on('input', function() {
       var g = $('#pselect').val();
       var id = $('#pbrow option[value="' + g + '"]').attr('data-id');
       document.getElementById('id_poj').value = id;
-      }
-    );
+    });
   </script>
   <script>
     $("input").on('input', function() {
       var g = $('#wselecte').val();
       var id = $('#wbrowe option[value="' + g + '"]').attr('data-id');
       document.getElementById('id_ware').value = id;
-      }
-    );
+    });
   </script>
   <script>
     $("input").on('input', function() {
       var g = $('#pselecte').val();
       var id = $('#pbrowe option[value="' + g + '"]').attr('data-id');
       document.getElementById('id_poje').value = id;
-      }
-    );
+    });
   </script>
   <?php
   unset($_SESSION['komunikat']);
