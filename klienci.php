@@ -548,14 +548,29 @@ if (!isset($_SESSION['zalogowany'])) {
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Kod pocztowy', 'Częstotliwość'],
-          ['38-000',     11],
-          ['34-000',      3],
-          ['37-000',  8],
-          ['39-000', 2],
-          ['40-000', 2],
-          ['42-000', 2],
-          ['55-000', 2],
-          ['36-000',    7]
+          <?php 
+          require_once "connect.php";
+          $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+          if (!$polaczenie) {
+                            die("Connection failed: " . oci_error());
+                        } else {
+                            $stid = oci_parse($polaczenie,"SELECT t.KOD_POCZTOWY, COUNT(*) AS ile FROM KLIENCI t GROUP BY t.KOD_POCZTOWY");
+                            if (oci_execute($stid) == TRUE) {
+                                while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                                    echo "['" . $row['KOD_POCZTOWY']."',".$row['ILE']."],";
+                                }
+                            }
+                        }
+                        oci_close($polaczenie);
+                        ?>
+          // ['38-000',     11],
+          // ['34-000',      3],
+          // ['37-000',  8],
+          // ['39-000', 2],
+          // ['40-000', 2],
+          // ['42-000', 2],
+          // ['55-000', 2],
+          // ['36-000',    7]
         ]);
 
 
@@ -564,7 +579,7 @@ if (!isset($_SESSION['zalogowany'])) {
           title: 'Kody pocztowe według ilości klientów',
           is3D: true,
           fontSize: 20,
-          sliceVisibilityThreshold: .2
+          sliceVisibilityThreshold: .1
         };
           
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
