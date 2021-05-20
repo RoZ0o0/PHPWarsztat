@@ -229,7 +229,7 @@ if (!isset($_SESSION['zalogowany'])) {
               <label for="imie" class="col-sm-4 col-form-label">Klient</label>
               <div class="col-sm-8">
               <input class="col-sm-12" list="browe" id="selecte" name="selecte" autocomplete="off" value="" placeholder="Podaj Klienta">
-                <datalist id="browe" onchange='changeFunc()'>
+                <datalist id="browe">
                   <?php
                   require_once "connect.php";
 
