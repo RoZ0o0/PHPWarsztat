@@ -20,7 +20,7 @@
         
         oci_free_statement($stid);
 
-        $nr_fak = "SPR0000".$id_usl;
+        $nr_fak = "SPR\\0000".$id_usl;
 
         echo $nr_fak."<br>";
         echo $id_usl."<br>";
