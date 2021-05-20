@@ -104,11 +104,13 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                   echo "<td>" . date_format($datee, 'Y-m-d') . "</td>";
                   echo "<td>" . $row['CENA'] . "</td>";
                   echo "<td>" . $row['MODEL'] . " " . $row['MARKA'] . " | " . $row['IMIE'] .  " " . $row['NAZWISKO'] . "</td>";
-                  echo "<td>";
+                  echo "<td style='width:13%'>";
                   if ($_SESSION['stanowisko'] == "Pracownik") {
+                    echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' onlick='getid(this.id);createPdf()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
                     echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
                   } else {
+                    echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='getid(this.id);createPdf()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
                     echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                   }
@@ -358,6 +360,10 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
 
+  <form name="faktura" id="faktura" method="post" action="utworzfakture.php">
+    <input type="hidden" name="id_usl" id="id_usl" value="">
+  </form>
+
   <script>
     getPagination('#table_to_highlight');
 
@@ -513,6 +519,18 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
           title: 'Udało się!',
           text: 'Usługa została usunięta!',
         });
+      }else if (simple == "fakturkapyk") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Udało się!',
+          text: 'Faktura została utworzona!',
+        });
+      }else if (simple == "fakturaniepyk") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Błąd!',
+          text: 'Faktura już istnieje!',
+        });
       }
     }
   </script>
@@ -535,6 +553,21 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
     }
   </script>
   <script>
+    function createPdf() {
+      Swal.fire({
+        title: 'Stworzyć fakturę danej usługi?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: `Stwórz`,
+        cancelButtonText: `Anuluj`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.forms["faktura"].submit();
+        }
+      })
+    }
+  </script>
+  <script>
     var b_id;
     var licz;
 
@@ -542,6 +575,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
       b_id = c_id;
       document.getElementById('id_p').value = b_id;
       document.getElementById('id_del').value = b_id;
+      document.getElementById('id_usl').value = b_id;
       return b_id;
     }
 
