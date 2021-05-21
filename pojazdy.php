@@ -290,7 +290,6 @@ if (!isset($_SESSION['zalogowany'])) {
   </form>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
        <div id="top_x_div" style="width: 1100px; height: 550px;"></div>
-   
   <script>
     getPagination('#table_to_highlight');
 
@@ -569,7 +568,7 @@ if (!isset($_SESSION['zalogowany'])) {
             subtitle: '' },
           axes: {
             x: {
-              0: { side: 'top', label: 'White to move'} // Top x-axis.
+              0: { side: 'top', label: ''} // Top x-axis.
             }
           },
           bar: { groupWidth: "90%" }
