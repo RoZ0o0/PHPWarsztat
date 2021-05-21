@@ -81,7 +81,7 @@ if (!isset($_SESSION['zalogowany'])) {
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
-              $stid = oci_parse($polaczenie, "SELECT klienci.imie, klienci.nazwisko, faktury.nr_faktury FROM faktury INNER JOIN klienci on faktury.id_klienta=klienci.id_klienta");
+              $stid = oci_parse($polaczenie, "SELECT faktury.id_faktury, klienci.imie, klienci.nazwisko, faktury.nr_faktury FROM faktury INNER JOIN klienci on faktury.id_klienta=klienci.id_klienta");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
                 // $ilu = $result->num_rows;
@@ -94,10 +94,10 @@ if (!isset($_SESSION['zalogowany'])) {
                   echo "<td>" . $row['NR_FAKTURY'] . "</td>";
                   echo "<td>";
                   if ($_SESSION['stanowisko'] == "Pracownik") {
-                    echo "<a href='#' class='settings' title='Settings'><i class='material-icons'>&#xE8B8;</i></a>";
+                    echo "<a href='#' class='pdf' id='" . $row['ID_FAKTURY'] . "' title='PDF' data-toggle='tooltip' onclick='getid(this.id);fakturkaShow()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9;</i></a>";
                   } else {
-                    echo "<a href='#' class='settings' title='Settings'><i class='material-icons'>&#xE8B8;</i></a>";
+                    echo "<a href='#' class='pdf' id='" . $row['ID_FAKTURY'] . "' title='PDF' data-toggle='tooltip' onclick='getid(this.id);fakturkaShow()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='delete' title='Delete' data-toggle='tooltip'><i class='material-icons'>&#xE5C9;</i></a>";
                   }
                   echo "</td>";
@@ -139,6 +139,10 @@ if (!isset($_SESSION['zalogowany'])) {
       </div>
     </div>
   </div>
+
+  <form name="faktura" id="faktura" method="post" action="test.php">
+    <input type="hidden" name="id_fakt" id="id_fakt" value="">
+  </form> 
 
   <script>
     getPagination('#table_to_highlight');
@@ -260,6 +264,34 @@ if (!isset($_SESSION['zalogowany'])) {
 
         }
       }
+    }
+  </script>
+
+  <script>
+  function getid(c_id) {
+      var b_id;
+      b_id = c_id;
+      document.getElementById('id_fakt').value = b_id;
+      return b_id;
+    }
+  </script>
+
+<script>
+    function fakturkaShow() {
+      Swal.fire({
+        title: 'Jesteś pewien?',
+        text: "Nie będziesz mógł tego cofnąć!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Anuluj',
+        confirmButtonText: 'Tak, usuń!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.forms["faktura"].submit();
+        }
+      })
     }
   </script>
 </body>
