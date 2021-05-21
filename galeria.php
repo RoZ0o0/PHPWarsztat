@@ -62,7 +62,7 @@ if (!$polaczenie) {
     INNER JOIN USLUGI
     ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
     INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
-    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie || ' ' || klienci.nazwisko LIKE '%".$text."%'
+    WHERE LOWER(galeria.komentarz) LIKE LOWER('%".$text."%') OR LOWER(klienci.imie) || ' ' || LOWER(klienci.nazwisko) LIKE LOWER('%".$text."%')
     ORDER BY USLUGI.DATA_OBSLUGI DESC";
   }
  else{
