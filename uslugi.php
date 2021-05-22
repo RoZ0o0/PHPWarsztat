@@ -57,11 +57,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               <h2>Zarządzenie usługami</h2>
             </div>
             <div class="col-xs-2 ml-auto">
-              <a href="#" class="btn btn-primary" <?php if ($_SESSION['stanowisko'] == "Pracownik") {
-                                                    echo 'onclick="return confirm_alert();"';
-                                                  } else {
-                                                    echo 'data-toggle="modal"';
-                                                  } ?> data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Usługe</span></a>
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Usługe</span></a>
               <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
             </div>
           </div>
@@ -116,11 +112,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                   }
 
                   echo "<td style='width:13%'>";
-                  if ($_SESSION['stanowisko'] == "Pracownik") {
-                    echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' onlick='getid(this.id);createPdf()'><i class='material-icons'>&#xe873;</i></a>";
-                    echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
-                    echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
-                  } else if ($faktura > 0) {
+                   if ($faktura > 0) {
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='faktura_close()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal' onclick='edit_close();'><i class='material-icons'>&#xE8B8;</i></a>";
                     echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";

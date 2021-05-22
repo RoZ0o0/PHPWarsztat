@@ -56,11 +56,7 @@ if (!isset($_SESSION['zalogowany'])) {
                             <h2>Zarządzenie warsztatami</h2>
                         </div>
                         <div class="col-xs-2 ml-auto">
-                            <a href="#" class="btn btn-primary" <?php if ($_SESSION['stanowisko'] == "Pracownik") {
-                                                                    echo 'onclick="return confirm_alert();"';
-                                                                } else {
-                                                                    echo 'data-toggle="modal"';
-                                                                } ?> data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Warsztat</span></a>
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Warsztat</span></a>
                             <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
                         </div>
                     </div>
@@ -97,15 +93,9 @@ if (!isset($_SESSION['zalogowany'])) {
                                     echo "<td class='adres_row'>" . $row['ADRES'] . "</td>";
                                     echo "<td class='miasto_row'>" . $row['MIASTO'] . "</td>";
                                     echo "<td class='tede'>";
-                                    if ($_SESSION['stanowisko'] == "Pracownik") {
-                                        echo "<a href='#' class='material-icons-outlined' id='" . $row['ID_WARSZTATU'] . "' title='Map' data-target='#showMap' onclick='reloadMaps();'><i class='material-icons ikonka_map'>&#xe0c8;</i></a>";
-                                        echo "<a href='#' class='settings' id='" . $row['ID_WARSZTATU'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
-                                        echo "<a href='#' class='delete' id='" . $row['ID_WARSZTATU'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
-                                    } else {
-                                        echo "<a href='#' class='material-icons-outlined' id='" . $row['ID_WARSZTATU'] . "' title='Map' data-target='#showMap' onclick='reloadMaps();'><i class='material-icons ikonka_map'>&#xe0c8;</i></a>";
-                                        echo "<a href='#' class='settings' id='" . $row['ID_WARSZTATU'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
-                                        echo "<a href='#' class='delete' id='" . $row['ID_WARSZTATU'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
-                                    }
+                                    echo "<a href='#' class='material-icons-outlined' id='" . $row['ID_WARSZTATU'] . "' title='Map' data-target='#showMap' onclick='reloadMaps();'><i class='material-icons ikonka_map'>&#xe0c8;</i></a>";
+                                    echo "<a href='#' class='settings' id='" . $row['ID_WARSZTATU'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                                    echo "<a href='#' class='delete' id='" . $row['ID_WARSZTATU'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                                     echo "</td>";
                                     echo "</tr>";
                                     $licznik++;
