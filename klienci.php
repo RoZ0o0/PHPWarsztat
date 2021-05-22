@@ -469,7 +469,7 @@ if (!isset($_SESSION['zalogowany'])) {
       document.getElementById("miastoe").value = array[licz][3];
       document.getElementById("nr_telefonue").value = parseFloat(array[licz][4]);
       document.getElementById("ulica_nr_domue").value = array[licz][5];
-      document.getElementById("kod_pocztowye").value=array[licz][6];
+      document.getElementById("kod_pocztowye").value = array[licz][6];
     }
   </script>
   <script>
@@ -485,47 +485,47 @@ if (!isset($_SESSION['zalogowany'])) {
     });
   </script>
   <script>
-    $("#kod_pocztowy").on("keydown", function(){
-        var key = event.keyCode || event.charCode;
-        if( key == 8 || key == 46 ){
-            if($(this).val().length == 4) {
-                $(this).val($(this).val().slice(0,-1));
-            }
-        }else{
-            if($(this).val().length == 2 && key != 189) {
-                $(this).val($(this).val() + '-');
-            }
+    $("#kod_pocztowy").on("keydown", function() {
+      var key = event.keyCode || event.charCode;
+      if (key == 8 || key == 46) {
+        if ($(this).val().length == 4) {
+          $(this).val($(this).val().slice(0, -1));
         }
-        if($(this).val().length == 6){
-            $(this).val($(this).val().slice(0,-1));
+      } else {
+        if ($(this).val().length == 2 && key != 189) {
+          $(this).val($(this).val() + '-');
         }
-        if(key == 189 && $(this).val().length != 2){
-            return false;
-        }
-        if(key >= 65 && key <= 90){
-            return false;
-        }
+      }
+      if ($(this).val().length == 6) {
+        $(this).val($(this).val().slice(0, -1));
+      }
+      if (key == 189 && $(this).val().length != 2) {
+        return false;
+      }
+      if (key >= 65 && key <= 90) {
+        return false;
+      }
     });
-    $("#kod_pocztowye").on("keydown", function(){
-        var key = event.keyCode || event.charCode;
-        if( key == 8 || key == 46 ){
-            if($(this).val().length == 4) {
-                $(this).val($(this).val().slice(0,-1));
-            }
-        }else{
-            if($(this).val().length == 2 && key != 189) {
-                $(this).val($(this).val() + '-');
-            }
+    $("#kod_pocztowye").on("keydown", function() {
+      var key = event.keyCode || event.charCode;
+      if (key == 8 || key == 46) {
+        if ($(this).val().length == 4) {
+          $(this).val($(this).val().slice(0, -1));
         }
-        if($(this).val().length == 6){
-            $(this).val($(this).val().slice(0,-1));
+      } else {
+        if ($(this).val().length == 2 && key != 189) {
+          $(this).val($(this).val() + '-');
         }
-        if(key == 189 && $(this).val().length != 2){
-            return false;
-        }
-        if(key >= 65 && key <= 90){
-            return false;
-        }
+      }
+      if ($(this).val().length == 6) {
+        $(this).val($(this).val().slice(0, -1));
+      }
+      if (key == 189 && $(this).val().length != 2) {
+        return false;
+      }
+      if (key >= 65 && key <= 90) {
+        return false;
+      }
     });
   </script>
   <?php
@@ -533,42 +533,45 @@ if (!isset($_SESSION['zalogowany'])) {
   unset($blad);
   ?>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Kod pocztowy', 'Częstotliwość'],
-          <?php 
-          require_once "connect.php";
-          $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-          if (!$polaczenie) {
-                            die("Connection failed: " . oci_error());
-                        } else {
-                            $stid = oci_parse($polaczenie,"SELECT t.KOD_POCZTOWY, COUNT(*) AS ile FROM KLIENCI t GROUP BY t.KOD_POCZTOWY");
-                            if (oci_execute($stid) == TRUE) {
-                                while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                                    echo "['" . $row['KOD_POCZTOWY']."',".$row['ILE']."],";
-                                }
-                            }
-                        }
-                        oci_close($polaczenie);
-                        ?>
-        ]);
+  <script type="text/javascript">
+    google.charts.load("current", {
+      packages: ["corechart"]
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Kod pocztowy', 'Częstotliwość'],
+        <?php
+        require_once "connect.php";
+        $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+        if (!$polaczenie) {
+          die("Connection failed: " . oci_error());
+        } else {
+          $stid = oci_parse($polaczenie, "SELECT t.KOD_POCZTOWY, COUNT(*) AS ile FROM KLIENCI t GROUP BY t.KOD_POCZTOWY");
+          if (oci_execute($stid) == TRUE) {
+            while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+              echo "['" . $row['KOD_POCZTOWY'] . "'," . $row['ILE'] . "],";
+            }
+          }
+        }
+        oci_close($polaczenie);
+        ?>
+      ]);
 
 
 
-        var options = {
-          title: 'Kody pocztowe według ilości klientów',
-          is3D: true,
-          fontSize: 20,
-          sliceVisibilityThreshold: .1
-        };
-          
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
+      var options = {
+        title: 'Kody pocztowe według ilości klientów',
+        is3D: true,
+        fontSize: 20,
+        sliceVisibilityThreshold: .1
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+      chart.draw(data, options);
+    }
+  </script>
 </body>
 
 </html>

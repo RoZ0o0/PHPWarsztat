@@ -1,6 +1,6 @@
 <?php
   session_start();
-  $page = "zamowienia";
+  $page = "czesci";
   if(!isset($_SESSION['zalogowany'])){
     header('Location: index.php');
     exit();
