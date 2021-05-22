@@ -214,6 +214,35 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
+              <label for="czesci" class="col-sm-4 col-form-label">Części</label>
+              <div class="col-sm-8">
+                <select id="czes" name="czesci[]" style="width:100%" size="3" onmouseover="this.style.width='150%'; this.size='5';" onmouseout="this.style.width='100%';  this.size='3';" multiple="multiple">
+                <?php
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "SELECT * FROM czesci where liczba_dostepnych_sztuk>0");
+                    $licznik = 1;
+                    if (oci_execute($stid) == TRUE) {
+                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                        $id_cz = $row['ID_CZESCI'];
+                        $nazwa = $row['NAZWA_CZESCI'];
+                        $nr_czesci = $row['NR_CZESCI'];
+                        $cena = $row['CENA'];
+                        echo "<option value='$id_cz'>$nazwa | $nr_czesci | $cena zł</option>";
+                      }
+                    }
+                  }
+                  oci_close($polaczenie);
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
               <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
               <div class="col-sm-8">
                 <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
