@@ -46,6 +46,11 @@
 require_once "connect.php";
 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 $arrLocales = array('pl_PL', 'pl','Polish_Poland.28592');
+
+$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; //potrzebne do wyciągania id z linku
+$id_from_link = parse_url($url, 6);
+
+
 setlocale( LC_ALL, $arrLocales );
 // $polaczenie->set_charset("utf8");
 function strftimeV($format,$timestamp){
@@ -55,6 +60,10 @@ if (!$polaczenie) {
     die("Connection failed: " . oci_error());
 }else{
   
+  if(!isset($id_from_link)){ //gdy nie jest ustawione id w linku strony
+  
+
+
   if(isset ($_POST['textFilter']))
   {
   $text = $_POST['textFilter'];
@@ -74,6 +83,17 @@ if (!$polaczenie) {
   ORDER BY USLUGI.DATA_OBSLUGI DESC";
  }
   
+}
+
+else{ //gdy w id strony jest ustawione id uslugi 
+  $id_from_link = substr($id_from_link, 3);
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+    INNER JOIN USLUGI
+    ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
+    INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
+    WHERE uslugi.id_uslugi LIKE '".$id_from_link."'
+    ORDER BY USLUGI.DATA_OBSLUGI DESC";
+}
 
     $stid = oci_parse($polaczenie, $sql_query);
     if (oci_execute($stid) == TRUE) {
@@ -99,6 +119,9 @@ if (!$polaczenie) {
 }
 oci_close($polaczenie);
 unset($_POST['textFilter']);
+
+
+
 ?>
   </div>
 </div>
