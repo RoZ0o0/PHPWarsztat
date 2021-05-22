@@ -279,8 +279,8 @@ if (!isset($_SESSION['zalogowany'])) {
   <form name="delpojazd" id="delpojazd" method="post" action="usunpojazd.php">
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-       <div id="top_x_div" style="width: 1100px; height: 550px; margin-left:auto; margin-right:auto;"></div>
+ <div class="outside_chart" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;"> <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+       <div id="top_x_div" style="width: 970px; height: 550px;padding-top: 40px;padding-left: 60px;"></div></div>
   <script>
     getPagination('#table_to_highlight');
 
@@ -550,7 +550,7 @@ if (!isset($_SESSION['zalogowany'])) {
         ]);
 
         var options = {
-          width: 1110,
+          width: 970,
           colors: '#3864cc',
           fontSize: 20,
           legend: { position: 'none' },
