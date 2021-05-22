@@ -119,15 +119,4 @@ display: none;
   cursor: default;
   background-color: #337ab7;
   border-color: #337ab7;
-}  
-#piechart_3d{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 60px;
-
-}
-#top_x_div{ /* wykres pojazdów*/
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 60px;
 }
