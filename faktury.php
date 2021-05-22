@@ -140,7 +140,7 @@ if (!isset($_SESSION['zalogowany'])) {
     </div>
   </div>
 
-  <form name="faktura" id="faktura" method="post" action="test.php">
+  <form name="faktura" id="faktura" method="post" target='_blank' action="test.php">
     <input type="hidden" name="id_fakt" id="id_fakt" value="">
   </form> 
 
@@ -279,14 +279,14 @@ if (!isset($_SESSION['zalogowany'])) {
 <script>
     function fakturkaShow() {
       Swal.fire({
-        title: 'Jesteś pewien?',
-        text: "Nie będziesz mógł tego cofnąć!",
-        icon: 'warning',
+        title: 'Zostaniesz przekierowany do faktury!',
+        text: "Akceptuj aby przejść dalej",
+        icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Anuluj',
-        confirmButtonText: 'Tak, usuń!'
+        confirmButtonText: 'Akceptuj!'
       }).then((result) => {
         if (result.isConfirmed) {
           document.forms["faktura"].submit();

@@ -104,11 +104,26 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                   echo "<td>" . date_format($datee, 'Y-m-d') . "</td>";
                   echo "<td>" . $row['CENA'] . "</td>";
                   echo "<td>" . $row['MODEL'] . " " . $row['MARKA'] . " | " . $row['IMIE'] .  " " . $row['NAZWISKO'] . "</td>";
+
+                  $faktura = 0;
+                  $id_uslugi = $row['ID_USLUGI'];
+
+                  $stid2 = oci_parse($polaczenie, "SELECT * from faktury where id_uslugi=$id_uslugi");
+                  if (oci_execute($stid2) == TRUE) {
+                    while ((oci_fetch_array($stid2, OCI_BOTH)) != false) {
+                      $faktura++;
+                    }
+                  }
+
                   echo "<td style='width:13%'>";
                   if ($_SESSION['stanowisko'] == "Pracownik") {
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' onlick='getid(this.id);createPdf()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal' onclick='confirm_alert();'><i class='material-icons'>&#xE8B8;</i></a>";
                     echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='confirm_alert()'><i class='material-icons'>&#xE5C9;</i></a>";
+                  } else if ($faktura > 0) {
+                    echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='faktura_close()'><i class='material-icons'>&#xe873;</i></a>";
+                    echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal' onclick='edit_close();'><i class='material-icons'>&#xE8B8;</i></a>";
+                    echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                   } else {
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='getid(this.id);createPdf()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
@@ -117,6 +132,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                   echo "</td>";
                   echo "</tr>";
                   $licznik++;
+                  $faktura = 0;
                 }
               }
             }
@@ -217,7 +233,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               <label for="czesci" class="col-sm-4 col-form-label">Części</label>
               <div class="col-sm-8">
                 <select id="czes" name="czesci[]" style="width:100%" size="3" onmouseover="this.style.width='150%'; this.size='5';" onmouseout="this.style.width='100%';  this.size='3';" multiple="multiple">
-                <?php
+                  <?php
                   require_once "connect.php";
 
                   $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
@@ -520,6 +536,25 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
   </script>
 
   <script>
+    function edit_close() {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Błąd',
+        text: 'Nie można edytować, ponieważ usługa już jest zrealizowana!',
+      });
+    }
+  </script>
+  <script>
+    function faktura_close() {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Błąd',
+        text: 'Nie można stworzyć faktury, ponieważ faktura już istnieje!',
+      });
+    }
+  </script>
+
+  <script>
     function blad() {
 
       var simple = '<?php echo $blad; ?>';
@@ -548,13 +583,34 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
           title: 'Udało się!',
           text: 'Usługa została usunięta!',
         });
-      }else if (simple == "fakturkapyk") {
+      } else if (simple == "fakturkapyk") {
+        let timerInterval
         Swal.fire({
-          icon: 'success',
-          title: 'Udało się!',
-          text: 'Faktura została utworzona!',
-        });
-      }else if (simple == "fakturaniepyk") {
+          title: 'Faktura się generuje!',
+          html: 'Faktura wygeneruje się w <b></b> milisekund.',
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+              const content = Swal.getHtmlContainer()
+              if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                  b.textContent = Swal.getTimerLeft()
+                }
+              }
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('Zamknięto okno!')
+          }
+        })
+      } else if (simple == "fakturaniepyk") {
         Swal.fire({
           icon: 'error',
           title: 'Błąd!',
