@@ -111,15 +111,17 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                     }
                   }
 
-                  echo "<td style='width:13%'>";
+                  echo "<td style='width:9%'>";
                    if ($faktura > 0) {
+                    echo "<a href='#' class='zdjecia' id='" . $row['ID_USLUGI'] . "' title='Galeria' data-toggle='tooltip' onclick='getid(this.id);goGaleria()'><i class='material-icons'>&#xe3f4;</i></a>";
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='faktura_close()'><i class='material-icons'>&#xe873;</i></a>";
-                    echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal' onclick='edit_close();'><i class='material-icons'>&#xE8B8;</i></a>";
-                    echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                    echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Edytowanie' data-target='#editModal' onclick='edit_close();'><i class='material-icons'>&#xE8B8;</i></a>";
+                    echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Usunięcie' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                   } else {
+                    echo "<a href='#' class='zdjecia' id='" . $row['ID_USLUGI'] . "' title='Galeria' data-toggle='tooltip' onclick='getid(this.id);goGaleria()'><i class='material-icons'>&#xe3f4;</i></a>";
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='getid(this.id);createPdf()'><i class='material-icons'>&#xe873;</i></a>";
-                    echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Settings' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
-                    echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Delete' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
+                    echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Edytowanie' data-target='#editModal'  data-toggle='modal' onclick='getid(this.id);getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xE8B8;</i></a>";
+                    echo "<a href='#' class='delete' id='" . $row['ID_USLUGI'] . "' title='Usunięcie' data-toggle='tooltip' onclick='getid(this.id);deletePrac()'><i class='material-icons'>&#xE5C9;</i></a>";
                   }
                   echo "</td>";
                   echo "</tr>";
@@ -401,6 +403,10 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
     <input type="hidden" name="id_usl" id="id_usl" value="">
   </form>
 
+  <form name="galeria" id="galeria" method="post" action="galeria.php">
+    <input type="hidden" name="id_gal" id="id_gal" value="">
+  </form>
+
   <script>
     getPagination('#table_to_highlight');
 
@@ -645,6 +651,21 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
     }
   </script>
   <script>
+    function goGaleria() {
+      Swal.fire({
+        title: 'Przejść do galerii usługi?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: `Tak`,
+        cancelButtonText: `Anuluj`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.forms["galeria"].submit();
+        }
+      })
+    }
+  </script>
+  <script>
     var b_id;
     var licz;
 
@@ -653,6 +674,8 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
       document.getElementById('id_p').value = b_id;
       document.getElementById('id_del').value = b_id;
       document.getElementById('id_usl').value = b_id;
+      document.getElementById('id_gal').value=b_id;
+      document.getElementById("galeria").action = "galeria.php?id="+b_id;
       return b_id;
     }
 
