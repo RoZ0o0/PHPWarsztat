@@ -279,7 +279,8 @@ if (!isset($_SESSION['zalogowany'])) {
   <form name="delpojazd" id="delpojazd" method="post" action="usunpojazd.php">
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
-
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+       <div id="top_x_div" style="width: 1100px; height: 550px;"></div>
   <script>
     getPagination('#table_to_highlight');
 
@@ -517,6 +518,59 @@ if (!isset($_SESSION['zalogowany'])) {
   unset($_SESSION['komunikat']);
   unset($blad);
   ?>
+<script>
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Marka', 'Ilość'],
+          <?php 
+          require_once "connect.php";
+          $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+          if (!$polaczenie) {
+                            die("Connection failed: " . oci_error());
+                        } else {
+                            $stid = oci_parse($polaczenie," SELECT t.MARKA, COUNT(*) AS ile FROM POJAZDY t GROUP BY t.MARKA ORDER BY ile DESC");
+                            if (oci_execute($stid) == TRUE) {
+                                while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                                    echo "['" . $row['MARKA']."',".$row['ILE']."],";
+                                }
+                            }
+                        }
+                        oci_close($polaczenie);
+                        ?>
+                        
+         
+          // ["Opel", 12],
+          // ["Audi", 8],
+          // ["Fiat", 5],
+          // ["Volkswagen", 3],
+          // ['Inne', 3]
+        ]);
+
+        var options = {
+          width: 1110,
+          colors: '#3864cc',
+          fontSize: 20,
+          legend: { position: 'none' },
+          chart: {
+            title: 'Marki samochodowe według ilości klientów',
+            subtitle: '' },
+          axes: {
+            x: {
+              0: { side: 'top', label: ''} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
+</script>
+  
 </body>
 
 </html>

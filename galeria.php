@@ -11,6 +11,7 @@
 <head>
     <title>Usługi warsztatowe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /> -->
@@ -43,32 +44,56 @@
 
 <?php
 require_once "connect.php";
-
 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+$arrLocales = array('pl_PL', 'pl','Polish_Poland.28592');
 
+$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; //potrzebne do wyciągania id z linku
+$id_from_link = parse_url($url, 6);
+
+
+setlocale( LC_ALL, $arrLocales );
 // $polaczenie->set_charset("utf8");
-
+function strftimeV($format,$timestamp){
+  return iconv("ISO-8859-2","UTF-8",ucfirst(strftime($format,$timestamp)));
+}
 if (!$polaczenie) {
     die("Connection failed: " . oci_error());
 }else{
   
+  if(!isset($id_from_link)){ //gdy nie jest ustawione id w linku strony
+  
+
+
   if(isset ($_POST['textFilter']))
   {
   $text = $_POST['textFilter'];
-  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
     INNER JOIN USLUGI
     ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
     INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
-    WHERE galeria.komentarz LIKE '%".$text."%' OR klienci.imie || ' ' || klienci.nazwisko LIKE '%".$text."%'";
+    WHERE LOWER(galeria.komentarz) LIKE LOWER('%".$text."%') OR LOWER(klienci.imie) || ' ' || LOWER(klienci.nazwisko) LIKE LOWER('%".$text."%')
+    ORDER BY USLUGI.DATA_OBSLUGI DESC";
   }
  else{
-  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz 
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI  
   FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
   INNER JOIN USLUGI
   ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
-  INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi)";
+  INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi)
+  ORDER BY USLUGI.DATA_OBSLUGI DESC";
  }
   
+}
+
+else{ //gdy w id strony jest ustawione id uslugi 
+  $id_from_link = substr($id_from_link, 3);
+  $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+    INNER JOIN USLUGI
+    ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
+    INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
+    WHERE uslugi.id_uslugi LIKE '".$id_from_link."'
+    ORDER BY USLUGI.DATA_OBSLUGI DESC";
+}
 
     $stid = oci_parse($polaczenie, $sql_query);
     if (oci_execute($stid) == TRUE) {
@@ -79,8 +104,14 @@ if (!$polaczenie) {
             echo "<div class='photo_container'>";
             echo "<img src='./gallery/" . $row['ZDJECIE'] . "' alt='zdj' style='width:100%'>";
             echo "</div>";
-            echo "<h4>".$row['IMIE']." ".$row['NAZWISKO']."</h4>";
-            echo "<p>".$row['KOMENTARZ']."</p>";
+            echo "<h5>".$row['IMIE']." ".$row['NAZWISKO']."</h5>";
+            echo "<h6>".$row['KOMENTARZ']."</h6>";
+
+            $datee = date_create($row['DATA_OBSLUGI']);
+            $datef = date_format($datee, 'd-m-Y');
+            $datetstamp = utf8_encode(strtotime($datef));
+
+            echo "<h7 class='data'>". strftimeV('%d %B %Y', $datetstamp) ."</h7>";
             echo "</div>";
             echo "</div>";
         }
@@ -88,6 +119,9 @@ if (!$polaczenie) {
 }
 oci_close($polaczenie);
 unset($_POST['textFilter']);
+
+
+
 ?>
   </div>
 </div>
