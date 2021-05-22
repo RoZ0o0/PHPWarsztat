@@ -75,6 +75,16 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="czesci.php" class="<?php if ($page == "czesci") {
+                                        echo "nav-link text-dark bg-light";
+                                      } else {
+                                        echo "nav-link text-dark";
+                                      } ?>">
+        <i class="fa fa-cogs mr-3 text-primary fa-fw"></i>
+        Części
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="zamowienia.php" class="<?php if ($page == "zamowienia") {
                                         echo "nav-link text-dark bg-light";
                                       } else {
