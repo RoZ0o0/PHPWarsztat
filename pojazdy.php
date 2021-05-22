@@ -289,7 +289,7 @@ if (!isset($_SESSION['zalogowany'])) {
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-       <div id="top_x_div" style="width: 1100px; height: 550px;"></div>
+       <div id="top_x_div" style="width: 1100px; height: 550px; margin-left:auto; margin-right:auto;"></div>
   <script>
     getPagination('#table_to_highlight');
 

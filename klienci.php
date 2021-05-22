@@ -151,7 +151,7 @@ if (!isset($_SESSION['zalogowany'])) {
       </div>
     </div>
   </div>
-  <div id="piechart_3d" style="width: 1110px; height: 600px;"></div>
+  <div id="piechart_3d" style="width: 1110px; height: 600px; margin-left:auto;margin-right:auto;"></div>
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
 
