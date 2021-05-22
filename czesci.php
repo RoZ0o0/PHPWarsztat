@@ -95,7 +95,11 @@ if (!isset($_SESSION['zalogowany'])) {
                   echo "<td>" . $row['NR_CZESCI'] . "</td>";
                   echo "<td>" . $row['OPIS'] . "</td>";
                   echo "<td>" . $row['CENA'] . "</td>";
-                  echo "<td>" . $row['LICZBA_DOSTEPNYCH_SZTUK'] . "</td>";
+                  if ($row['LICZBA_DOSTEPNYCH_SZTUK'] == 0) {
+                    echo "<td>Brak</td>";
+                  } else {
+                    echo "<td>" . $row['LICZBA_DOSTEPNYCH_SZTUK'] . "</td>";
+                  }
                   echo "</tr>";
                   $licznik++;
                 }
@@ -262,7 +266,7 @@ if (!isset($_SESSION['zalogowany'])) {
   </script>
   <script>
     $(document).ready(function() {
-      $('#myInput').on("keyup",function() {
+      $('#myInput').on("keyup", function() {
         if (!$(this).val()) {
           $('#maxRows').val(5).change();
         }
