@@ -44,6 +44,8 @@ if (!isset($_SESSION['zalogowany'])) {
     var cos;
     var array = [];
     var licznik = 0;
+    var licz;
+    var val;
 
     function getid(b_id) {
       c_id = b_id;
@@ -52,24 +54,43 @@ if (!isset($_SESSION['zalogowany'])) {
     }
 
     function addCzesc() {
-      var val = document.getElementById(cos).value;
+      val = document.getElementById(cos).value;
       document.getElementById(cos).value = '';
       array[licznik] = [];
       array[licznik][0] = c_id;
       array[licznik][1] = val;
-      alert(array[licznik][0]);
+
       licznik++;
       JSON.stringify(array);
-      $('#zamowienia').append('<p><b>Część: </b>'+c_id+'      <b>Ilość: </b>'+val+'</p>');
     }
 
-    $(document).ready(function(){ 
-		  $('#btn').click(function(){
-		    $('#str').val(JSON.stringify(array)); 
-		  }); 
-		}); 
-  </script>
+    $(document).ready(function() {
+      $('#btn').click(function() {
+        $('#str').val(JSON.stringify(array));
+      });
+    });
 
+    function getlicznik(licz1) {
+      licz = licz1;
+      return licz;
+    }
+
+    function showTableData() {
+      var myTab = document.getElementById('table_to_highlight');
+      var arr = [];
+
+      for (i = licz; i < licz + 1; i++) {
+        arr[i] = [];
+        var objCells = myTab.rows.item(i).cells;
+
+        for (var j = 1; j < objCells.length - 1; j++) {
+          arr[i][j] = objCells.item(j).innerHTML;
+        }
+      }
+      $('#zamowienia').append('<p>' + arr[licz][1] + ' | ' + arr[licz][2] + ' | ' + arr[licz][3] + ': ' + val + ' szt.' + '</p>');
+      document.getElementById('info').innerHTML = 'Przedmioty w koszyku';
+    }
+  </script>
 
 </head>
 
@@ -137,7 +158,7 @@ if (!isset($_SESSION['zalogowany'])) {
                     echo "<td>" . $row['LICZBA_DOSTEPNYCH_SZTUK'] . "</td>";
                   }
                   echo "<td><input id='$id_czescis' class='form-control' style='width:50px; display:inline;' type='number'>";
-                  echo "<a href='#' class='dodaj' id='" . $id_czesc . "' title='Dodaj' data-toggle='tooltip' onclick='getid(this.id);addCzesc()'><i class='material-icons'>&#xe145;</i></a>";
+                  echo "<a href='#' class='dodaj' id='" . $id_czesc . "' title='Dodaj' data-toggle='tooltip' onclick='getid(this.id);addCzesc();getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xe145;</i></a>";
                   echo "</td>";
                   echo "</tr>";
                   $licznik++;
@@ -190,13 +211,17 @@ if (!isset($_SESSION['zalogowany'])) {
         <div class="modal-body">
           <form method="post" action="koszyk.php" id="form">
             <div class="form-group row">
-              <div class="col-sm-8" id="zamowienia">
+              <div class="col-sm-12" id="zamowienia">
+                <br>
+                <center>
+                  <p id="info">Koszyk jest pusty</p>
+                </center>
               </div>
             </div>
-            <input type="hidden" id="str" name="str" value="" />
         </div>
         <div class="modal-footer">
           <input type="submit" class="sub form-control col-sm-4" id="btn" name="submit" value="Zamów">
+          <input type="hidden" id="str" name="str" value="" /> 
         </div>
         </form>
       </div>
