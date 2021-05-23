@@ -11,15 +11,23 @@
     
     if(in_array($file_ext,$expensions)=== false){
        $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+       $_SESSION['komunikat'] = "zlyformat";
+       header('Location: galeria.php');
+       exit();
     }
     
     if($file_size > 2097152){
        $errors[]='File size must be excately 2 MB';
+       $_SESSION['komunikat'] = "zaduzy";
+       header('Location: galeria.php');
+       exit();
     }
     
     if(empty($errors)==true){
        move_uploaded_file($file_tmp,"gallery/".$file_name);
        echo "Success";
+       $_SESSION['komunikat'] = "dodany";
+       header('Location: galeria.php');
     }else{
        print_r($errors);
     }
@@ -37,6 +45,7 @@ if (!$polaczenie) {
     $id_uslugi = $_POST['id_usl'];
     $in_zdjecie=$file_name;
     $in_komentarz= $_POST['komentarz'];
+    
     if(isset($_POST['przed'])){
     $stan = 1;
     }
@@ -48,7 +57,7 @@ if (!$polaczenie) {
         $_SESSION['komunikat'] = "dodany";
         header('Location: galeria.php');
     }else{
-        $_SESSION['komunikat']="błąd";
+        $_SESSION['komunikat']="blad";
         header('Location: galeria.php');
     }
     oci_close($polaczenie);
