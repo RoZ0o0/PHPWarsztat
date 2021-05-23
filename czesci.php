@@ -39,6 +39,36 @@ if (!isset($_SESSION['zalogowany'])) {
       $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
+  <script>
+    var c_id;
+    var cos;
+    var array = [];
+    var licznik = 0;
+
+    function getid(b_id) {
+      c_id = b_id;
+      cos = b_id + "czesc";
+      // alert(b_id);
+    }
+
+    function addCzesc() {
+      var val = document.getElementById(cos).value;
+      document.getElementById(cos).value = '';
+      array[licznik] = [];
+      array[licznik][0] = c_id;
+      array[licznik][1] = val;
+      alert(array[licznik][0]);
+      licznik++;
+      JSON.stringify(array);
+      $('#zamowienia').append('<p><b>Część: </b>'+c_id+'      <b>Ilość: </b>'+val+'</p>');
+    }
+
+    $(document).ready(function(){ 
+		  $('#btn').click(function(){
+		    $('#str').val(JSON.stringify(array)); 
+		  }); 
+		}); 
+  </script>
 
 
 </head>
@@ -56,10 +86,10 @@ if (!isset($_SESSION['zalogowany'])) {
               <h2>Zarządzenie częściami</h2>
             </div>
             <div class="col-xs-5 ml-auto">
-            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Wyszukaj części">
+              <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Wyszukaj części">
             </div>
             <div class="col-xs-5 ml-auto">
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Zamówienie</span></a>
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xe8cc;</i> <span>Koszyk</span></a>
             </div>
           </div>
         </div>
@@ -72,6 +102,7 @@ if (!isset($_SESSION['zalogowany'])) {
               <th>Opis</th>
               <th>Cena</th>
               <th>Sztuki</th>
+              <th style='width:5%;'>Zamówienie</th>
             </tr>
           </thead>
           <tbody>
@@ -92,6 +123,8 @@ if (!isset($_SESSION['zalogowany'])) {
                 // $_SESSION['ile'] = $ilu;
                 // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                  $id_czescis = $row['ID_CZESCI'] . "czesc";
+                  $id_czesc = $row['ID_CZESCI'];
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";
                   echo "<td>" . $row['NAZWA_CZESCI'] . "</td>";
@@ -103,6 +136,9 @@ if (!isset($_SESSION['zalogowany'])) {
                   } else {
                     echo "<td>" . $row['LICZBA_DOSTEPNYCH_SZTUK'] . "</td>";
                   }
+                  echo "<td><input id='$id_czescis' class='form-control' style='width:50px; display:inline;' type='number'>";
+                  echo "<a href='#' class='dodaj' id='" . $id_czesc . "' title='Dodaj' data-toggle='tooltip' onclick='getid(this.id);addCzesc()'><i class='material-icons'>&#xe145;</i></a>";
+                  echo "</td>";
                   echo "</tr>";
                   $licznik++;
                 }
@@ -142,130 +178,25 @@ if (!isset($_SESSION['zalogowany'])) {
     </div>
   </div>
 
+
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
 
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Dodaj Usługe</h4>
+          <h4 class="modal-title">Zamówienie</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="post" action="dodajusluge.php" id="form">
+          <form method="post" action="koszyk.php" id="form">
             <div class="form-group row">
-              <label for="pracownik" class="col-sm-4 col-form-label">Pracownik</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="pracownik" name="pracownik" placeholder="Pracownik" value="<?php echo $imiep ?>" disabled required>
-                <input type="hidden" id="id_pracownika" name="id_pracownika" value="<?php echo $_SESSION['id_prac']; ?>">
+              <div class="col-sm-8" id="zamowienia">
               </div>
             </div>
-            <div class="form-group row">
-              <label for="warsztat" class="col-sm-4 col-form-label">Warsztat</label>
-              <div class="col-sm-8">
-                <input class="col-sm-12 form-control" list="wbrow" id="wselect" name="wselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
-                <datalist id="wbrow">
-                  <?php
-                  require_once "connect.php";
-
-                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-                  if (!$polaczenie) {
-                    die("Connection failed: " . oci_error());
-                  } else {
-                    $stid = oci_parse($polaczenie, "SELECT * FROM warsztaty");
-                    $licznik = 1;
-                    if (oci_execute($stid) == TRUE) {
-                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                        $idw = $row['ID_WARSZTATU'];
-                        $adres = $row['ADRES'];
-                        $miasto = $row['MIASTO'];
-                        echo "<option data-id='$idw' value='" . $adres . " " . $miasto . "'></option>";
-                      }
-                    }
-                  }
-                  oci_close($polaczenie);
-                  ?>
-                </datalist>
-                <input type="hidden" id="id_war" name="id_war" value="">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="date" class="col-sm-4 col-form-label">Data Obsługi</label>
-              <div class="col-sm-8">
-                <input type="date" class="form-control" id="date" name="date" placeholder="Data Obsługi" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="cena" class="col-sm-4 col-form-label">Cena</label>
-              <div class="col-sm-8">
-                <input type="number" class="form-control" id="cena" name="cena" placeholder="Cena" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="czesci" class="col-sm-4 col-form-label">Części</label>
-              <div class="col-sm-8">
-                <select id="czes" name="czesci[]" style="width:100%" size="3" onchange="if (this.selectedIndex) doSomething(this.selectedIndex);" onmouseover="this.style.width='150%'; this.size='5';" onmouseout="this.style.width='100%';  this.size='3';" multiple="multiple">
-                  <?php
-                  require_once "connect.php";
-
-                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-                  if (!$polaczenie) {
-                    die("Connection failed: " . oci_error());
-                  } else {
-                    $stid = oci_parse($polaczenie, "SELECT * FROM czesci");
-                    $licznik = 1;
-                    if (oci_execute($stid) == TRUE) {
-                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                        $id_cz = $row['ID_CZESCI'];
-                        $nazwa = $row['NAZWA_CZESCI'];
-                        $nr_czesci = $row['NR_CZESCI'];
-                        $liczba = $row['LICZBA_DOSTEPNYCH_SZTUK'];
-                        echo "<option value='$id_cz'>$nazwa | $nr_czesci | $liczba szt</option>";
-                      }
-                    }
-                  }
-                  oci_close($polaczenie);
-                  ?>
-                </select>
-
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
-              <div class="col-sm-8">
-                <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
-                <datalist id="pbrow">
-                  <?php
-                  require_once "connect.php";
-
-                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-                  if (!$polaczenie) {
-                    die("Connection failed: " . oci_error());
-                  } else {
-                    $stid = oci_parse($polaczenie, "SELECT pojazdy.id_pojazdu, pojazdy.marka, pojazdy.model, klienci.imie, klienci.nazwisko FROM pojazdy inner join klienci on pojazdy.id_klienta=klienci.id_klienta");
-                    $licznik = 1;
-                    if (oci_execute($stid) == TRUE) {
-                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
-                        $idp = $row['ID_POJAZDU'];
-                        $marka = $row['MARKA'];
-                        $model = $row['MODEL'];
-                        $imiek = $row['IMIE'];
-                        $nazwiskok = $row['NAZWISKO'];
-                        echo "<option data-id='$idp' value='" . $marka . " " . $model . " " . $imiek . " " . $nazwiskok . "'></option>";
-                      }
-                    }
-                  }
-                  oci_close($polaczenie);
-                  ?>
-                </datalist>
-                <input type="hidden" id="id_poj" name="id_poj" value="">
-              </div>
-            </div>
+            <input type="hidden" id="str" name="str" value="" />
         </div>
         <div class="modal-footer">
-          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Pracownika">
+          <input type="submit" class="sub form-control col-sm-4" id="btn" name="submit" value="Zamów">
         </div>
         </form>
       </div>
@@ -407,7 +338,7 @@ if (!isset($_SESSION['zalogowany'])) {
     });
   </script>
   <script>
-    function doSomething(b_id){
+    function doSomething(b_id) {
       alert(b_id);
     }
   </script>
