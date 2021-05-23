@@ -184,7 +184,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="warsztat" class="col-sm-4 col-form-label">Warsztat</label>
               <div class="col-sm-8">
-                <input class="col-sm-12 form-control" list="wbrow" id="wselect" name="wselect" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
+                <input class="col-sm-12 form-control" list="wbrow" id="wselect" name="wselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrow">
                   <?php
                   require_once "connect.php";
@@ -255,7 +255,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
               <div class="col-sm-8">
-                <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
+                <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrow">
                   <?php
                   require_once "connect.php";

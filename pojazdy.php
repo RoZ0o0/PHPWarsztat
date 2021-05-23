@@ -153,7 +153,7 @@ if (!isset($_SESSION['zalogowany'])) {
             <div class="form-group row">
               <label for="klient" class="col-sm-4 col-form-label">Klient</label>
               <div class="col-sm-8">
-                <input class="col-sm-12" list="brow" id="select" name="select" autocomplete="off" placeholder="Podaj Klienta">
+                <input class="col-sm-12 form-control" list="brow" id="select" name="select" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" placeholder="Podaj Klienta">
                 <datalist id="brow" onchange='changeFunc()'>
                   <?php
                   require_once "connect.php";
