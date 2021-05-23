@@ -94,7 +94,7 @@ if (!isset($_SESSION['zalogowany'])) {
 
 </head>
 
-<body>
+<body onload="blad()">
   <center>
     <h2 class="display-4 text-white">Sekcja części</h2>
   </center>
@@ -221,7 +221,7 @@ if (!isset($_SESSION['zalogowany'])) {
         </div>
         <div class="modal-footer">
           <input type="submit" class="sub form-control col-sm-4" id="btn" name="submit" value="Zamów">
-          <input type="hidden" id="str" name="str" value="" /> 
+          <input type="hidden" id="str" name="str" value="" />
         </div>
         </form>
       </div>
@@ -367,6 +367,30 @@ if (!isset($_SESSION['zalogowany'])) {
       alert(b_id);
     }
   </script>
+  <script>
+    function blad() {
+
+      var simple = '<?php echo $blad; ?>';
+
+      if (simple == "istnieje") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Błąd',
+          text: 'Wystąpił błąd!',
+        });
+      } else if (simple == "dodany") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Udało się!',
+          text: 'Zamówienie zostało stworzone!',
+        });
+      }
+    }
+  </script>
+  <?php
+  unset($_SESSION['komunikat']);
+  unset($blad);
+  ?>
 </body>
 
 </html>
