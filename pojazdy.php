@@ -280,7 +280,7 @@ if (!isset($_SESSION['zalogowany'])) {
     <input type="hidden" name="id_del" id="id_del" value="">
   </form>
  <div class="outside_chart" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;"> <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-       <div id="top_x_div" style="width: 970px; height: 550px;padding-top: 40px;padding-left: 60px;"></div></div>
+       <div id="top_x_div" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px;"></div></div>
   <script>
     getPagination('#table_to_highlight');
 
