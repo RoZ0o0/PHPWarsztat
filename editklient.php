@@ -15,7 +15,8 @@
         $miasto = $_POST['miastoe'];
         $nr_telefonu = $_POST['nr_telefonue'];
         $adres = $_POST['ulica_nr_domue'];
-        $stid  = oci_parse($polaczenie, "BEGIN klienci_crud.klienci_edit('$id_kli', '$imie', '$nazwisko', '$miasto', $nr_telefonu, '$adres'); END;");
+        $kod = $_POST['kod_pocztowye'];
+        $stid  = oci_parse($polaczenie, "BEGIN klienci_crud.klienci_edit('$id_kli', '$imie', '$nazwisko', '$miasto', $nr_telefonu, '$adres', '$kod'); END;");
         if (oci_execute($stid) == TRUE) {
             $_SESSION['komunikat'] = "edycja";
             header('Location: klienci.php');

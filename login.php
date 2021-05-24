@@ -25,6 +25,7 @@ if (!$polaczenie) {
         // if ($ilu > 0) {
 
         while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+            $_SESSION['id_prac'] = $row['ID_PRACOWNIKA'];
             $_SESSION['user'] = $row['USERNAME'];
             $_SESSION['nazwisko'] = $row['NAZWISKO'];
             $_SESSION['imie'] = $row['IMIE'];

@@ -49,3 +49,4 @@ if (!$polaczenie) {
     // }
     oci_close($polaczenie);
 }
+?>

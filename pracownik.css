@@ -151,11 +151,13 @@ table.table .avatar {
     font-size: 13px;
 }
 input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input {
     -webkit-appearance: none;
     margin: 0;
 }
-input[type="number"] {
+input[type="number"],
+input {
     -moz-appearance: textfield;
 }
 .pagination li:hover{
