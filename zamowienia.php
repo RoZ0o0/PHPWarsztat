@@ -5,6 +5,9 @@ if (!isset($_SESSION['zalogowany'])) {
   header('Location: index.php');
   exit();
 }
+if (isset($_SESSION['komunikat'])) {
+  $blad = $_SESSION['komunikat'];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -141,6 +144,10 @@ if (!isset($_SESSION['zalogowany'])) {
     <input type="hidden" name="id_listy" id="id_listy" value="">
   </form>
 
+  <form name="zatwierdz_form" id="zatwierdz_form" method="post" action="zatwierdz_zamowienie.php">
+    <input type="hidden" name="id_zatw" id="id_zatw" value="">
+  </form>
+
   <script>
     getPagination('#table_to_highlight');
 
@@ -263,6 +270,7 @@ if (!isset($_SESSION['zalogowany'])) {
     function getid(b_id) {
       c_id = b_id;
       document.getElementById('id_listy').value = b_id;
+      document.getElementById('id_zatw').value = b_id;
     }
 
     function goLista() {
@@ -271,11 +279,14 @@ if (!isset($_SESSION['zalogowany'])) {
   </script>
   <script>
     function alert() {
+
       Swal.fire({
         icon: 'error',
         title: 'Błąd',
         text: 'Zamówienie jest już zrealizowane!',
       });
+
+
     }
 
     function zatwierdz() {
@@ -287,10 +298,33 @@ if (!isset($_SESSION['zalogowany'])) {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Anuluj',
-        confirmButtonText: 'Tak!'
+        confirmButtonText: 'Tak'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.forms["zatwierdz_form"].submit();
+        }
       })
     }
   </script>
+    <script>
+    function blad() {
+
+      var simple = '<?php echo $blad; ?>';
+
+
+     if (simple == "sukces") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Udało się!',
+          text: 'Zamówienie zostało zatwierdzone!',
+        });
+      }
+    }
+  </script>
+   <?php
+  unset($_SESSION['komunikat']);
+  unset($blad);
+  ?>
 </body>
 
 </html>
