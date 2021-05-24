@@ -66,6 +66,7 @@ if (!isset($_SESSION['zalogowany'])) {
             <tr>
               <th>#</th>
               <th>Klient</th>
+              <th>Data</th>
               <th>Faktura</th>
               <th>Akcja</th>
             </tr>
@@ -81,7 +82,7 @@ if (!isset($_SESSION['zalogowany'])) {
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
-              $stid = oci_parse($polaczenie, "SELECT faktury.id_faktury, klienci.imie, klienci.nazwisko, faktury.nr_faktury FROM faktury INNER JOIN klienci on faktury.id_klienta=klienci.id_klienta");
+              $stid = oci_parse($polaczenie, "SELECT faktury.id_faktury, klienci.imie, uslugi.data_obslugi, klienci.nazwisko, faktury.nr_faktury FROM faktury INNER JOIN klienci on faktury.id_klienta=klienci.id_klienta inner join uslugi on faktury.id_uslugi=uslugi.id_uslugi");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
                 // $ilu = $result->num_rows;
@@ -91,6 +92,8 @@ if (!isset($_SESSION['zalogowany'])) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";
                   echo "<td>" . $row['IMIE'] . " " . $row['NAZWISKO'] . "</td>";
+                  $datee = date_create($row['DATA_OBSLUGI']);
+                  echo "<td>" . date_format($datee, 'Y-m-d') . "</td>";
                   echo "<td>" . $row['NR_FAKTURY'] . "</td>";
                   echo "<td>";
                   if ($_SESSION['stanowisko'] == "Pracownik") {

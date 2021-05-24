@@ -1,7 +1,6 @@
 <?php
 session_start();
 $page = "galeria";
-$page = "warsztaty";
 if (isset($_SESSION['komunikat'])) {
     $blad = $_SESSION['komunikat'];
 }
@@ -165,7 +164,9 @@ if (!isset($_SESSION['zalogowany'])) {
                           $model_poj = $row['MODEL'];
                           $imie_kl = $row['IMIE'];
                           $nazw_kl = $row['NAZWISKO'];
-                          echo "<option data-id='$id_usl' value='" . $imie_kl . " " . $nazw_kl . ', ' . " $marka_poj $model_poj'></option>";
+                          $datee = date_create($row['DATA_OBSLUGI']);
+                          $datee = date_format($datee, 'Y-m-d');
+                          echo "<option data-id='$id_usl' value='" . $imie_kl . " " . $nazw_kl . ', ' . " $marka_poj $model_poj | $datee'></option>";
                         }
                       }
                     }
