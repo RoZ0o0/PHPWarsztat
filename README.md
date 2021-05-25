@@ -65,6 +65,16 @@ HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/
 ![image](https://user-images.githubusercontent.com/62017852/119495159-65f60a00-bd62-11eb-96b1-8b4186939206.png)
 ![image](https://user-images.githubusercontent.com/62017852/119495122-5971b180-bd62-11eb-94ea-5b09c974089e.png)
 
+### Galeria
+![image](https://user-images.githubusercontent.com/62017852/119495272-89b95000-bd62-11eb-83f2-b52632604d46.png)
+![image](https://user-images.githubusercontent.com/62017852/119495308-9342b800-bd62-11eb-8253-73c515a9fc93.png)
+
+### Mapy Warsztatów
+![image](https://user-images.githubusercontent.com/62017852/119495401-abb2d280-bd62-11eb-98ec-47124b96948f.png)
+![image](https://user-images.githubusercontent.com/62017852/119495466-bb321b80-bd62-11eb-8486-28472d8b9c66.png)
+
+
 
 ## Potrzebne nazwy użytkowników do uruchomienia aplikacji
--||-<br/>
+Login: root<br>
+Hasło: root
