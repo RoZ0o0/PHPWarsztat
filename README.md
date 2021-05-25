@@ -21,6 +21,12 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 ### Logowanie
 ![image](https://user-images.githubusercontent.com/62017852/119493697-c1bf9380-bd60-11eb-8d50-c0952c483b83.png)
 
+### Rejestracja
+![image](https://user-images.githubusercontent.com/62017852/119493912-ffbcb780-bd60-11eb-9ca0-1aaafe83d8f4.png)
+
+### Serwis z Navbar'em
+![image](https://user-images.githubusercontent.com/62017852/119494095-34c90a00-bd61-11eb-91d9-8289ccb11ea6.png)
+
 
 
 ## Baza danych
