@@ -73,13 +73,11 @@ HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/
 ![image](https://user-images.githubusercontent.com/62017852/119495401-abb2d280-bd62-11eb-98ec-47124b96948f.png)
 ![image](https://user-images.githubusercontent.com/62017852/119495466-bb321b80-bd62-11eb-8486-28472d8b9c66.png)
 
-
-
 ## Potrzebne nazwy użytkowników do uruchomienia aplikacji
 ### Kierownik
 Login: root<br>
 Hasło: root<br>
 
 ### Pracownik
-Login: awis
+Login: awis<br>
 Hasło: awis123
