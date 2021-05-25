@@ -71,7 +71,7 @@ HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/
 
 ### Mapy Warsztatów
 ![image](https://user-images.githubusercontent.com/62017852/119495401-abb2d280-bd62-11eb-98ec-47124b96948f.png)
-![image](https://user-images.githubusercontent.com/62017852/119496266-9c805480-bd63-11eb-80ea-3dc4e4224d49.png)
+![image](https://user-images.githubusercontent.com/62017852/119496342-b1f57e80-bd63-11eb-8871-ab6a2c463075.png)
 
 ## Potrzebne nazwy użytkowników do uruchomienia aplikacji
 ### Kierownik
