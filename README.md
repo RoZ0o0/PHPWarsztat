@@ -8,10 +8,12 @@ Stworzenie interfejsu umożliwiającego obsługę sieci warsztatów blacharskich
 ### Funkcjonalności:
 
 Program posiadał będzie następujące funkcjonalności:<br/>
-• Podgląd i zarządzanie informacjami o warsztatch firmy,<br/>
-• Podgląd i zarządzanie informacjami o klientach,<br/>
-• Możliwość podglądu usterki przed i po naprawie,<br/>
+• Podgląd i zarządzanie informacjami o tabelach.<br/>
+• Możliwość podglądu usterki przed i po naprawie.<br/>
 • Dodawanie rekordów w danych tabelach, edytowanie, usuwanie.<br/>
+• Dodawanie części t.j. tworzenie zamówienia.<br/>
+• Tworzenie faktury danej usługi oraz zamówienia w formacie PDF.<br/>
+
 
 ### Interfejs serwisu
 -||-<br/>
