@@ -12,11 +12,15 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 • Możliwość podglądu usterki przed i po naprawie.<br/>
 • Dodawanie rekordów w danych tabelach, edytowanie, usuwanie.<br/>
 • Dodawanie części t.j. tworzenie zamówienia.<br/>
-• Tworzenie faktury danej usługi oraz zamówienia w formacie PDF.<br/>
+• Generowanie faktury danej usługi oraz zamówienia w formacie PDF.<br/>
+• Wykresy statystyczne wybranych rekordów.<br/>
+• Wyświetlanie lokalizacji warsztatu za pomocą Google Maps.<br/>
 
 
 ### Interfejs serwisu
--||-<br/>
+Logowanie
+![image](https://user-images.githubusercontent.com/62017852/119493600-a785b580-bd60-11eb-9203-adcb36d8831d.png)
+
 
 ## Baza danych
 
