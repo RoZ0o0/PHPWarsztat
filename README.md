@@ -18,8 +18,9 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 
 
 ### Interfejs serwisu
-Logowanie
-![image](https://user-images.githubusercontent.com/62017852/119493600-a785b580-bd60-11eb-9203-adcb36d8831d.png)
+# Logowanie
+![image](https://user-images.githubusercontent.com/62017852/119493697-c1bf9380-bd60-11eb-8d50-c0952c483b83.png)
+
 
 
 ## Baza danych
