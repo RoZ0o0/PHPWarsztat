@@ -45,6 +45,10 @@ HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/
 ### Tabele z paginacją
 ![image](https://user-images.githubusercontent.com/62017852/119494537-b28d1580-bd61-11eb-9503-25e125eeb8a6.png)
 
+### Tabela i edycja po zalogowaniu jako pracownik
+![image](https://user-images.githubusercontent.com/62017852/119496523-dc473c00-bd63-11eb-9b58-def94327dfaa.png)
+![image](https://user-images.githubusercontent.com/62017852/119496572-e701d100-bd63-11eb-86b2-22be83d15ba4.png)
+
 ### Dodawanie do tabel
 ![image](https://user-images.githubusercontent.com/62017852/119494601-c769a900-bd61-11eb-89fb-2d309c08f797.png)
 
