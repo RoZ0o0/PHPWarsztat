@@ -76,5 +76,10 @@ HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/
 
 
 ## Potrzebne nazwy użytkowników do uruchomienia aplikacji
+### Kierownik
 Login: root<br>
-Hasło: root
+Hasło: root<br>
+
+### Pracownik
+Login: awis
+Hasło: awis123
