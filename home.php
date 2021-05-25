@@ -6,21 +6,23 @@
     <table class="content-table">
 
     </table>
-    <div style="position: relative; left: 20%;">
-      <div class="outside_chart" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <select id="chartSelect" name="chartSelect">
+      <option value="top_x_div">Plane</option>
+      <option value="marka">Car</option>
+      <option value="naprawy">Car</option>
+    </select> -->
+    <div id="container" style="position: relative; left: 20%;">
+      <div class="outside_chart top_x_div" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="top_x_div" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
-      <div class="outside_chart" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <div class="outside_chart marka" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="marka" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
-      <div class="outside_chart" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <div class="outside_chart naprawy" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="naprawy" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
     </div>
-
 
     <script>
       google.charts.load('current', {
@@ -194,6 +196,8 @@
         chart.draw(data, options);
       };
     </script>
+
+
   </div>
 </div>
 </div>
