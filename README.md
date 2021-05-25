@@ -39,7 +39,7 @@ Baza danych służy do użytku przez sieć warsztatów blacharskich w której is
 
 
 ## Wykorzystane technologie
-HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax<br/>
+HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/>
 
 ## Proces uruchomienia aplikacji (krok po kroku)
 -||-<br/>
