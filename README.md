@@ -18,7 +18,7 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 
 
 ### Interfejs serwisu
-# Logowanie
+#### Logowanie
 ![image](https://user-images.githubusercontent.com/62017852/119493697-c1bf9380-bd60-11eb-8d50-c0952c483b83.png)
 
 
