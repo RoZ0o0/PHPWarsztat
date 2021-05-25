@@ -7,19 +7,22 @@
 
     </table>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <!-- <select id="chartSelect" name="chartSelect">
-      <option value="top_x_div">Plane</option>
-      <option value="marka">Car</option>
-      <option value="naprawy">Car</option>
-    </select> -->
-    <div id="container" style="position: relative; left: 20%;">
-      <div class="outside_chart top_x_div" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="top_x_div" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+    <div>
+      <select class="chartSelect form-control" id="chartSelect" name="chartSelect" style="width: 20%;">
+        <option value="-1">Wszystkie</option>
+        <option value="1">Wynagrodzenie</option>
+        <option value="2">Marki</option>
+        <option value="3">Naprawy</option>
+      </select>
+    </div>
+    <div id="container" class="container" style="position: relative; left: 20%;">
+      <div class="outside_chart" id="div1" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="wynagrodzenie" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
-      <div class="outside_chart marka" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+      <div class="outside_chart" id="div2" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="marka" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
-      <div class="outside_chart naprawy" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+      <div class="outside_chart" id="div3" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="naprawy" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
     </div>
@@ -85,7 +88,7 @@
           }
         };
 
-        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        var chart = new google.charts.Bar(document.getElementById('wynagrodzenie'));
         // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
@@ -197,7 +200,19 @@
       };
     </script>
 
-
+    <script>
+    </script>
+    <script>
+      $(".chartSelect").change(function() {
+        if ($(this).val() == -1) {
+          $("#div1").show();
+          $("#div2").show();
+          $("#div3").show();
+        } else {
+          $("#div" + $(this).val()).show().siblings().hide();
+        }
+      });
+    </script>
   </div>
 </div>
 </div>
