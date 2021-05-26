@@ -15,6 +15,7 @@
         <option value="3">Naprawy</option>
         <option value="4">Kody pocztowe</option>
         <option value="5">Części</option>
+        <option value="6">TOP 5 Pracowników</option>
       </select>
     </div>
     <div id="container" class="container" style="position: relative; left: 20%;">
@@ -31,10 +32,11 @@
       <div id="klienci_kody" style="width: 970px; height: 570px;margin-left:auto;margin-right:auto;margin-top:10px;"></div></div>
 
       <div class="outside-chart" id="div5" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-      <!-- <label><h2 style="color:purple;">Najczęściej sprzedawane części</h2></label> -->
        <div id="czesci_wykres" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
-
+      <div class="outside_chart" id="div6" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="pracownicy_top" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
     </div>
 
     <script>
@@ -73,7 +75,7 @@
 
         var options = {
           width: 970,
-          colors: '#3864cc',
+          colors: '#a1bc1a',
           fontSize: 20,
           legend: {
             position: 'none'
@@ -138,7 +140,7 @@
 
         var options = {
           width: 970,
-          colors: '#3864cc',
+          colors: '#82AE8B',
           fontSize: 20,
           legend: {
             position: 'none'
@@ -249,8 +251,13 @@
         title: 'Kody pocztowe według ilości klientów',
         is3D: true,
         fontSize: 20,
-        sliceVisibilityThreshold: .1
-      };
+        sliceVisibilityThreshold: .1,
+        slices: {
+            0: { color: '#2B987E' },
+            1: { color: '#BDBA04' },
+            2: { color: '#A1C6CA'},
+          }
+        };
 
       var chart = new google.visualization.PieChart(document.getElementById('klienci_kody'));
       chart.draw(data, options);
@@ -291,7 +298,7 @@
 
         var options = {
           width: 970,
-          colors: '#3864cc',
+          colors: '#107a4c',
           fontSize: 20,
           bars: 'horizontal',
           legend: {
@@ -322,6 +329,74 @@
 
 
 </script>
+
+
+<script>
+      google.charts.load('current', {
+        'packages': ['bar']
+      });
+      google.charts.setOnLoadCallback(pracownicy_top);
+
+      function pracownicy_top() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Pracownik', 'Usługi'],
+          <?php
+          require_once "connect.php";
+
+          $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+          // $polaczenie->set_charset("utf8");
+
+          if (!$polaczenie) {
+            die("Connection failed: " . oci_error());
+          } else {
+            $curs = oci_new_cursor($polaczenie);
+            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.PRACOWNICY_TOP(:cursr); END;");
+            oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
+            oci_execute($stid);
+            oci_execute($curs);
+
+            while (($row = oci_fetch_array($curs, OCI_BOTH)) != false) {
+              echo "['" . $row['PRACOWNIK'] . "'," . $row['ILE'] . "],";
+            }
+          }
+          oci_close($polaczenie);
+          ?>
+        ]);
+
+        var options = {
+          width: 970,
+          colors: '#066997',
+          fontSize: 20,
+          bars: 'horizontal',
+          legend: {
+            position: 'none'
+          },
+    
+          chart: {
+            title: 'TOP 5 Pracowników',
+            subtitle: ''
+          },
+          axes: {
+            x: {
+              0: {
+                side: 'top',
+                label: ''
+              } // Top x-axis.
+            }
+          },
+          bar: {
+            groupWidth: "90%"
+          }
+        };
+
+
+        var chart = new google.charts.Bar(document.getElementById('pracownicy_top'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
+    </script>
+
 
     <script>
       $(".chartSelect").change(function() {
