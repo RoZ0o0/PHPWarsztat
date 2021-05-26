@@ -6,7 +6,7 @@
     <table class="content-table">
     </table>
 
-   
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <div>
       <select class="chartSelect form-control" id="chartSelect" name="chartSelect" style="width: 20%;">
@@ -19,30 +19,8 @@
         <option value="6">TOP 5 Pracowników</option>
         <option value="7">TOP 5 Warsztatów</option>
         <option value="8">Najczęsciej płacący klienci</option>
+        <option value="9">Informacje ogólne</option>
       </select>
-
-      <div style="background-color: #c2c2c2;margin-left:25%; color:black"><p class="pstat">Łączna ilość klientów:
-      <?php
-
-      require_once "connect.php";
-
-      $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-      // $polaczenie->set_charset("utf8");
-
-      if (!$polaczenie) {
-        die("Connection failed: " . oci_error());
-      } else {
-        $stid = oci_parse($polaczenie, "BEGIN :a:=TOTALCUSTOMERS(); END;");
-        oci_bind_by_name($stid, ':a', $total, 32);
-        oci_execute($stid);
-        echo $total;
-      }
-      oci_close($polaczenie);
-      ?>
-      </p>
-
-    </div>
 
 
     </div>
@@ -71,6 +49,65 @@
       </div>
       <div class="outside_chart" id="div8" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="klient_najczesciej" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div9" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px; margin-top:10px; padding:20px;">
+        <div style="color:black;" class="col-sm-12">
+
+          <br>
+          <center>
+            <h1>Informacje Ogólne</h1>
+          </center>
+          <br>
+          <div class="row">
+            <div class="col-sm-4">
+
+              <p class="pstat" style="text-align:center;"><b>Łączna ilość klientów</b></p>
+              <center>
+                <?php
+
+                require_once "connect.php";
+
+                $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                // $polaczenie->set_charset("utf8");
+
+                if (!$polaczenie) {
+                  die("Connection failed: " . oci_error());
+                } else {
+                  $stid = oci_parse($polaczenie, "BEGIN :a:=TOTALCUSTOMERS(); END;");
+                  oci_bind_by_name($stid, ':a', $total, 32);
+                  oci_execute($stid);
+                  echo $total;
+                }
+                oci_close($polaczenie);
+                ?>
+              </center>
+            </div>
+            <div class="col-sm-4">
+              <p class="pstat" style="text-align:center;"><b>Dochód ze sprzedanych części</b></p>
+              <center>
+                <?php
+
+                require_once "connect.php";
+
+                $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                // $polaczenie->set_charset("utf8");
+
+                if (!$polaczenie) {
+                  die("Connection failed: " . oci_error());
+                } else {
+                  $stid = oci_parse($polaczenie, "BEGIN :a:=CZESCIDOCHOD(); END;");
+                  oci_bind_by_name($stid, ':a', $total, 32);
+                  oci_execute($stid);
+                  echo $total . "zł";
+                }
+                oci_close($polaczenie);
+                ?>
+              </center>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -581,6 +618,7 @@
           $("#div6").show();
           $("#div7").show();
           $("#div8").show();
+          $("#div9").show();
         } else {
           $("#div" + $(this).val()).show().siblings().hide();
         }
