@@ -17,6 +17,7 @@
         <option value="5">Części</option>
         <option value="6">TOP 5 Pracowników</option>
         <option value="7">TOP 5 Warsztatów</option>
+        <option value="8">Najczęsciej płacący klienci</option>
       </select>
     </div>
     <div id="container" class="container" style="position: relative; left: 20%;">
@@ -41,6 +42,9 @@
       </div>
       <div class="outside_chart" id="div7" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
         <div id="warsztaty_top" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div8" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="klient_najczesciej" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
     </div>
 
@@ -408,7 +412,7 @@
       };
     </script>
 
-<script>
+    <script>
       google.charts.load('current', {
         'packages': ['bar']
       });
@@ -449,7 +453,7 @@
           legend: {
             position: 'none'
           },
-    
+
           chart: {
             title: 'TOP 5 Warsztatów',
             subtitle: ''
@@ -475,6 +479,72 @@
     </script>
 
     <script>
+      google.charts.load('current', {
+        'packages': ['bar']
+      });
+      google.charts.setOnLoadCallback(warsztaty_top);
+
+      function warsztaty_top() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Klient', 'Płatności'],
+          <?php
+          require_once "connect.php";
+
+          $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+          // $polaczenie->set_charset("utf8");
+
+          if (!$polaczenie) {
+            die("Connection failed: " . oci_error());
+          } else {
+            $curs = oci_new_cursor($polaczenie);
+            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.KLIENT_NAJCZESCIEJ(:cursr); END;");
+            oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
+            oci_execute($stid);
+            oci_execute($curs);
+
+            while (($row = oci_fetch_array($curs, OCI_BOTH)) != false) {
+              echo "['" . $row['KLIENT'] . "'," . $row['ILE'] . "],";
+            }
+          }
+          oci_close($polaczenie);
+          ?>
+        ]);
+
+        var options = {
+          width: 970,
+          colors: '#066997',
+          fontSize: 20,
+          bars: 'horizontal',
+          legend: {
+            position: 'none'
+          },
+
+          chart: {
+            title: 'Najczęściej płacący klienci',
+            subtitle: ''
+          },
+          axes: {
+            x: {
+              0: {
+                side: 'top',
+                label: ''
+              } // Top x-axis.
+            }
+          },
+          bar: {
+            groupWidth: "90%"
+          }
+        };
+
+
+        var chart = new google.charts.Bar(document.getElementById('klient_najczesciej'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
+    </script>
+
+    <script>
       $(".chartSelect").change(function() {
         if ($(this).val() == -1) {
           $("#div1").show();
@@ -484,6 +554,7 @@
           $("#div5").show();
           $("#div6").show();
           $("#div7").show();
+          $("#div8").show();
         } else {
           $("#div" + $(this).val()).show().siblings().hide();
         }
