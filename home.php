@@ -265,7 +265,7 @@
 
       function czesci_wykres() {
         var data = new google.visualization.arrayToDataTable([
-          ['Nazwa części', 'Percentage'],
+          ['Nazwa części', 'Ilość'],
           <?php
         require_once "connect.php";
         $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
