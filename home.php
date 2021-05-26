@@ -81,6 +81,9 @@
                 }
                 oci_close($polaczenie);
                 ?>
+                <br>
+                <br><br><br><br>
+                <p>Jd</p>
               </center>
             </div>
             <div class="col-sm-4">
@@ -101,6 +104,34 @@
                   oci_bind_by_name($stid, ':a', $total, 32);
                   oci_execute($stid);
                   echo $total . "zł";
+                }
+                oci_close($polaczenie);
+                ?>
+              </center>
+            </div>
+            <div class="col-sm-4">
+              <p class="pstat" style="text-align:center;"><b>Kończące się części</b></p>
+              <center>
+                <?php
+
+                require_once "connect.php";
+
+                $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                // $polaczenie->set_charset("utf8");
+
+                if (!$polaczenie) {
+                  die("Connection failed: " . oci_error());
+                } else {
+                  $curs = oci_new_cursor($polaczenie);
+                  $stid = oci_parse($polaczenie, "BEGIN :cursr:=KONCZACE_SIE_CZESCI; END;");
+                  oci_bind_by_name($stid, ':cursr', $curs, -1, OCI_B_CURSOR);
+                  oci_execute($stid);
+                  oci_execute($curs);
+
+                  while (($row = oci_fetch_array($curs, OCI_BOTH)) != false) {
+                    echo $row['NAZWA_CZESCI'] . " | Pozostało: " . $row['LICZBA_DOSTEPNYCH_SZTUK'] . "szt.<br>";
+                  }
                 }
                 oci_close($polaczenie);
                 ?>
