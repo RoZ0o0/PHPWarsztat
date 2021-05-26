@@ -165,7 +165,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
   </div>
 
   <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
 
       <div class="modal-content">
         <div class="modal-header">
@@ -226,7 +226,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="czesci" class="col-sm-4 col-form-label">Części</label>
               <div class="col-sm-8">
-                <select id="czes" name="czesci[]" style="width:100%" size="3" onmouseover="this.style.width='150%'; this.size='5';" onmouseout="this.style.width='100%';  this.size='3';" multiple="multiple">
+                <select id="czes" name="czesci[]" style="width:100%" size="3"  this.size='5'; onmouseout="this.style.width='100%';  this.size='6';" multiple="multiple">
                   <?php
                   require_once "connect.php";
 
