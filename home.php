@@ -57,7 +57,7 @@
                 oci_close($polaczenie);
                 ?>
                 <br>
-                <br><br><br><br>
+                <br><br><br><br><br>
                 <p>Jd</p>
               </center>
             </div>
@@ -83,7 +83,7 @@
                 oci_close($polaczenie);
                 ?>
                 <br>
-                <br><br><br><br>
+                <br><br><br><br><br>
                 <p>Jd</p>
               </center>
             </div>
