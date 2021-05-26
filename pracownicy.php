@@ -511,6 +511,11 @@ if (!isset($_SESSION['zalogowany'])) {
             }
         });
     </script>
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        $("#date").attr('min', today);
+        $("#datee").attr('min', today);
+    </script>
     <?php
     unset($_SESSION['komunikat']);
     unset($blad);

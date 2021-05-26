@@ -112,7 +112,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                   }
 
                   echo "<td style='width:9%'>";
-                   if ($faktura > 0) {
+                  if ($faktura > 0) {
                     echo "<a href='#' class='zdjecia' id='" . $row['ID_USLUGI'] . "' title='Galeria' data-toggle='tooltip' onclick='getid(this.id);goGaleria()'><i class='material-icons' style='color: black'>&#xe3f4;</i></a>";
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='faktura_close()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Edytowanie' data-target='#editModal' onclick='edit_close();'><i class='material-icons'>&#xE8B8;</i></a>";
@@ -674,8 +674,8 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
       document.getElementById('id_p').value = b_id;
       document.getElementById('id_del').value = b_id;
       document.getElementById('id_usl').value = b_id;
-      document.getElementById('id_gal').value=b_id;
-      document.getElementById("galeria").action = "galeria.php?id="+b_id;
+      document.getElementById('id_gal').value = b_id;
+      document.getElementById("galeria").action = "galeria.php?id=" + b_id;
       return b_id;
     }
 
@@ -727,6 +727,11 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
       var id = $('#pbrowe option[value="' + g + '"]').attr('data-id');
       document.getElementById('id_poje').value = id;
     });
+  </script>
+  <script>
+    var today = new Date().toISOString().split('T')[0];
+    $("#date").attr('min', today);
+    $("#datee").attr('min', today);
   </script>
   <?php
   unset($_SESSION['komunikat']);
