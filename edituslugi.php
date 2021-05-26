@@ -31,6 +31,15 @@
         $date = date_format($date, 'y/m/d');
         $stid  = oci_parse($polaczenie, "BEGIN uslugi_crud.uslugi_edit($id_p, $id_prac, '$id_war', $cena, '$id_poj', (TO_DATE('$date', 'yy/mm/dd'))); END;");
         if (oci_execute($stid) == TRUE) {
+            
+            $stid2 = oci_parse($polaczenie, "DELETE FROM uslugi_czesci where id_uslugi=$id_p");
+            oci_execute($stid2);
+
+            foreach ($_POST['czescie'] as $selectedOption){
+                $stid3 = oci_parse($polaczenie, "INSERT INTO uslugi_czesci(id_czesci, id_uslugi, ilosc) values($selectedOption, $id_p, 1)");
+                oci_execute($stid3);
+            }
+
             $_SESSION['komunikat'] = "edycja";
             header('Location: uslugi.php');
         }
