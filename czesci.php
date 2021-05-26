@@ -115,14 +115,14 @@ if (!isset($_SESSION['zalogowany'])) {
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
-            <div class="col-xs-5">
+            <div class="col-xs-6">
               <h2>Zarządzenie częściami</h2>
             </div>
-            <div class="col-xs-5 ml-auto">
+            <div class="col-xs-2 offset-6">
               <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Wyszukaj części">
-            </div>
-            <div class="col-xs-5 ml-auto">
-              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xe8cc;</i> <span>Koszyk</span></a>
+           </div>
+            <div class="col-xs-4">
+              <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-top: 2px;margin-left:7px;"><i class="material-icons">&#xe8cc;</i> <span>Koszyk</span></a>
             </div>
           </div>
         </div>

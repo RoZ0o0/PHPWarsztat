@@ -85,7 +85,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
-              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie as imiep, pracownicy.nazwisko as nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko  FROM uslugi inner join pracownicy on uslugi.id_pracownika=pracownicy.id_pracownika inner join warsztaty on uslugi.id_warsztatu=warsztaty.id_warsztatu inner join pojazdy on uslugi.id_pojazdu=pojazdy.id_pojazdu inner join klienci on pojazdy.id_pojazdu=klienci.id_klienta");
+              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta ORDER BY uslugi.id_pracownika, uslugi.data_obslugi desc");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
                 // $ilu = $result->num_rows;
@@ -112,7 +112,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
                   }
 
                   echo "<td style='width:9%'>";
-                   if ($faktura > 0) {
+                  if ($faktura > 0) {
                     echo "<a href='#' class='zdjecia' id='" . $row['ID_USLUGI'] . "' title='Galeria' data-toggle='tooltip' onclick='getid(this.id);goGaleria()'><i class='material-icons' style='color: black'>&#xe3f4;</i></a>";
                     echo "<a href='#' class='pdf' id='" . $row['ID_USLUGI'] . "' title='PDF' data-toggle='tooltip' onclick='faktura_close()'><i class='material-icons'>&#xe873;</i></a>";
                     echo "<a href='#' class='settings' id='" . $row['ID_USLUGI'] . "' title='Edytowanie' data-target='#editModal' onclick='edit_close();'><i class='material-icons'>&#xE8B8;</i></a>";
@@ -165,11 +165,11 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
   </div>
 
   <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
 
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Dodaj Usługe</h4>
+          <h4 class="modal-title">Dodaj Usługę</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -226,7 +226,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             <div class="form-group row">
               <label for="czesci" class="col-sm-4 col-form-label">Części</label>
               <div class="col-sm-8">
-                <select id="czes" name="czesci[]" style="width:100%" size="3" onmouseover="this.style.width='150%'; this.size='5';" onmouseout="this.style.width='100%';  this.size='3';" multiple="multiple">
+                <select id="czes" name="czesci[]" style="width:100%" size="3"  this.size='5'; onmouseout="this.style.width='100%';  this.size='6';" multiple="multiple">
                   <?php
                   require_once "connect.php";
 
@@ -286,7 +286,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Pracownika">
+          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Usługę">
         </div>
         </form>
       </div>
@@ -674,8 +674,8 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
       document.getElementById('id_p').value = b_id;
       document.getElementById('id_del').value = b_id;
       document.getElementById('id_usl').value = b_id;
-      document.getElementById('id_gal').value=b_id;
-      document.getElementById("galeria").action = "galeria.php?id="+b_id;
+      document.getElementById('id_gal').value = b_id;
+      document.getElementById("galeria").action = "galeria.php?id=" + b_id;
       return b_id;
     }
 
@@ -727,6 +727,11 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
       var id = $('#pbrowe option[value="' + g + '"]').attr('data-id');
       document.getElementById('id_poje').value = id;
     });
+  </script>
+  <script>
+    var today = new Date().toISOString().split('T')[0];
+    $("#date").attr('min', today);
+    $("#datee").attr('min', today);
   </script>
   <?php
   unset($_SESSION['komunikat']);

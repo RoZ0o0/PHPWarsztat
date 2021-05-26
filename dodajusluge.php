@@ -15,7 +15,7 @@ if (!$polaczenie) {
     $date = date_format($date, 'y/m/d');
     $cena = $_POST['cena'];
 
-    $stid = oci_parse($polaczenie, "BEGIN uslugi_crud.uslugi_add($id_pracownika, $id_warsztatu, $cena, $id_pojazdu, (TO_DATE('$date', 'dd/mm/yy'))); END;");
+    $stid = oci_parse($polaczenie, "BEGIN uslugi_crud.uslugi_add($id_pracownika, $id_warsztatu, $cena, $id_pojazdu, (TO_DATE('$date', 'yy/mm/dd'))); END;");
 
 
 
@@ -30,7 +30,7 @@ if (!$polaczenie) {
         }
         
         foreach ($_POST['czesci'] as $selectedOption){
-            $stid3 = oci_parse($polaczenie, "INSERT INTO uslugi_czesci(id_czesci, id_uslugi) values($selectedOption, $last_usluga)");
+            $stid3 = oci_parse($polaczenie, "INSERT INTO uslugi_czesci(id_czesci, id_uslugi, ilosc) values($selectedOption, $last_usluga, 1)");
             oci_execute($stid3);
         }
         header('Location: uslugi.php');
