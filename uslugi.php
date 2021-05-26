@@ -175,15 +175,15 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
         <div class="modal-body">
           <form method="post" action="dodajusluge.php" id="form">
             <div class="form-group row">
-              <label for="pracownik" class="col-sm-4 col-form-label">Pracownik</label>
-              <div class="col-sm-8">
+              <label for="pracownik" class="col-sm-2 col-form-label">Pracownik</label>
+              <div class="col-sm-10">
                 <input type="text" class="form-control" id="pracownik" name="pracownik" placeholder="Pracownik" value="<?php echo $imiep ?>" disabled required>
                 <input type="hidden" id="id_pracownika" name="id_pracownika" value="<?php echo $_SESSION['id_prac']; ?>">
               </div>
             </div>
             <div class="form-group row">
-              <label for="warsztat" class="col-sm-4 col-form-label">Warsztat</label>
-              <div class="col-sm-8">
+              <label for="warsztat" class="col-sm-2 col-form-label">Warsztat</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="wbrow" id="wselect" name="wselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrow">
                   <?php
@@ -212,21 +212,21 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="date" class="col-sm-4 col-form-label">Data Obsługi</label>
-              <div class="col-sm-8">
+              <label for="date" class="col-sm-2 col-form-label">Data Obsługi</label>
+              <div class="col-sm-10">
                 <input type="date" class="form-control" id="date" name="date" placeholder="Data Obsługi" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="cena" class="col-sm-4 col-form-label">Cena</label>
-              <div class="col-sm-8">
+              <label for="cena" class="col-sm-2 col-form-label">Cena</label>
+              <div class="col-sm-10">
                 <input type="number" class="form-control" id="cena" name="cena" placeholder="Cena" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="czesci" class="col-sm-4 col-form-label">Części</label>
-              <div class="col-sm-8">
-                <select id="czes" name="czesci[]" style="width:100%" size="3"  this.size='5'; onmouseout="this.style.width='100%';  this.size='6';" multiple="multiple">
+              <label for="czesci" class="col-sm-2 col-form-label">Części</label>
+              <div class="col-sm-10">
+                <select id="czes" name="czesci[]" style="width:100%" size="6" onmouseout="this.style.width='100%';" multiple="multiple">
                   <?php
                   require_once "connect.php";
 
@@ -253,8 +253,8 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
-              <div class="col-sm-8">
+              <label for="pojazd" class="col-sm-2 col-form-label">Pojazd</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrow">
                   <?php
@@ -294,7 +294,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
   </div>
 
   <div id="editModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Edytuj Usługę</h4>
@@ -303,15 +303,15 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
         <div class="modal-body">
           <form method="post" action="edituslugi.php" id="form1">
             <div class="form-group row">
-              <label for="pracownike" class="col-sm-4 col-form-label">Pracownik</label>
-              <div class="col-sm-8">
+              <label for="pracownike" class="col-sm-2 col-form-label">Pracownik</label>
+              <div class="col-sm-10">
                 <input type="text" class="form-control" id="pracownike" name="pracownike" placeholder="Pracownik" value="<?php echo $imiep ?>" disabled required>
                 <input type="hidden" id="id_pracownikae" name="id_pracownikae" value="<?php echo $_SESSION['id_prac']; ?>">
               </div>
             </div>
             <div class="form-group row">
-              <label for="warsztate" class="col-sm-4 col-form-label">Warsztat</label>
-              <div class="col-sm-8">
+              <label for="warsztate" class="col-sm-2 col-form-label">Warsztat</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="wbrowe" id="wselecte" name="wselecte" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrowe">
                   <?php
@@ -340,21 +340,21 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="datee" class="col-sm-4 col-form-label">Data Obsługi</label>
-              <div class="col-sm-8">
+              <label for="datee" class="col-sm-2 col-form-label">Data Obsługi</label>
+              <div class="col-sm-10">
                 <input type="date" class="form-control" id="datee" name="datee" placeholder="Data Obsługi" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="cenae" class="col-sm-4 col-form-label">Cena</label>
-              <div class="col-sm-8">
+              <label for="cenae" class="col-sm-2 col-form-label">Cena</label>
+              <div class="col-sm-10">
                 <input type="number" class="form-control" id="cenae" name="cenae" placeholder="Cena" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="czescie" class="col-sm-4 col-form-label">Części</label>
-              <div class="col-sm-8">
-                <select id="czese" name="czescie[]" style="width:100%" size="3"  this.size='5'; onmouseout="this.style.width='100%';  this.size='6';" multiple="multiple">
+              <label for="czescie" class="col-sm-2 col-form-label">Części</label>
+              <div class="col-sm-10">
+                <select id="czese" name="czescie[]" style="width:100%" size="6" onmouseout="this.style.width='100%';" multiple="multiple">
                   <?php
                   require_once "connect.php";
 
@@ -381,8 +381,8 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="pojazde" class="col-sm-4 col-form-label">Pojazd</label>
-              <div class="col-sm-8">
+              <label for="pojazde" class="col-sm-2 col-form-label">Pojazd</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="pbrowe" id="pselecte" name="pselecte" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrowe">
                   <?php
