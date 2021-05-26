@@ -286,7 +286,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Pracownika">
+          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Usługe">
         </div>
         </form>
       </div>
