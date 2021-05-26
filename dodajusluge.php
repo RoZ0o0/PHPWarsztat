@@ -30,7 +30,7 @@ if (!$polaczenie) {
         }
         
         foreach ($_POST['czesci'] as $selectedOption){
-            $stid3 = oci_parse($polaczenie, "INSERT INTO uslugi_czesci(id_czesci, id_uslugi) values($selectedOption, $last_usluga)");
+            $stid3 = oci_parse($polaczenie, "INSERT INTO uslugi_czesci(id_czesci, id_uslugi, ilosc) values($selectedOption, $last_usluga, 1)");
             oci_execute($stid3);
         }
         header('Location: uslugi.php');

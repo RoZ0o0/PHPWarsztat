@@ -85,7 +85,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
-              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie as imiep, pracownicy.nazwisko as nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko  FROM uslugi inner join pracownicy on uslugi.id_pracownika=pracownicy.id_pracownika inner join warsztaty on uslugi.id_warsztatu=warsztaty.id_warsztatu inner join pojazdy on uslugi.id_pojazdu=pojazdy.id_pojazdu inner join klienci on pojazdy.id_pojazdu=klienci.id_klienta");
+              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
                 // $ilu = $result->num_rows;
@@ -169,7 +169,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
 
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Dodaj Usługe</h4>
+          <h4 class="modal-title">Dodaj Usługę</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -286,7 +286,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             </div>
         </div>
         <div class="modal-footer">
-          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Usługe">
+          <input type="submit" class="sub form-control col-sm-4" value="Dodaj Usługę">
         </div>
         </form>
       </div>
