@@ -75,7 +75,7 @@
 
         var options = {
           width: 970,
-          colors: '#a1bc1a',
+          colors: '#94d651',
           fontSize: 20,
           legend: {
             position: 'none'
@@ -306,7 +306,7 @@
           },
     
           chart: {
-            title: 'Najczęściej sprzedawane części',
+            title: 'TOP 10 Najczęściej sprzedawanych części',
             subtitle: ''
           },
           axes: {
