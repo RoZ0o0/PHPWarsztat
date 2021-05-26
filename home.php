@@ -57,7 +57,7 @@
             die("Connection failed: " . oci_error());
           } else {
             $curs = oci_new_cursor($polaczenie);
-            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI_CRUD.PRACOWNICY_WYNAGRODZENIE(:cursr); END;");
+            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.PRACOWNICY_WYNAGRODZENIE(:cursr); END;");
             oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
             oci_execute($stid);
             oci_execute($curs);
@@ -123,7 +123,7 @@
             die("Connection failed: " . oci_error());
           } else {
             $curs = oci_new_cursor($polaczenie);
-            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI_CRUD.POJAZDY_MARKA(:cursr); END;");
+            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.POJAZDY_MARKA(:cursr); END;");
             oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
             oci_execute($stid);
             oci_execute($curs);
@@ -185,7 +185,7 @@
             die("Connection failed: " . oci_error());
           } else {
             $curs = oci_new_cursor($polaczenie);
-            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI_CRUD.USLUGI_MARKA(:cursr); END;");
+            $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.USLUGI_MARKA(:cursr); END;");
             oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
             oci_execute($stid);
             oci_execute($curs);
@@ -230,7 +230,7 @@
           die("Connection failed: " . oci_error());
         } else {
           $curs = oci_new_cursor($polaczenie);
-          $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI_CRUD.KLIENCI_KODY(:cursr); END;");
+          $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.KLIENCI_KODY(:cursr); END;");
           oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
           oci_execute($stid);
           oci_execute($curs);
@@ -276,7 +276,7 @@
           die("Connection failed: " . oci_error());
         } else {
           $curs = oci_new_cursor($polaczenie);
-          $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI_CRUD.CZESCI_WYKRES(:cursr); END;");
+          $stid = oci_parse($polaczenie, "BEGIN STATYSTYKI.CZESCI_WYKRES(:cursr); END;");
           oci_bind_by_name($stid, ":cursr", $curs, -1, OCI_B_CURSOR);
           oci_execute($stid);
           oci_execute($curs);
@@ -329,6 +329,8 @@
           $("#div1").show();
           $("#div2").show();
           $("#div3").show();
+          $("#div4").show();
+          $("#div5").show();
         } else {
           $("#div" + $(this).val()).show().siblings().hide();
         }
