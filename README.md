@@ -13,11 +13,11 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 • Dodawanie rekordów w danych tabelach, edytowanie, usuwanie.<br/>
 • Dodawanie części t.j. tworzenie zamówienia.<br/>
 • Generowanie faktury danej usługi oraz zamówienia w formacie PDF.<br/>
-• Wykresy statystyczne wybranych rekordów.<br/>
+• Wybrane wykresy statystyczne<br/>
 • Wyświetlanie lokalizacji warsztatu za pomocą Google Maps.<br/>
 
 
-## Interfejs serwisu
+## Proces uruchomienia aplikacji (krok po kroku)
 ### Logowanie
 ![image](https://user-images.githubusercontent.com/62017852/119493697-c1bf9380-bd60-11eb-8d50-c0952c483b83.png)
 
@@ -35,12 +35,16 @@ Baza danych służy do użytku przez sieć warsztatów blacharskich w której is
 ![image](https://user-images.githubusercontent.com/59484767/117965278-9f2a8500-b333-11eb-83a2-4f3a482f66df.png)
 
 ## Wykorzystane technologie
-HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL<br/>
+HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL, TCPDF<br/>
 
-## Proces uruchomienia aplikacji (krok po kroku)
+## Interfejs serwisu
 
 ### Logowanie
 ![image](https://user-images.githubusercontent.com/62017852/119494443-99846480-bd61-11eb-8d05-ef92957b0b7e.png)
+
+### Strona Główna
+![image](https://user-images.githubusercontent.com/62017852/119648091-52f63f00-be21-11eb-8256-3471d010fc74.png)
+
 
 ### Tabele z paginacją
 ![image](https://user-images.githubusercontent.com/62017852/119494537-b28d1580-bd61-11eb-9503-25e125eeb8a6.png)
