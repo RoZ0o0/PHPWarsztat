@@ -18,8 +18,6 @@ require_once "connect.php";
 
 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-// $polaczenie->set_charset("utf8");
-
 $html = '
     <style>
     .usluga table, .usluga td, .usluga th{

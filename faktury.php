@@ -57,7 +57,6 @@ if (!isset($_SESSION['zalogowany'])) {
               <h2>Zarządzenie fakturami</h2>
             </div>
             <div class="col-xs-2 ml-auto">
-              <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
             </div>
           </div>
         </div>
@@ -77,17 +76,12 @@ if (!isset($_SESSION['zalogowany'])) {
 
             $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-            // $polaczenie->set_charset("utf8");
-
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
               $stid = oci_parse($polaczenie, "SELECT faktury.id_faktury, klienci.imie, uslugi.data_obslugi, klienci.nazwisko, faktury.nr_faktury FROM faktury INNER JOIN klienci on faktury.id_klienta=klienci.id_klienta inner join uslugi on faktury.id_uslugi=uslugi.id_uslugi");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
-                // $ilu = $result->num_rows;
-                // $_SESSION['ile'] = $ilu;
-                // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";

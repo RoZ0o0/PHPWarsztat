@@ -58,7 +58,6 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             </div>
             <div class="col-xs-2 ml-auto">
               <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Usługe</span></a>
-              <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
             </div>
           </div>
         </div>
@@ -80,17 +79,12 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
 
             $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-            // $polaczenie->set_charset("utf8");
-
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
               $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta ORDER BY uslugi.id_uslugi desc");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
-                // $ilu = $result->num_rows;
-                // $_SESSION['ile'] = $ilu;
-                // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";

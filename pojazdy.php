@@ -58,7 +58,6 @@ if (!isset($_SESSION['zalogowany'])) {
             </div>
             <div class="col-xs-2 ml-auto">
               <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Pojazd</span></a>
-              <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
             </div>
           </div>
         </div>
@@ -79,17 +78,12 @@ if (!isset($_SESSION['zalogowany'])) {
 
             $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-            // $polaczenie->set_charset("utf8");
-
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
               $stid = oci_parse($polaczenie, "SELECT klienci.imie, klienci.nazwisko, pojazdy.id_pojazdu, pojazdy.model, pojazdy.marka, pojazdy.rocznik FROM pojazdy inner join klienci on pojazdy.id_klienta=klienci.id_klienta");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
-                // $ilu = $result->num_rows;
-                // $_SESSION['ile'] = $ilu;
-                // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";

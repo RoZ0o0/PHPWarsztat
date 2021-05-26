@@ -18,8 +18,6 @@ if (isset($_POST['id_fakt'])) {
 
 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-// $polaczenie->set_charset("utf8");
-
 if (!$polaczenie) {
     die("Connection failed: " . oci_error());
 } else {

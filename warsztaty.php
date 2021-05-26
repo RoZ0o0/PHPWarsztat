@@ -76,17 +76,12 @@ if (!isset($_SESSION['zalogowany'])) {
 
                         $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-                        // $polaczenie->set_charset("utf8");
-
                         if (!$polaczenie) {
                             die("Connection failed: " . oci_error());
                         } else {
                             $stid = oci_parse($polaczenie, "SELECT * FROM warsztaty");
                             $licznik = 1;
                             if (oci_execute($stid) == TRUE) {
-                                // $ilu = $result->num_rows;
-                                // $_SESSION['ile'] = $ilu;
-                                // if ($ilu > 0) {
                                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                                     echo "<tr>";
                                     echo "<td>" . $licznik . "</td>";
@@ -215,12 +210,6 @@ if (!isset($_SESSION['zalogowany'])) {
         document.getElementById("tutaj_Mapy").innerHTML = "<div id='map-container-google-3' class='z-depth-1-half map-container-3'><iframe src='https://maps.google.com/maps?q="+miastoo+adreso+"E&t=&z=18&ie=UTF8&iwloc=&output=embed' frameborder='0' style='border:0' allowfullscreen></iframe></div>";
 
     });
-
-// function reloadMaps(){
-// var adreso = $('#adrese').val() + ' ';
-// var miastoo = $('#miastoe').val()+ ' ';
-// document.getElementById("tutaj_Mapy").innerHTML = "<div id='map-container-google-3' class='z-depth-1-half map-container-3'><iframe src='https://maps.google.com/maps?q="+miastoo+adreso+"E&t=&z=18&ie=UTF8&iwloc=&output=embed' frameborder='0' style='border:0' allowfullscreen></iframe></div>";
-// console.log(miastoo+adreso);
 
 </script>
 

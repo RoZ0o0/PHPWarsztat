@@ -44,8 +44,6 @@
 
                 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-                // $polaczenie->set_charset("utf8");
-
                 if (!$polaczenie) {
                   die("Connection failed: " . oci_error());
                 } else {
@@ -70,8 +68,6 @@
 
                 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-                // $polaczenie->set_charset("utf8");
-
                 if (!$polaczenie) {
                   die("Connection failed: " . oci_error());
                 } else {
@@ -95,8 +91,6 @@
                 require_once "connect.php";
 
                 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-                // $polaczenie->set_charset("utf8");
 
                 if (!$polaczenie) {
                   die("Connection failed: " . oci_error());
@@ -159,8 +153,6 @@
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-          // $polaczenie->set_charset("utf8");
-
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
           } else {
@@ -198,7 +190,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -207,7 +199,6 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('wynagrodzenie'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -224,8 +215,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -260,7 +249,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -269,7 +258,6 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('marka'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -286,8 +274,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -313,12 +299,10 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('naprawy'));
-        // Convert the Classic options to Material options.
         chart.draw(data, options);
       };
     </script>
 
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
     <script type="text/javascript">
       google.charts.load("current", {
         packages: ["corechart"]
@@ -331,8 +315,6 @@
           <?php
           require_once "connect.php";
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -391,8 +373,6 @@
           require_once "connect.php";
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-          // $polaczenie->set_charset("utf8");
-
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
           } else {
@@ -428,7 +408,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -456,8 +436,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -494,7 +472,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -504,7 +482,6 @@
 
 
         var chart = new google.charts.Bar(document.getElementById('pracownicy_top'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -522,8 +499,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -560,7 +535,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -570,7 +545,6 @@
 
 
         var chart = new google.charts.Bar(document.getElementById('warsztaty_top'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -588,8 +562,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -626,7 +598,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -636,7 +608,6 @@
 
 
         var chart = new google.charts.Bar(document.getElementById('klient_najczesciej'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
