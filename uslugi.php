@@ -85,7 +85,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
-              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta");
+              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta ORDER BY uslugi.id_pracownika, uslugi.data_obslugi desc");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
                 // $ilu = $result->num_rows;

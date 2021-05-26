@@ -15,7 +15,7 @@ if (!$polaczenie) {
     $date = date_format($date, 'y/m/d');
     $cena = $_POST['cena'];
 
-    $stid = oci_parse($polaczenie, "BEGIN uslugi_crud.uslugi_add($id_pracownika, $id_warsztatu, $cena, $id_pojazdu, (TO_DATE('$date', 'dd/mm/yy'))); END;");
+    $stid = oci_parse($polaczenie, "BEGIN uslugi_crud.uslugi_add($id_pracownika, $id_warsztatu, $cena, $id_pojazdu, (TO_DATE('$date', 'yy/mm/dd'))); END;");
 
 
 
