@@ -36,7 +36,7 @@
           <div class="row">
             <div class="col-sm-4">
 
-              <p class="pstat" style="text-align:center;"><b>Łączna ilość klientów</b></p>
+              <p class="pstat" style="text-align:center;"><b>Łączna ilość klientów:</b></p>
               <center>
                 <?php
 
@@ -57,12 +57,33 @@
                 oci_close($polaczenie);
                 ?>
                 <br>
-                <br><br><br><br><br>
+                <br><br><br><br>
+                <p><b>Liczba napraw w tym miesiącu:</b><br> <br>
+                  <?php
+
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  // $polaczenie->set_charset("utf8");
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "BEGIN :a:=USLUGI_TEN_MIESIAC(); END;");
+                    oci_bind_by_name($stid, ':a', $total, 32);
+                    oci_execute($stid);
+                    echo $total;
+                  }
+                  oci_close($polaczenie);
+                  ?></p>
+                   <br>
+                <br><br><br>
                 <p>Jd</p>
               </center>
             </div>
             <div class="col-sm-4">
-              <p class="pstat" style="text-align:center;"><b>Dochód ze sprzedanych części</b></p>
+              <p class="pstat" style="text-align:center;"><b>Dochód ze sprzedanych części:</b></p>
               <center>
                 <?php
 
@@ -83,8 +104,27 @@
                 oci_close($polaczenie);
                 ?>
                 <br>
-                <br><br><br><br><br>
-                <p>Jd</p>
+                <br><br><br><br>
+                <p><b>Najczęściej odwiedzajacy klient:</b><br><br> <?php
+
+                    require_once "connect.php";
+
+                    $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                    // $polaczenie->set_charset("utf8");
+
+                    if (!$polaczenie) {
+                      die("Connection failed: " . oci_error());
+                    } else {
+                      $stid = oci_parse($polaczenie, "BEGIN :a:=TOP_CUSTOMER(); END;");
+                      oci_bind_by_name($stid, ':a', $total, 32);
+                      oci_execute($stid);
+                      echo $total;
+                    }
+                    oci_close($polaczenie);
+                    ?></p><br>
+                    <br><br><br>
+                    <p>Jd</p>
               </center>
             </div>
             <div class="col-sm-4">
