@@ -11,6 +11,7 @@
     <div>
       <select class="chartSelect form-control" id="chartSelect" name="chartSelect" style="width: 20%;">
         <option value="-1">Wszystkie</option>
+        <option value="9">Informacje ogólne</option>
         <option value="1">Wynagrodzenie</option>
         <option value="2">Marki</option>
         <option value="3">Naprawy</option>
@@ -19,37 +20,11 @@
         <option value="6">TOP 5 Pracowników</option>
         <option value="7">TOP 5 Warsztatów</option>
         <option value="8">Najczęsciej płacący klienci</option>
-        <option value="9">Informacje ogólne</option>
       </select>
 
 
     </div>
     <div id="container" class="container" style="position: relative; left: 20%;">
-      <div class="outside_chart" id="div1" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="wynagrodzenie" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
-      <div class="outside_chart" id="div2" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="marka" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
-      <div class="outside_chart" id="div3" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="naprawy" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
-      <div class="outside-chart" id="div4" style="width: 1110px;height:570px;background-color:#fff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="klienci_kody" style="width: 970px; height: 570px;margin-left:auto;margin-right:auto;margin-top:10px;"></div>
-      </div>
-
-      <div class="outside-chart" id="div5" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="czesci_wykres" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
-      <div class="outside_chart" id="div6" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="pracownicy_top" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
-      <div class="outside_chart" id="div7" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="warsztaty_top" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
-      <div class="outside_chart" id="div8" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
-        <div id="klient_najczesciej" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
-      </div>
       <div class="outside_chart" id="div9" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px; margin-top:10px; padding:20px;">
         <div style="color:black;" class="col-sm-12">
 
@@ -107,6 +82,9 @@
                 }
                 oci_close($polaczenie);
                 ?>
+                <br>
+                <br><br><br><br>
+                <p>Jd</p>
               </center>
             </div>
             <div class="col-sm-4">
@@ -139,6 +117,31 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="outside_chart" id="div1" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="wynagrodzenie" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div2" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="marka" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div3" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="naprawy" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside-chart" id="div4" style="width: 1110px;height:570px;background-color:#fff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="klienci_kody" style="width: 970px; height: 570px;margin-left:auto;margin-right:auto;margin-top:10px;"></div>
+      </div>
+
+      <div class="outside-chart" id="div5" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="czesci_wykres" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div6" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="pracownicy_top" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div7" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="warsztaty_top" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
+      </div>
+      <div class="outside_chart" id="div8" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
+        <div id="klient_najczesciej" style="width: 970px; height: 550px;padding-top: 25px;padding-left: 60px; margin-top:10px;"></div>
       </div>
     </div>
 
