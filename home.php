@@ -4,8 +4,9 @@
 <div class="row text-white">
   <div class="col-lg-7">
     <table class="content-table">
-
     </table>
+
+   
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <div>
       <select class="chartSelect form-control" id="chartSelect" name="chartSelect" style="width: 20%;">
@@ -19,6 +20,31 @@
         <option value="7">TOP 5 Warsztatów</option>
         <option value="8">Najczęsciej płacący klienci</option>
       </select>
+
+      <div style="background-color: #c2c2c2;margin-left:25%; color:black"><p class="pstat">Łączna ilość klientów:
+      <?php
+
+      require_once "connect.php";
+
+      $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+      // $polaczenie->set_charset("utf8");
+
+      if (!$polaczenie) {
+        die("Connection failed: " . oci_error());
+      } else {
+        $stid = oci_parse($polaczenie, "BEGIN :a:=TOTALCUSTOMERS(); END;");
+        oci_bind_by_name($stid, ':a', $total, 32);
+        oci_execute($stid);
+        echo $total;
+      }
+      oci_close($polaczenie);
+      ?>
+      </p>
+
+    </div>
+
+
     </div>
     <div id="container" class="container" style="position: relative; left: 20%;">
       <div class="outside_chart" id="div1" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px;">
@@ -84,7 +110,7 @@
 
         var options = {
           width: 970,
-          colors: '#a1bc1a',
+          colors: '#94d651',
           fontSize: 20,
           legend: {
             position: 'none'
@@ -323,7 +349,7 @@
           },
 
           chart: {
-            title: 'Najczęściej sprzedawane części',
+            title: 'TOP 10 Najczęściej sprzedawanych części',
             subtitle: ''
           },
           axes: {
