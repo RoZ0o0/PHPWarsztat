@@ -26,12 +26,14 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 
 [Backup Bazy Danych](https://github.com/UR-INF/20-21-ai-projekt-lab3-projekt-ai-przewoznik-plizga/blob/main/sql_BACKUP_24_05_21.sql)
 
+
 ## Baza danych
 
 Baza danych służy do użytku przez sieć warsztatów blacharskich w której istnieją tabele do zapisu danych pracownika, klienta, pojazdu, warsztatu oraz tabela główna będąca zbiorem danych o wykonanych naprawach dla danych klientów, pojazdów w danym warsztacie przez danego pracownika.<br/>
 
 ###	Diagram ERD
-![erd_bazy](https://user-images.githubusercontent.com/59484767/119705747-69b88800-be59-11eb-98b0-cf2df98fb50d.jpg)
+![Untitled Diagram](https://user-images.githubusercontent.com/59484767/119823837-8b674d00-bef5-11eb-8673-178b79d78fa0.jpg)
+
 
 ## Wykorzystane technologie
 HTML, CSS, JavaScript, PHP, Bootstrap, jQuery, Ajax, Oracle Database, PL/SQL, TCPDF, Google Developers<br/>
