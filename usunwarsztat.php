@@ -15,6 +15,9 @@
         if (oci_execute($stid) == TRUE) {
             $_SESSION['komunikat'] = "usuniete";
             header('Location: warsztaty.php');
+        }else{
+            $_SESSION['komunikat'] = "niemozna";
+            header('Location: warsztaty.php');
         }
         oci_free_statement($stid);
     }

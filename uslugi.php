@@ -638,6 +638,13 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
           text: 'Faktura już istnieje!',
         });
       }
+      else if (simple == "niemozna") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Błąd!',
+          text: 'Nie można usunąć usługi!',
+        });
+      }
     }
   </script>
   <script>

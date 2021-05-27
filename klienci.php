@@ -409,6 +409,12 @@ if (!isset($_SESSION['zalogowany'])) {
           title: 'Udało się!',
           text: 'Klient został usunięty!',
         });
+      }else if (simple == "niemozna") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Udało się!',
+          text: 'Klient został usunięty!',
+        });
       }
     }
   </script>

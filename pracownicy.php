@@ -435,6 +435,13 @@ if (!isset($_SESSION['zalogowany'])) {
                     text: 'Pracownik został usunięty!',
                 });
             }
+            else if (simple == "niemozna") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Błąd!',
+                    text: 'Nie można usunąć pracownika!',
+                });
+            }
         }
     </script>
     <script>

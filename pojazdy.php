@@ -434,6 +434,12 @@ if (!isset($_SESSION['zalogowany'])) {
           title: 'Udało się!',
           text: 'Pojazd został usunięty!',
         });
+      }else if (simple == "niemozna") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Błąd!',
+          text: 'Nie można usunąć pojazdu!',
+        });
       }
     }
   </script>
