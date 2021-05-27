@@ -50,7 +50,6 @@ if (!isset($_SESSION['zalogowany'])) {
     function getid(b_id) {
       c_id = b_id;
       cos = b_id + "czesc";
-      // alert(b_id);
     }
 
     function addCzesc() {
@@ -62,7 +61,7 @@ if (!isset($_SESSION['zalogowany'])) {
         array[licznik] = [];
         array[licznik][0] = c_id;
         array[licznik][1] = val;
-
+        $("#btn").attr("disabled", false);
         licznik++;
         JSON.stringify(array);
       }
@@ -72,6 +71,10 @@ if (!isset($_SESSION['zalogowany'])) {
       $('#btn').click(function() {
         $('#str').val(JSON.stringify(array));
       });
+    });
+
+    $(document).ready(function() {
+      $("#btn").attr("disabled", true);
     });
 
     function getlicznik(licz1) {
@@ -96,12 +99,6 @@ if (!isset($_SESSION['zalogowany'])) {
         document.getElementById('info').innerHTML = 'Przedmioty w koszyku';
       }
     }
-    if (array.length == 0) {
-      // $("#btn").attr("disabled", true);
-    }else{
-      alert("h3h3");
-      // $("#btn").attr("disabled", false);
-    }
   </script>
 
 </head>
@@ -120,7 +117,7 @@ if (!isset($_SESSION['zalogowany'])) {
             </div>
             <div class="col-xs-2 offset-6">
               <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Wyszukaj części">
-           </div>
+            </div>
             <div class="col-xs-4">
               <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-top: 2px;margin-left:7px;"><i class="material-icons">&#xe8cc;</i> <span>Koszyk</span></a>
             </div>
@@ -144,17 +141,12 @@ if (!isset($_SESSION['zalogowany'])) {
 
             $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-            // $polaczenie->set_charset("utf8");
-
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
               $stid = oci_parse($polaczenie, "SELECT * FROM czesci");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
-                // $ilu = $result->num_rows;
-                // $_SESSION['ile'] = $ilu;
-                // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   $id_czescis = $row['ID_CZESCI'] . "czesc";
                   $id_czesc = $row['ID_CZESCI'];

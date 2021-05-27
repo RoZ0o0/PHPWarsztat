@@ -18,7 +18,6 @@ if (!isset($_SESSION['zalogowany'])) {
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /> -->
   <link rel="stylesheet" href="style_dashboard.css">
 </head>
 
@@ -60,7 +59,6 @@ if (!isset($_SESSION['zalogowany'])) {
 
 
         setlocale(LC_ALL, $arrLocales);
-        // $polaczenie->set_charset("utf8");
         function strftimeV($format, $timestamp)
         {
           return iconv("ISO-8859-2", "UTF-8", ucfirst(strftime($format, $timestamp)));
@@ -283,7 +281,6 @@ if (!isset($_SESSION['zalogowany'])) {
     padding: 20px;
   }
 
-  /* Center website */
   .main {
     max-width: 1000px;
     margin: auto;
@@ -298,26 +295,22 @@ if (!isset($_SESSION['zalogowany'])) {
     margin: 8px -16px;
   }
 
-  /* Add padding BETWEEN each column (if you want) */
   .row,
   .row>.column {
     padding: 8px;
   }
 
-  /* Create three equal columns that floats next to each other */
   .column {
     float: left;
     width: 33.33%;
   }
 
-  /* Clear floats after rows */
   .row:after {
     content: "";
     display: table;
     clear: both;
   }
 
-  /* Content */
   .content {
     background-color: white;
     padding: 15px;
@@ -330,12 +323,10 @@ if (!isset($_SESSION['zalogowany'])) {
     height: 200px;
   }
 
-  /* The "show" class is added to the filtered elements */
   .show {
     display: block;
   }
 
-  /* Style the buttons */
   .btnfilter {
     border: none;
     outline: none;
@@ -346,12 +337,10 @@ if (!isset($_SESSION['zalogowany'])) {
     margin-top: 8px;
   }
 
-  /* Add a grey background color on mouse-over */
   .btn:hover {
     background-color: #ddd;
   }
 
-  /* Add a dark background color to the active button */
   .btn.active {
     background-color: #666;
     color: white;

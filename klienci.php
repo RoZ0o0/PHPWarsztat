@@ -80,17 +80,12 @@ if (!isset($_SESSION['zalogowany'])) {
 
             $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-            // $polaczenie->set_charset("utf8");
-
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
               $stid = oci_parse($polaczenie, "SELECT * FROM klienci");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
-                // $ilu = $result->num_rows;
-                // $_SESSION['ile'] = $ilu;
-                // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";
@@ -142,7 +137,7 @@ if (!isset($_SESSION['zalogowany'])) {
       </div>
     </div>
   </div>
-  <div class="outside-chart" style="width: 1110px;height:570px;background-color:#fff; margin-left:auto; margin-right:auto;border-radius:20px;"><div id="piechart_3d" style="width: 970px; height: 570px;margin-left:auto;margin-right:auto;"></div></div>
+  
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
 
@@ -532,45 +527,6 @@ if (!isset($_SESSION['zalogowany'])) {
   unset($_SESSION['komunikat']);
   unset($blad);
   ?>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load("current", {
-      packages: ["corechart"]
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Kod pocztowy', 'Częstotliwość'],
-        <?php
-        require_once "connect.php";
-        $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-        if (!$polaczenie) {
-          die("Connection failed: " . oci_error());
-        } else {
-          $stid = oci_parse($polaczenie, "SELECT t.KOD_POCZTOWY, COUNT(*) AS ile FROM KLIENCI t GROUP BY t.KOD_POCZTOWY");
-          if (oci_execute($stid) == TRUE) {
-            while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
-              echo "['" . $row['KOD_POCZTOWY'] . "'," . $row['ILE'] . "],";
-            }
-          }
-        }
-        oci_close($polaczenie);
-        ?>
-      ]);
-
-
-
-      var options = {
-        title: 'Kody pocztowe według ilości klientów',
-        is3D: true,
-        fontSize: 20,
-        sliceVisibilityThreshold: .1
-      };
-
-      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-      chart.draw(data, options);
-    }
   </script>
 </body>
 

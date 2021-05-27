@@ -39,12 +39,6 @@
                                 <i class="fas fa-lock"></i>
                                 <input class="myInput" type="password" id="password" placeholder="Powtórz hasło" name="password"  required> 
                             </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" id="check_1" name="check_1" required><small> Przeczytałem i akceptuję regulamin</small></input> 
-                                    <div class="invalid-feedback">Zaznacz to pole jeśli chcesz kontynuować.</div>
-                                </label>
-                            </div>
                             <input type="submit" class="butt" value="ZAREJESTRUJ SIĘ">
                             <?php
                                 if(isset($_SESSION['komunikat'])){

@@ -58,7 +58,6 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
             </div>
             <div class="col-xs-2 ml-auto">
               <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="material-icons">&#xE147;</i> <span>Dodaj Usługe</span></a>
-              <!-- <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Exportuj do Excela</span></a> -->
             </div>
           </div>
         </div>
@@ -80,17 +79,12 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
 
             $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-            // $polaczenie->set_charset("utf8");
-
             if (!$polaczenie) {
               die("Connection failed: " . oci_error());
             } else {
-              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta ORDER BY uslugi.id_pracownika, uslugi.data_obslugi desc");
+              $stid = oci_parse($polaczenie, "SELECT id_uslugi, pracownicy.imie AS imiep, pracownicy.nazwisko AS nazwiskop, warsztaty.adres, warsztaty.miasto, uslugi.data_obslugi, uslugi.cena, pojazdy.model, pojazdy.marka, klienci.imie, klienci.nazwisko FROM uslugi INNER JOIN pracownicy ON uslugi.id_pracownika=pracownicy.id_pracownika INNER JOIN warsztaty ON uslugi.id_warsztatu=warsztaty.id_warsztatu INNER JOIN pojazdy ON uslugi.id_pojazdu=pojazdy.id_pojazdu INNER JOIN klienci ON pojazdy.id_klienta=klienci.id_klienta ORDER BY uslugi.id_uslugi desc");
               $licznik = 1;
               if (oci_execute($stid) == TRUE) {
-                // $ilu = $result->num_rows;
-                // $_SESSION['ile'] = $ilu;
-                // if ($ilu > 0) {
                 while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
                   echo "<tr>";
                   echo "<td>" . $licznik . "</td>";
@@ -175,15 +169,15 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
         <div class="modal-body">
           <form method="post" action="dodajusluge.php" id="form">
             <div class="form-group row">
-              <label for="pracownik" class="col-sm-4 col-form-label">Pracownik</label>
-              <div class="col-sm-8">
+              <label for="pracownik" class="col-sm-2 col-form-label">Pracownik</label>
+              <div class="col-sm-10">
                 <input type="text" class="form-control" id="pracownik" name="pracownik" placeholder="Pracownik" value="<?php echo $imiep ?>" disabled required>
                 <input type="hidden" id="id_pracownika" name="id_pracownika" value="<?php echo $_SESSION['id_prac']; ?>">
               </div>
             </div>
             <div class="form-group row">
-              <label for="warsztat" class="col-sm-4 col-form-label">Warsztat</label>
-              <div class="col-sm-8">
+              <label for="warsztat" class="col-sm-2 col-form-label">Warsztat</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="wbrow" id="wselect" name="wselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrow">
                   <?php
@@ -212,21 +206,21 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="date" class="col-sm-4 col-form-label">Data Obsługi</label>
-              <div class="col-sm-8">
+              <label for="date" class="col-sm-2 col-form-label">Data Obsługi</label>
+              <div class="col-sm-10">
                 <input type="date" class="form-control" id="date" name="date" placeholder="Data Obsługi" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="cena" class="col-sm-4 col-form-label">Cena</label>
-              <div class="col-sm-8">
+              <label for="cena" class="col-sm-2 col-form-label">Cena</label>
+              <div class="col-sm-10">
                 <input type="number" class="form-control" id="cena" name="cena" placeholder="Cena" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="czesci" class="col-sm-4 col-form-label">Części</label>
-              <div class="col-sm-8">
-                <select id="czes" name="czesci[]" style="width:100%" size="3"  this.size='5'; onmouseout="this.style.width='100%';  this.size='6';" multiple="multiple">
+              <label for="czesci" class="col-sm-2 col-form-label">Części</label>
+              <div class="col-sm-10">
+                <select id="czes" name="czesci[]" style="width:100%" size="6" onmouseout="this.style.width='100%';" multiple="multiple">
                   <?php
                   require_once "connect.php";
 
@@ -253,8 +247,8 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="pojazd" class="col-sm-4 col-form-label">Pojazd</label>
-              <div class="col-sm-8">
+              <label for="pojazd" class="col-sm-2 col-form-label">Pojazd</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="pbrow" id="pselect" name="pselect" onfocus="this.value=''" onchange="this.blur();" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrow">
                   <?php
@@ -294,7 +288,7 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
   </div>
 
   <div id="editModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Edytuj Usługę</h4>
@@ -303,15 +297,15 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
         <div class="modal-body">
           <form method="post" action="edituslugi.php" id="form1">
             <div class="form-group row">
-              <label for="pracownike" class="col-sm-4 col-form-label">Pracownik</label>
-              <div class="col-sm-8">
+              <label for="pracownike" class="col-sm-2 col-form-label">Pracownik</label>
+              <div class="col-sm-10">
                 <input type="text" class="form-control" id="pracownike" name="pracownike" placeholder="Pracownik" value="<?php echo $imiep ?>" disabled required>
                 <input type="hidden" id="id_pracownikae" name="id_pracownikae" value="<?php echo $_SESSION['id_prac']; ?>">
               </div>
             </div>
             <div class="form-group row">
-              <label for="warsztate" class="col-sm-4 col-form-label">Warsztat</label>
-              <div class="col-sm-8">
+              <label for="warsztate" class="col-sm-2 col-form-label">Warsztat</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="wbrowe" id="wselecte" name="wselecte" autocomplete="off" value="" placeholder="Podaj Warsztat" required>
                 <datalist id="wbrowe">
                   <?php
@@ -340,20 +334,49 @@ $imiep = $_SESSION['imie'] . " " . $_SESSION['nazwisko'];
               </div>
             </div>
             <div class="form-group row">
-              <label for="datee" class="col-sm-4 col-form-label">Data Obsługi</label>
-              <div class="col-sm-8">
+              <label for="datee" class="col-sm-2 col-form-label">Data Obsługi</label>
+              <div class="col-sm-10">
                 <input type="date" class="form-control" id="datee" name="datee" placeholder="Data Obsługi" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="cenae" class="col-sm-4 col-form-label">Cena</label>
-              <div class="col-sm-8">
+              <label for="cenae" class="col-sm-2 col-form-label">Cena</label>
+              <div class="col-sm-10">
                 <input type="number" class="form-control" id="cenae" name="cenae" placeholder="Cena" required>
               </div>
             </div>
             <div class="form-group row">
-              <label for="pojazde" class="col-sm-4 col-form-label">Pojazd</label>
-              <div class="col-sm-8">
+              <label for="czescie" class="col-sm-2 col-form-label">Części</label>
+              <div class="col-sm-10">
+                <select id="czese" name="czescie[]" style="width:100%" size="6" onmouseout="this.style.width='100%';" multiple="multiple">
+                  <?php
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "SELECT * FROM czesci where liczba_dostepnych_sztuk>0");
+                    $licznik = 1;
+                    if (oci_execute($stid) == TRUE) {
+                      while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+                        $id_cz = $row['ID_CZESCI'];
+                        $nazwa = $row['NAZWA_CZESCI'];
+                        $nr_czesci = $row['NR_CZESCI'];
+                        $cena = $row['CENA'];
+                        echo "<option value='$id_cz'>$nazwa | $nr_czesci | $cena zł</option>";
+                      }
+                    }
+                  }
+                  oci_close($polaczenie);
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="pojazde" class="col-sm-2 col-form-label">Pojazd</label>
+              <div class="col-sm-10">
                 <input class="col-sm-12 form-control" list="pbrowe" id="pselecte" name="pselecte" autocomplete="off" value="" placeholder="Podaj Pojazd" required>
                 <datalist id="pbrowe">
                   <?php
