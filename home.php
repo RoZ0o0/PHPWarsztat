@@ -24,7 +24,7 @@
 
 
     </div>
-    <div id="container" class="container" style="position: relative; left: 20%;">
+    <div id="container" class="container" style="position: relative; transform: translate(10%, 0%);">
       <div class="outside_chart" id="div9" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px; margin-top:10px; padding:20px;">
         <div style="color:black;" class="col-sm-12">
 
@@ -111,6 +111,7 @@
 
                     $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
+<<<<<<< Updated upstream
                     // $polaczenie->set_charset("utf8");
 
                     if (!$polaczenie) {
@@ -125,6 +126,36 @@
                     ?></p><br>
                     <br><br><br>
                     <p>Jd</p>
+=======
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "BEGIN :a:=TOP_CUSTOMER(); END;");
+                    oci_bind_by_name($stid, ':a', $total, 32);
+                    oci_execute($stid);
+                    echo $total;
+                  }
+                  oci_close($polaczenie);
+                  ?></p><br>
+                <br><br>
+                <p><b>Najczęściej sprzedawana część:</b><br><br>
+                  <?php
+
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "BEGIN :a:=TOP_CZESC(); END;");
+                    oci_bind_by_name($stid, ':a', $total, 32);
+                    oci_execute($stid);
+                    echo $total;
+                  }
+                  oci_close($polaczenie);
+                  ?></p>
+>>>>>>> Stashed changes
               </center>
             </div>
             <div class="col-sm-4">
