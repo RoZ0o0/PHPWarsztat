@@ -73,7 +73,7 @@ if (!isset($_SESSION['zalogowany'])) {
 
             if (isset($_POST['textFilter'])) {
               $text = $_POST['textFilter'];
-              $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, galeria.stan USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+              $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, galeria.stan, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
         INNER JOIN USLUGI
         ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
         INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
@@ -89,7 +89,7 @@ if (!isset($_SESSION['zalogowany'])) {
             }
           } else { //gdy w id strony jest ustawione id uslugi 
             $id_from_link = substr($id_from_link, 3);
-            $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, galeria.stan USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+            $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, galeria.stan, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
         INNER JOIN USLUGI
         ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
         INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
