@@ -99,6 +99,7 @@ if (!isset($_SESSION['zalogowany'])) {
 
           $stid = oci_parse($polaczenie, $sql_query);
           if (oci_execute($stid) == TRUE) {
+            $count=oci_num_rows($stid);
 
             while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
               echo "<div class='col-lg-4 col-12 column'>";
@@ -121,6 +122,10 @@ if (!isset($_SESSION['zalogowany'])) {
               echo "<h7 class='data'>" . strftimeV('%d %B %Y', $datetstamp) .' Stan: '. $stan."</h7>";
               echo "</div>";
               echo "</div>";
+            }
+
+            if($count == 0){
+              echo "Nie ma zdjęć!";
             }
           }
         }
