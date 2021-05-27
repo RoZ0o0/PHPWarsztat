@@ -1,5 +1,4 @@
 <h2 class="display-4 text-white">Strona główna</h2>
-<p class="lead text-white mb-0">Spurdo spardum dolor sit amet, consectetur adipiscing spurdo, sed do spardo tempor incididunt ut labore et dolore magna spurdo.</p>
 <div class="separator"></div>
 <div class="row text-white">
   <div class="col-lg-7">
@@ -597,7 +596,7 @@
 
         var options = {
           width: 970,
-          colors: '#066997',
+          colors: '#F6DE97',
           fontSize: 20,
           bars: 'horizontal',
           legend: {
@@ -660,7 +659,7 @@
 
         var options = {
           width: 970,
-          colors: '#066997',
+          colors: '#D982A5',
           fontSize: 20,
           bars: 'horizontal',
           legend: {
