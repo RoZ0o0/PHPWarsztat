@@ -82,6 +82,13 @@
 
                   $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
+                  $arrLocales = array('pl_PL', 'pl', 'Polish_Poland.28592');
+                  setlocale(LC_ALL, $arrLocales);
+                  function strftimeV($format, $timestamp)
+                  {
+                    return iconv("ISO-8859-2", "UTF-8", ucfirst(strftime($format, $timestamp)));
+                  }
+
                   if (!$polaczenie) {
                     die("Connection failed: " . oci_error());
                   } else {
@@ -94,9 +101,10 @@
                     while (($row = oci_fetch_array($curs, OCI_BOTH)) != false) {
                       $date = $row['MIESIAC'];
                       $date = DateTime::createFromFormat('y-m', $date);
-                      $arrLocale = array("pl_PL", "polish_pol");
-                      setlocale(LC_ALL, $arrLocale);
-                      echo strftime('%Y %B', strtotime($date->format('Y-m'))) . " | Liczba usług: " . $row['ILE'] . "<br>";
+                      $date = date_create($date->format("Y-m"));
+                      $date = date_format($date, 'Y-m');
+                      $datestamp = utf8_encode(strtotime($date));
+                      echo strftimeV('%Y %B', $datestamp) . " | Liczba usług: " . $row['ILE'] . "<br>";
                     }
                   }
                   oci_close($polaczenie);
