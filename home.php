@@ -44,8 +44,6 @@
 
                 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-                // $polaczenie->set_charset("utf8");
-
                 if (!$polaczenie) {
                   die("Connection failed: " . oci_error());
                 } else {
@@ -65,8 +63,6 @@
 
                   $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-                  // $polaczenie->set_charset("utf8");
-
                   if (!$polaczenie) {
                     die("Connection failed: " . oci_error());
                   } else {
@@ -77,9 +73,34 @@
                   }
                   oci_close($polaczenie);
                   ?></p>
-                   <br>
-                <br><br><br>
-                <p>Jd</p>
+                <br>
+                <br><br>
+                <p><b>Najlepszy miesiąc:</b><br> <br>
+                  <?php
+
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $curs = oci_new_cursor($polaczenie);
+                    $stid = oci_parse($polaczenie, "BEGIN :cursr:=NAJLEPSZY_MIESIAC; END;");
+                    oci_bind_by_name($stid, ':cursr', $curs, -1, OCI_B_CURSOR);
+                    oci_execute($stid);
+                    oci_execute($curs);
+
+                    while (($row = oci_fetch_array($curs, OCI_BOTH)) != false) {
+                      $date = $row['MIESIAC'];
+                      $date = DateTime::createFromFormat('y-m', $date);
+                      $arrLocale = array("pl_PL", "polish_pol");
+                      setlocale(LC_ALL, $arrLocale);
+                      echo strftime('%Y %B', strtotime($date->format('Y-m'))) . " | Liczba usług: " . $row['ILE'] . "<br>";
+                    }
+                  }
+                  oci_close($polaczenie);
+                  ?></p>
               </center>
             </div>
             <div class="col-sm-4">
@@ -90,8 +111,6 @@
                 require_once "connect.php";
 
                 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-                // $polaczenie->set_charset("utf8");
 
                 if (!$polaczenie) {
                   die("Connection failed: " . oci_error());
@@ -105,28 +124,13 @@
                 ?>
                 <br>
                 <br><br><br><br>
-                <p><b>Najczęściej odwiedzajacy klient:</b><br><br> <?php
+                <p><b>Najczęściej odwiedzajacy klient:</b><br><br>
+                  <?php
 
-                    require_once "connect.php";
+                  require_once "connect.php";
 
-                    $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-<<<<<<< Updated upstream
-                    // $polaczenie->set_charset("utf8");
-
-                    if (!$polaczenie) {
-                      die("Connection failed: " . oci_error());
-                    } else {
-                      $stid = oci_parse($polaczenie, "BEGIN :a:=TOP_CUSTOMER(); END;");
-                      oci_bind_by_name($stid, ':a', $total, 32);
-                      oci_execute($stid);
-                      echo $total;
-                    }
-                    oci_close($polaczenie);
-                    ?></p><br>
-                    <br><br><br>
-                    <p>Jd</p>
-=======
                   if (!$polaczenie) {
                     die("Connection failed: " . oci_error());
                   } else {
@@ -155,7 +159,6 @@
                   }
                   oci_close($polaczenie);
                   ?></p>
->>>>>>> Stashed changes
               </center>
             </div>
             <div class="col-sm-4">
@@ -166,8 +169,6 @@
                 require_once "connect.php";
 
                 $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-                // $polaczenie->set_charset("utf8");
 
                 if (!$polaczenie) {
                   die("Connection failed: " . oci_error());
@@ -230,8 +231,6 @@
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-          // $polaczenie->set_charset("utf8");
-
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
           } else {
@@ -269,7 +268,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -278,7 +277,6 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('wynagrodzenie'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -295,8 +293,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -331,7 +327,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -340,7 +336,6 @@
         };
 
         var chart = new google.charts.Bar(document.getElementById('marka'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -357,8 +352,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -384,12 +377,10 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('naprawy'));
-        // Convert the Classic options to Material options.
         chart.draw(data, options);
       };
     </script>
 
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
     <script type="text/javascript">
       google.charts.load("current", {
         packages: ["corechart"]
@@ -402,8 +393,6 @@
           <?php
           require_once "connect.php";
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -462,8 +451,6 @@
           require_once "connect.php";
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
-          // $polaczenie->set_charset("utf8");
-
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
           } else {
@@ -499,7 +486,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -527,8 +514,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -565,7 +550,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -575,7 +560,6 @@
 
 
         var chart = new google.charts.Bar(document.getElementById('pracownicy_top'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -593,8 +577,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -631,7 +613,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -641,7 +623,6 @@
 
 
         var chart = new google.charts.Bar(document.getElementById('warsztaty_top'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
@@ -659,8 +640,6 @@
           require_once "connect.php";
 
           $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
-
-          // $polaczenie->set_charset("utf8");
 
           if (!$polaczenie) {
             die("Connection failed: " . oci_error());
@@ -697,7 +676,7 @@
               0: {
                 side: 'top',
                 label: ''
-              } // Top x-axis.
+              }
             }
           },
           bar: {
@@ -707,7 +686,6 @@
 
 
         var chart = new google.charts.Bar(document.getElementById('klient_najczesciej'));
-        // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
