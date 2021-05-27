@@ -53,7 +53,7 @@ if (!isset($_SESSION['zalogowany'])) {
     }
 
     function addCzesc() {
-      val = document.getElementById(cos).value;
+      val = Math.round(Math.abs(document.getElementById(cos).value));
       if (val == '') {
         alert("Podaj Wartość!");
       } else {
@@ -161,7 +161,7 @@ if (!isset($_SESSION['zalogowany'])) {
                   } else {
                     echo "<td>" . $row['LICZBA_DOSTEPNYCH_SZTUK'] . "</td>";
                   }
-                  echo "<td><input id='$id_czescis' class='form-control' style='width:50px; display:inline;' type='number'>";
+                  echo "<td><input id='$id_czescis' min='1' class='form-control' style='width:50px; display:inline;' type='number'>";
                   echo "<a href='#' class='dodaj' id='" . $id_czesc . "' title='Dodaj' data-toggle='tooltip' onclick='getid(this.id);addCzesc();getlicznik(" . $licznik . ");showTableData()'><i class='material-icons'>&#xe145;</i></a>";
                   echo "</td>";
                   echo "</tr>";
