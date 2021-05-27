@@ -24,7 +24,7 @@
 
 
     </div>
-    <div id="container" class="container" style="position: relative; left: 20%;">
+    <div id="container" class="container" style="position: relative; transform: translate(10%, 0%);">
       <div class="outside_chart" id="div9" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px; margin-top:10px; padding:20px;">
         <div style="color:black;" class="col-sm-12">
 
@@ -82,6 +82,7 @@
 
                   $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
 
+<<<<<<< HEAD
                   $arrLocales = array('pl_PL', 'pl', 'Polish_Poland.28592');
                   setlocale(LC_ALL, $arrLocales);
                   function strftimeV($format, $timestamp)
@@ -89,6 +90,8 @@
                     return iconv("ISO-8859-2", "UTF-8", ucfirst(strftime($format, $timestamp)));
                   }
 
+=======
+>>>>>>> cyziek
                   if (!$polaczenie) {
                     die("Connection failed: " . oci_error());
                   } else {
@@ -101,10 +104,16 @@
                     while (($row = oci_fetch_array($curs, OCI_BOTH)) != false) {
                       $date = $row['MIESIAC'];
                       $date = DateTime::createFromFormat('y-m', $date);
+<<<<<<< HEAD
                       $date = date_create($date->format("Y-m"));
                       $date = date_format($date, 'Y-m');
                       $datestamp = utf8_encode(strtotime($date));
                       echo strftimeV('%Y %B', $datestamp) . " | Liczba usług: " . $row['ILE'] . "<br>";
+=======
+                      $arrLocale = array("pl_PL", "polish_pol");
+                      setlocale(LC_ALL, $arrLocale);
+                      echo strftime('%Y %B', strtotime($date->format('Y-m'))) . " | Liczba usług: " . $row['ILE'] . "<br>";
+>>>>>>> cyziek
                     }
                   }
                   oci_close($polaczenie);
@@ -134,6 +143,17 @@
                 <br><br><br><br>
                 <p><b>Najczęściej odwiedzajacy klient:</b><br><br>
                   <?php
+<<<<<<< HEAD
+
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "BEGIN :a:=TOP_CUSTOMER(); END;");
+=======
 
                   require_once "connect.php";
 
@@ -149,8 +169,31 @@
                   }
                   oci_close($polaczenie);
                   ?></p><br>
+                <br><br>
+                <p><b>Najczęściej sprzedawana część:</b><br><br>
+                  <?php
+
+                  require_once "connect.php";
+
+                  $polaczenie = oci_connect($user, $password, $db, 'AL32UTF8');
+
+                  if (!$polaczenie) {
+                    die("Connection failed: " . oci_error());
+                  } else {
+                    $stid = oci_parse($polaczenie, "BEGIN :a:=TOP_CZESC(); END;");
+>>>>>>> cyziek
+                    oci_bind_by_name($stid, ':a', $total, 32);
+                    oci_execute($stid);
+                    echo $total;
+                  }
+                  oci_close($polaczenie);
+<<<<<<< HEAD
+                  ?></p><br>
                 <br><br><br>
                 <p>Jd</p>
+=======
+                  ?></p>
+>>>>>>> cyziek
               </center>
             </div>
             <div class="col-sm-4">
