@@ -24,7 +24,7 @@ Program posiadał będzie następujące funkcjonalności:<br/>
 
 ### Import Bazy Danych
 
-[Backup Bazy Danych](https://github.com/UR-INF/20-21-ai-projekt-lab3-projekt-ai-przewoznik-plizga/blob/main/sql_BACKUP_24_05_21.sql)
+[Backup Bazy Danych](https://github.com/UR-INF/20-21-ai-projekt-lab3-projekt-ai-przewoznik-plizga/blob/main/sql_BACKUP_27_05_21)
 
 
 ## Baza danych
