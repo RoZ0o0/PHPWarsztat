@@ -75,14 +75,14 @@ if (!isset($_SESSION['zalogowany'])) {
 
             if (isset($_POST['textFilter'])) {
               $text = $_POST['textFilter'];
-              $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+              $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, galeria.stan USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
         INNER JOIN USLUGI
         ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
         INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
         WHERE LOWER(galeria.komentarz) LIKE LOWER('%" . $text . "%') OR LOWER(klienci.imie) || ' ' || LOWER(klienci.nazwisko) LIKE LOWER('%" . $text . "%')
         ORDER BY USLUGI.DATA_OBSLUGI DESC";
             } else {
-              $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI  
+              $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, GALERIA.zdjecie, galeria.komentarz, galeria.stan, USLUGI.DATA_OBSLUGI  
         FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
         INNER JOIN USLUGI
         ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
@@ -91,7 +91,7 @@ if (!isset($_SESSION['zalogowany'])) {
             }
           } else { //gdy w id strony jest ustawione id uslugi 
             $id_from_link = substr($id_from_link, 3);
-            $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
+            $sql_query = "SELECT KLIENCI.imie, KLIENCI.nazwisko, KLIENCI.imie || ' ' || KLIENCI.nazwisko as hehe, GALERIA.zdjecie, galeria.komentarz, galeria.stan USLUGI.DATA_OBSLUGI FROM (((KLIENCI INNER JOIN POJAZDY ON klienci.id_klienta = pojazdy.id_klienta)
         INNER JOIN USLUGI
         ON pojazdy.id_pojazdu = uslugi.id_pojazdu)
         INNER JOIN GALERIA ON uslugi.id_uslugi = galeria.id_uslugi) 
@@ -114,8 +114,13 @@ if (!isset($_SESSION['zalogowany'])) {
               $datee = date_create($row['DATA_OBSLUGI']);
               $datef = date_format($datee, 'd-m-Y');
               $datetstamp = utf8_encode(strtotime($datef));
+              $stan;
+              if($row['STAN']==1){
+                $stan = 'PRZED';
+              }
+              else $stan = 'PO';
 
-              echo "<h7 class='data'>" . strftimeV('%d %B %Y', $datetstamp) . "</h7>";
+              echo "<h7 class='data'>" . strftimeV('%d %B %Y', $datetstamp) .' Stan: '. $stan."</h7>";
               echo "</div>";
               echo "</div>";
             }

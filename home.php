@@ -24,7 +24,7 @@
 
 
     </div>
-    <div id="container" class="container" style="position: relative; transform: translate(10%, 0%);">
+    <div id="container" class="container" style="position: relative; transform: translate(20%, 0%);">
       <div class="outside_chart" id="div9" style="width: 1110px;height:570px;background-color:#ffffff; margin-left:auto; margin-right:auto;border-radius:20px; margin-top:10px; padding:20px;">
         <div style="color:black;" class="col-sm-12">
 
