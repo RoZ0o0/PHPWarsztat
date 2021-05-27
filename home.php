@@ -31,7 +31,7 @@
           <center>
             <h1>Informacje Ogólne</h1>
           </center>
-          <br>
+          <hr>
           <div class="row">
             <div class="col-sm-4">
 
