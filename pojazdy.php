@@ -176,7 +176,7 @@ if (!isset($_SESSION['zalogowany'])) {
             <div class="form-group row">
               <label for="model" class="col-sm-4 col-form-label">Model</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="model" name="model" placeholder="Miasto" required>
+                <input type="text" class="form-control" id="model" name="model" placeholder="Model" required>
               </div>
             </div>
             <div class="form-group row">
