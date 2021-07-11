@@ -315,7 +315,7 @@ if (isset($_SESSION['komunikat'])) {
      if (simple == "sukces") {
         Swal.fire({
           icon: 'success',
-          title: 'Udało się!!',
+          title: 'Udało się!',
           text: 'Zamówienie zostało zatwierdzone!',
         });
       }
